@@ -1,0 +1,28 @@
+  # --------------------------
+  # Servidor de bus
+  # --------------------------  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: container-broker
+    environment:
+    - RABBITMQ_DEFAULT_USER=admin
+    - RABBITMQ_DEFAULT_PASS=admin
+    hostname: broker
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+      - db-broker:/var/lib/rabbitmq
+    networks:
+      - kong-net
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # --------------------------
+volumes:
+  db-broker:
+networks:
+    kong-net:
+        external: true
