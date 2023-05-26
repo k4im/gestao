@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rEecpYX075qneg3muaVAljvNyYSdnlUurPOi1cQUmxPVG6Dj/VvVXz39oVRbAb+TdQ6ZWXS3xvx92OvT8Y2Giw==",
+  "dgSpecHash": "670dJw9D6sK3Tq4xytlFJZ0b4n4PP3a8oFrsaNOrBqzFYE2bukfAXOo3xMctNJUTxSBOVbkXlfT4IJ68sjxipQ==",
   "success": true,
   "projectFilePath": "/home/k4imdesktop/gestao/app/Services/estoque/estoque.service.tests/estoque.service.tests.csproj",
   "expectedPackageFiles": [
