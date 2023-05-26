@@ -1,1 +1,12 @@
 global using Xunit;
+global using autenticacao.service.Repository;
+global using autenticacao.service.Data;
+global using autenticacao.service.Models;
+global using shared.models.ValueObjects;
+global using shared.models;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Storage;
+global using Moq;
+global using Moq.EntityFrameworkCore;
+global using AutoFixture;
+using autenticacao.service.Controllers;

@@ -10,3 +10,15 @@
 /home/k4imdesktop/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/refint/shared.models.dll
 /home/k4imdesktop/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/shared.models.pdb
 /home/k4imdesktop/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/ref/shared.models.dll
+/home/oem/gestao/app/Services/Shared/shared.models/bin/Debug/net7.0/shared.models.deps.json
+/home/oem/gestao/app/Services/Shared/shared.models/bin/Debug/net7.0/shared.models.dll
+/home/oem/gestao/app/Services/Shared/shared.models/bin/Debug/net7.0/shared.models.pdb
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/shared.models.csproj.AssemblyReference.cache
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/shared.models.GeneratedMSBuildEditorConfig.editorconfig
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/shared.models.AssemblyInfoInputs.cache
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/shared.models.AssemblyInfo.cs
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/shared.models.csproj.CoreCompileInputs.cache
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/shared.models.dll
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/refint/shared.models.dll
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/shared.models.pdb
+/home/oem/gestao/app/Services/Shared/shared.models/obj/Debug/net7.0/ref/shared.models.dll
