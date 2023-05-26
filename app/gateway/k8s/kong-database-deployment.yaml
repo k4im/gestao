@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: kong-database
+  name: kong-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: kong-database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.28.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/kong-net: "true"
+        io.kompose.service: kong-database
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: kong
+            - name: POSTGRES_PASSWORD
+              value: kong
+            - name: POSTGRES_USER
+              value: kong
+          image: postgres:9.6
+          name: kong-database
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2147483648"
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: db-data-kong-postgres
+      restartPolicy: Always
+      volumes:
+        - name: db-data-kong-postgres
+          persistentVolumeClaim:
+            claimName: db-data-kong-postgres
+status: {}
