@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Bpndv1soRa4Ib2aCTNcpx2gQ+eP7aqaxhii5MQWO9A9oIjvxeRaaFt96dmaOCP1cK0h5vBikOLMBjAJc/Np/jw==",
+  "success": true,
+  "projectFilePath": "/home/k4imdesktop/gestao/app/Services/Shared/shared.models/shared.models.csproj",
+  "expectedPackageFiles": [
+    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
