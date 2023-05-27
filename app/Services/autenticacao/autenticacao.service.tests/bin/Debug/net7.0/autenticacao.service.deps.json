@@ -512,6 +512,9 @@
       },
       "System.Threading.Tasks.Extensions/4.5.4": {},
       "shared.models/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.5"
+        },
         "runtime": {
           "shared.models.dll": {}
         }

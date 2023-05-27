@@ -13,6 +13,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Autofac.Extras.Moq": "6.1.0",
           "Microsoft.EntityFrameworkCore.InMemory": "7.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.5",
           "Microsoft.NET.Test.Sdk": "17.3.2",
           "Moq": "4.18.4",
           "Moq.EntityFrameworkCore": "7.0.0.2",
@@ -159,7 +160,7 @@
       },
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore/7.0.4": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "7.0.4",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.5",
           "Microsoft.Extensions.Identity.Stores": "7.0.4"
         },
         "runtime": {
@@ -224,15 +225,15 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/7.0.4": {
+      "Microsoft.EntityFrameworkCore.Relational/7.0.5": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
         },
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Relational.dll": {
-            "assemblyVersion": "7.0.4.0",
-            "fileVersion": "7.0.423.11504"
+            "assemblyVersion": "7.0.5.0",
+            "fileVersion": "7.0.523.16503"
           }
         }
       },
@@ -771,7 +772,7 @@
       },
       "Pomelo.EntityFrameworkCore.MySql/7.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "7.0.4",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.5",
           "MySqlConnector": "2.2.5"
         },
         "runtime": {
@@ -1595,6 +1596,9 @@
         }
       },
       "shared.models/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.5"
+        },
         "runtime": {
           "shared.models.dll": {}
         }
@@ -1754,12 +1758,12 @@
       "path": "microsoft.entityframeworkcore.inmemory/7.0.5",
       "hashPath": "microsoft.entityframeworkcore.inmemory.7.0.5.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Relational/7.0.4": {
+    "Microsoft.EntityFrameworkCore.Relational/7.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-L41+VonK6L0IurFHopoe5yY+m3MD26OMocKLPPR/XKxnazzZUcGPz0IGJpVnwpZyKVPfEIAnD5vmm60meYr1NA==",
-      "path": "microsoft.entityframeworkcore.relational/7.0.4",
-      "hashPath": "microsoft.entityframeworkcore.relational.7.0.4.nupkg.sha512"
+      "sha512": "sha512-u/33DC4S6g2hpMPgBc5Kdnlz//nqHR5c/ovgjtiP/wQ7sOd0EOdygVzUJAAOxCwbtAHDsJXS9Vc3jLFYq0yu8Q==",
+      "path": "microsoft.entityframeworkcore.relational/7.0.5",
+      "hashPath": "microsoft.entityframeworkcore.relational.7.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
       "type": "package",

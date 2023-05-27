@@ -8,10 +8,24 @@ namespace autenticacao.service.Repository
         {
             _db = db;
         }
-        public Task<bool> atualiarPessoa(Pessoa pessoa)
-        {
 
-            throw new NotImplementedException();
+        public async Task<bool> atualiarPessoa(int id, Pessoa pessoa)
+        {
+            try
+            {
+                var item = await buscarPessoaId(id);
+                item = pessoa;
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public async Task<Pessoa> buscarPessoaId(int id)

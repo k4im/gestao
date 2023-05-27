@@ -86,5 +86,23 @@ namespace autenticacao.service.tests
             //Assert
             Assert.NotNull(result);
         }
+
+
+        [Fact]
+        public async void DeveAtualizarPessoa()
+        {
+            //Arrange
+            _context = new DataContext(_contextOptions.Options);
+            var repo = new RepoPessoa(_context);
+            var pessoa = new Pessoa(_nome, _endereco, _telefone, _cpf);
+            var atualizada = new Pessoa(_nome, _endereco, _telefone, _cpf);
+            await repo.criarPessoa(pessoa);
+
+            //Act
+            var result = await repo.atualiarPessoa(1, atualizada);
+
+            //Assert
+            Assert.True(result);
+        }
     }
 }
