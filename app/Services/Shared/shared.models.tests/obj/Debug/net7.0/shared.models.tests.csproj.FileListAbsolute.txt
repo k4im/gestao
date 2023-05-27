@@ -99,3 +99,13 @@
 /home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/obj/Debug/net7.0/shared.models.tests.pdb
 /home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/obj/Debug/net7.0/shared.models.tests.genruntimeconfig.cache
 /home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/obj/Debug/net7.0/ref/shared.models.tests.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.Extensions.Caching.Abstractions.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.Extensions.Caching.Memory.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.Extensions.DependencyInjection.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.Extensions.Logging.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.Extensions.Logging.Abstractions.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
+/home/k4imdesktop/gestao/app/Services/Shared/shared.models.tests/bin/Debug/net7.0/Microsoft.Extensions.Primitives.dll

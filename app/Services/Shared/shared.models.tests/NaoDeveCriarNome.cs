@@ -1,48 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using shared.models.Exceptions;
-using shared.models.ValueObjects;
-using Xunit;
-
 namespace shared.models.tests
 {
     public class NaoDeveCriarNome
     {
-
-        Nome erro { get; set; } = new Nome("teste", "teste");
-        
+       
         [Theory]
-        [InlineData("")]
-        public void DeveRetornarNomeVazioInvalido(string primeiroNome)
+        [InlineData("", "segundo nome")]
+        public void DeveRetornarNomeVazioInvalido(string primeiroNome, string segundo)
         {
-            var error = Assert.Throws<CampoVazio>(() => erro.validarPrimeiroNome(primeiroNome));
+            //Act
+            var error = Assert.Throws<CampoVazio>(() => new Nome(primeiroNome, segundo));
+            
+            //Assert
             Assert.Equal("O nome não pode estar vazio!", error.Message);
         }
 
         [Theory]
-        [InlineData("")]
-        public void DeveRetonarSobreNomeVazioInvalido(string sobreNome)
+        [InlineData("primeironome", "")]
+        public void DeveRetonarSobreNomeVazioInvalido(string primeiroNome, string segundo)
         {
-            var error = Assert.Throws<CampoVazio>(() => erro.validarSobreNome(sobreNome));
+            //Act
+            var error = Assert.Throws<CampoVazio>(() => new Nome(primeiroNome, segundo));
+            
+            //Assert
             Assert.Equal("O sobrenome não pode estar vazio!", error.Message);
         }
 
 
         [Theory]
-        [InlineData("@")]
-        public void DeveRetornarNomeInvalido(string primeiroNome)
+        [InlineData("@", "teste")]
+        public void DeveRetornarNomeInvalido(string primeiroNome, string segundo)
         {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.validarPrimeiroNome(primeiroNome));
+            //Act
+            var error = Assert.Throws<CaracterInvalido>(() => new Nome(primeiroNome, segundo));
+            
+            //Assert
             Assert.Equal("O nome não pode conter caracteres especiais", error.Message);
         }
 
         [Theory]
-        [InlineData("@")]
-        public void DeveRetonarSobreNomeInvalido(string sobreNome)
+        [InlineData("teste", "@")]
+        public void DeveRetonarSobreNomeInvalido(string primeiroNome, string segundo)
         {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.validarSobreNome(sobreNome));
+            //Act
+            var error = Assert.Throws<CaracterInvalido>(() => new Nome(primeiroNome, segundo));
+            
+            //Assert
             Assert.Equal("O sobrenome não pode conter caracteres especiais", error.Message);
         }
     }

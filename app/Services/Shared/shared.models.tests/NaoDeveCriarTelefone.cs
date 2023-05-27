@@ -1,21 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using shared.models.Exceptions;
-using shared.models.ValueObjects;
-
 namespace shared.models.tests
 {
     public class NaoDeveCriarTelefone
     {
-        public Telefone erro { get; set; }  = new Telefone("22", "22", "0000");
         [Theory]
         [InlineData("@", "Teste", ",.,")]
         //        pais,    area,  numero
         public void DeveRetonarErroCaractereEspecial(string pais, string area, string numero)
         {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.validarRegex(pais, area, numero));
+            //Act
+            var error = Assert.Throws<CaracterInvalido>(() => new Telefone(pais, area, numero));
+            
+            
             Assert.Equal("Codigo do país precisa conter apenas numeros", error.Message);
         }
        
@@ -24,7 +19,10 @@ namespace shared.models.tests
         //        pais,    area,  numero
         public void DeveRetornarErroAreaInvalida(string pais, string area, string numero)
         {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.validarRegex(pais, area, numero));
+            //Act
+            var error = Assert.Throws<CaracterInvalido>(() => new Telefone(pais, area, numero));
+            
+            //Assert
             Assert.Equal("Codigo de area precisa conter apenas numeros", error.Message);
         }
 
@@ -34,15 +32,21 @@ namespace shared.models.tests
         //        pais,    area,  numero
         public void DeveRetornarErroNumeroInvalido(string pais, string area, string numero)
         {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.validarRegex(pais, area, numero));
+            //Act
+            var error = Assert.Throws<CaracterInvalido>(() => new Telefone(pais, area, numero));
+            
+            //Assert
             Assert.Equal("Numero de telefone precisa conter apenas numeros", error.Message);
         }
 
         [Theory]
-        [InlineData("")]
-        public void DeveRetornarAreaInvalida(string area)
+        [InlineData("22", "", "5959595")]
+        public void DeveRetornarAreaInvalida(string pais, string area, string numero)
         {
-            var error = Assert.Throws<CampoVazio>(() => erro.validarCodigoDeArea(area));
+            //Act
+            var error = Assert.Throws<CampoVazio>(() => new Telefone(pais, area, numero));
+            
+            //Assert
             Assert.Equal("O DDD precisa ser preenchido", error.Message);
         }
     }

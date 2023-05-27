@@ -1,92 +1,99 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using shared.models.Exceptions;
-using shared.models.ValueObjects;
 
 namespace shared.models.tests
 {
     public class NaoDeveCriarEndereco
     {
-        public Endereco erro { get; set; } = new Endereco("cidade", "bairro", "rua","1230040", 0);
         [Theory]
-        [InlineData("")]
+        [InlineData("", "bairro", "rua", "1234455", 0)]
         //        Cidade, Bairro, Rua, Cep, Numero da casa
-        public void DeveRetonarErroCidadeVaziaInvalida(string cidade)
+        public void DeveRetonarErroCidadeVaziaInvalida(string cidade, string bairro, 
+        string rua, string cep, int numero)
         {
+            //Act
+            var error = Assert.Throws<CampoVazio>(() => new Endereco(cidade, bairro, rua, cep, numero));
             
-            var error = Assert.Throws<CampoVazio>(() => erro.VerificarCidade(cidade));
+            //Assert
             Assert.Equal("A cidade não pode estar vazia!", error.Message);
             
         }
         [Theory]
-        [InlineData("")]
+        [InlineData("cidade", "", "rua", "1234455", 0)]
         //        Cidade, Bairro, Rua, Cep, Numero da casa
-        public void DeveRetonarErroBairroVazioInvalida(string bairro)
+        public void DeveRetonarErroBairroVazioInvalida(string cidade, string bairro, 
+        string rua, string cep, int numero)
         {
-            var error = Assert.Throws<CampoVazio>(() => erro.VerificarBairro(bairro));
+            //Act
+            var error = Assert.Throws<CampoVazio>(() => new Endereco(cidade, bairro, rua, cep, numero));
+            
+            //Assert
             Assert.Equal("O bairro não pode estar vazio!", error.Message);
             
         }
 
         [Theory]
-        [InlineData("")]
+        [InlineData("cidade", "bairro", "", "1234455", 0)]
         //        Cidade, Bairro, Rua, Cep, Numero da casa
-        public void DeveRetonarErroRuaVaziaInvalida(string rua)
+        public void DeveRetonarErroRuaVaziaInvalida(string cidade, string bairro, 
+        string rua, string cep, int numero)
         {
-            var error = Assert.Throws<CampoVazio>(() => erro.VerificarRua(rua));
+            //Act
+            var error = Assert.Throws<CampoVazio>(() => new Endereco(cidade, bairro, rua, cep, numero));
+            
+            //Assert
             Assert.Equal("A rua não pode estar vazia!", error.Message);
             
         }
     
         [Theory]
-        [InlineData("")]
+        [InlineData("cidade", "bairro", "rua", "", 0)]
         //        Cidade, Bairro, Rua, Cep, Numero da casa
-        public void DeveRetonarErroCepVazioInvalida(string cep)
+        public void DeveRetonarErroCepVazioInvalida(string cidade, string bairro, 
+        string rua, string cep, int numero)
         {
-            var error = Assert.Throws<CampoVazio>(() => erro.VerificarCep(cep));
+            //Act
+            var error = Assert.Throws<CampoVazio>(() => new Endereco(cidade, bairro, rua, cep, numero));
+
+            //Assert
             Assert.Equal("O cep não pode estar vazio!", error.Message);
             
         }
 
         [Theory]
-        [InlineData("12323@")]
+        [InlineData("cid@de", "bairro", "rua", "1234455", 0)]
         //        Cidade, Bairro, Rua, Cep, Numero da casa
-        public void DeveRetonarErroCidadeInvalida(string cidade)
+        public void DeveRetonarErroCidadeInvalida(string cidade, string bairro, 
+        string rua, string cep, int numero)
         {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.VerificarCidade(cidade));
+            //Act
+            var error = Assert.Throws<CaracterInvalido>(() => new Endereco(cidade, bairro, rua, cep, numero));
+
+            //Assert
             Assert.Equal("A cidade não pode conter caracteres especiais", error.Message);
         }
         
         [Theory]
-        [InlineData("12323@")]
+        [InlineData("cidade", "@", "rua", "1234455", 0)]
         //        Cidade, Bairro, Rua, Cep, Numero da casa
-        public void DeveRetonarErroBairroInvalido(string bairro)
+        public void DeveRetonarErroBairroInvalido(string cidade, string bairro, 
+        string rua, string cep, int numero)
         {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.VerificarBairro(bairro));
+            //Act
+            var error = Assert.Throws<CaracterInvalido>(() => new Endereco(cidade, bairro, rua, cep, numero));
+
+            //Assert
             Assert.Equal("O bairro não pode conter caracteres especiais", error.Message);
         }
 
-/*
-        Necessário estar realizando adequação
-        
         [Theory]
-        [InlineData("12323@")]
+        [InlineData("cidade", "bairro", "rua", "1@234455", 0)]
         //        Cidade, Bairro, Rua, Cep, Numero da casa
-        public void DeveRetonarErroRuaInvalido(string rua)
+        public void DeveRetonarErroCepInvalido(string cidade, string bairro, 
+        string rua, string cep, int numero)
         {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.VerificarRua(rua));
-            Assert.Equal("O bairro não pode conter caracteres especiais", error.Message);
-        }
-        
-*/
-        [Theory]
-        [InlineData("12323@")]
-        //        Cidade, Bairro, Rua, Cep, Numero da casa
-        public void DeveRetonarErroCepInvalido(string cep)
-        {
-            var error = Assert.Throws<CaracterInvalido>(() => erro.VerificarCep(cep));
+            //Act
+            var error = Assert.Throws<CaracterInvalido>(() => new Endereco(cidade, bairro, rua, cep, numero));
+
+            //Assert
             Assert.Equal("O cep não pode conter caracteres especiais", error.Message);
         }
     }

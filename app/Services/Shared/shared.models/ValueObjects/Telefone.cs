@@ -25,14 +25,14 @@ namespace shared.models.ValueObjects
             Numero = numero;
         }
 
-        public void validarCodigoDeArea(string codigoDeArea)
+        void validarCodigoDeArea(string codigoDeArea)
         {
             if(string.IsNullOrEmpty(codigoDeArea)) throw new CampoVazio("O DDD precisa ser preenchido");
             if(codigoDeArea.Length > 2) throw new Exception("O DDD precisa conter dois numeros!");
             if(codigoDeArea.Length < 2) throw new Exception("O DDD precisa conter dois numeros!");
         }
 
-        public void validarRegex(string codigoPais, string codigoDeArea, string numero)
+        void validarRegex(string codigoPais, string codigoDeArea, string numero)
         {
             if (!Regex.IsMatch(codigoPais, "^[0-9]*$")) throw new CaracterInvalido("Codigo do país precisa conter apenas numeros");
             if (!Regex.IsMatch(codigoDeArea, "^[0-9]*$")) throw new CaracterInvalido("Codigo de area precisa conter apenas numeros");
