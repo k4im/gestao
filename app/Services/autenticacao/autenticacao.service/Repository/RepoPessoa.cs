@@ -52,7 +52,7 @@ namespace autenticacao.service.Repository
                 await _db.SaveChangesAsync();
                 return true;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -68,7 +68,7 @@ namespace autenticacao.service.Repository
                 await _db.SaveChangesAsync();
                 return true;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }
