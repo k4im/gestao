@@ -6,16 +6,15 @@ namespace autenticacao.service.Repository
         readonly SignInManager<AppUser> _signInManager;
         readonly RoleManager<IdentityRole> _roleManager;
         readonly IjwtManager _jwtManager;
+        readonly IChaveManager _chaveManager;
 
-        public RepoAuth(UserManager<AppUser> userManager, 
-        SignInManager<AppUser> signInManager, 
-        RoleManager<IdentityRole> roleManager, 
-        IjwtManager jwtManager)
+        public RepoAuth(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IjwtManager jwtManager, IChaveManager chaveManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _jwtManager = jwtManager;
+            _chaveManager = chaveManager;
         }
 
         public Task<Response<AppUser>> listarUsuarios(int pagina, float resultado)
@@ -39,9 +38,37 @@ namespace autenticacao.service.Repository
             throw new NotImplementedException();
         }
 
-        public Task<ResponseRegistroDTO> registrarUsuario(NovoUsuarioDTO user)
+        public async Task<ResponseRegistroDTO> registrarUsuario(NovoUsuarioDTO user)
         {
-            throw new NotImplementedException();
+            var chave = await _chaveManager.gerarChaveDeAcesso();
+            var NovoUsuario = new AppUser
+            {
+                UserName = chave,
+                Email = chave,
+                EmailConfirmed = true,
+                Role = user.Papel
+                
+            };
+            var result = await _userManager.CreateAsync(NovoUsuario, user.Senha);
+            if(result.Succeeded)
+            {
+                await criarRoles();
+                await _userManager.SetLockoutEnabledAsync(NovoUsuario, false);
+                await _userManager.AddToRoleAsync(NovoUsuario, user.Papel);     
+            }
+            if(!result.Succeeded && result.Errors.Count() > 0) Console.WriteLine("Erro");
+            
+            return new ResponseRegistroDTO(chave);
+        }
+
+        async Task criarRoles()
+        {
+            if (!_roleManager.RoleExistsAsync("ADMIN").GetAwaiter().GetResult())
+            {
+                await _roleManager.CreateAsync(new IdentityRole("ADMIN"));
+                await _roleManager.CreateAsync(new IdentityRole("ATENDENTE"));
+                await _roleManager.CreateAsync(new IdentityRole("FINANCEIRO"));
+            }
         }
     }
 }
