@@ -1,9 +1,3 @@
-
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-
 var builder = WebApplication.CreateBuilder(args);
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 // Add services to the container.
@@ -14,6 +8,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
 builder.Services.AddScoped<IRepoPessoa, RepoPessoa>();
+builder.Services.AddScoped<IRepoAuth, RepoAuth>();
+builder.Services.AddScoped<IjwtManager, jwtManager>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 

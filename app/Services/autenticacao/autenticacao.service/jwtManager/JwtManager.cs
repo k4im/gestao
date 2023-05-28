@@ -29,7 +29,7 @@ namespace autenticacao.service.jwtManager
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: creds,
                 audience : _config["Jwt:Audience"],
                 issuer : _config["Jwt:Issuer"]

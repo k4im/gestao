@@ -20,3 +20,4 @@ global using System.Text;
 global using Microsoft.IdentityModel.Tokens;
 global using autenticacao.service.jwtManager;
 global using autenticacao.service;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
