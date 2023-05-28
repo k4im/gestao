@@ -14,7 +14,7 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Authorization;
 global using autenticacao.service.Models.UserController;
-global using autenticacao.service.ChaveManager;
+global using autenticacao.service.chaveManager;
 global using System.Security.Claims;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Text;

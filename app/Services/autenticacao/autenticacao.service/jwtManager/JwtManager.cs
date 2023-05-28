@@ -7,7 +7,8 @@ namespace autenticacao.service.jwtManager
         readonly RoleManager<IdentityRole> _roleManager;
         readonly IConfiguration _config;
 
-        public jwtManager(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IConfiguration config)
+        public jwtManager(UserManager<AppUser> userManager, 
+        SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;

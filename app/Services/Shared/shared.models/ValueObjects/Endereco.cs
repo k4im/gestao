@@ -18,7 +18,7 @@ namespace shared.models.ValueObjects
             Cidade = VerificarCidade(cidade);
             Bairro = VerificarBairro(bairro);
             Rua = VerificarRua(rua);
-            Cep = VerificarCep(cep);
+            Cep = cep;
             Numero = numero;
         }
 

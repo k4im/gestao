@@ -13,9 +13,13 @@ namespace autenticacao.service.Models.Tokens
             DataDeCriacao = DateTime.UtcNow;
             DataDeExpiracao = DateTime.UtcNow.AddHours(1);
         }
-
+        [DataType("NVARCHAR")]
         public string Token { get;}
+        
+        [DataType("DATETIME")]
         public DateTime DataDeCriacao { get;}
+        
+        [DataType("DATETIME")]
         public DateTime DataDeExpiracao { get;}
 
         public bool tokenExpirado()

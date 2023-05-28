@@ -7,9 +7,12 @@ namespace autenticacao.service.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            // Identity User
+            base.OnModelCreating(modelBuilder);
+            
             #region Nome 
 
-                modelBuilder.Entity<Pessoa>(builder =>{
+            modelBuilder.Entity<Pessoa>(builder =>{
                     builder.OwnsOne<Nome>(pessoa => pessoa.Nome)
                     .Property(nome => nome.PrimeiroNome)
                     .HasColumnName("PrimeiroNome")
@@ -77,5 +80,6 @@ namespace autenticacao.service.Data
             #endregion
         }
         public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<RefreshTokenTable> RTokens { get; set; }
     }
 }

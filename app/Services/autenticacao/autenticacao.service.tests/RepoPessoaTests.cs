@@ -1,14 +1,16 @@
+using autenticacao.service.tests.Helpers;
+
 namespace autenticacao.service.tests
 {
     public class RepoPessoaTests
     {
 
-        DbContextOptionsBuilder _contextOptions = new DbContextOptionsBuilder().UseInMemoryDatabase(new Guid().ToString());
+        DbContextOptionsBuilder _contextOptions = FakeDbOptions.factoryDbInMemory();
         DataContext _context;
-        Nome _nome = new Nome("teste","teste");
-        Endereco _endereco = new Endereco("cidade", "bairro", "rua", "123404040", 0);
-        Telefone _telefone = new Telefone("55", "49", "5959595");
-        CadastroPessoaFisica _cpf = new CadastroPessoaFisica("012096332587");
+        Nome _nome = FakeNome.factoryNome();
+        Endereco _endereco = FakeEndereco.factoryFakeEndereco();
+        Telefone _telefone = FakeTelefone.factoryTelefone();
+        CadastroPessoaFisica _cpf = FakeCpf.factoryCpf();
         Fixture _fixture = new Fixture();
 
         [Fact]
@@ -18,7 +20,6 @@ namespace autenticacao.service.tests
             _contextOptions = new DbContextOptionsBuilder().UseInMemoryDatabase(new Guid().ToString());
             _context = new DataContext(_contextOptions.Options);
             var repo = new RepoPessoa(_context);
-
             //Act
             var result = await repo.criarPessoa(new Pessoa(_nome, _endereco, _telefone, _cpf));
 
