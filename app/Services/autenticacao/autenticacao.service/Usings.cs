@@ -19,5 +19,5 @@ global using System.IdentityModel.Tokens.Jwt;
 global using System.Text;
 global using Microsoft.IdentityModel.Tokens;
 global using autenticacao.service.jwtManager;
-global using autenticacao.service;
+global using autenticacao.service.Models.Tokens;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
