@@ -1,6 +1,6 @@
-namespace autenticacao.service.JwtHelper
+namespace autenticacao.service.jwtManager
 {
-    public interface IJwtHelper
+    public interface IjwtManager
     {
         Task<string> criarAccessToken(string chaveDeAcesso);
         List<Claim> gerarClaims(AppUser user);

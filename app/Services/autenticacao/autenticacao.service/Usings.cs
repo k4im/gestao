@@ -18,4 +18,5 @@ global using System.Security.Claims;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Text;
 global using Microsoft.IdentityModel.Tokens;
-global using autenticacao.service.JwtHelper;
+global using autenticacao.service.jwtManager;
+global using autenticacao.service;

@@ -1,13 +1,13 @@
-namespace autenticacao.service.JwtHelper
+namespace autenticacao.service.jwtManager
 {
-    public class JwtHelper : IJwtHelper
+    public class jwtManager : IjwtManager
     {
         readonly UserManager<AppUser> _userManager;
         readonly SignInManager<AppUser> _signInManager;
         readonly RoleManager<IdentityRole> _roleManager;
         readonly IConfiguration _config;
 
-        public JwtHelper(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IConfiguration config)
+        public jwtManager(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -5,12 +5,12 @@ namespace autenticacao.service.Repository
         readonly UserManager<AppUser> _userManager;
         readonly SignInManager<AppUser> _signInManager;
         readonly RoleManager<IdentityRole> _roleManager;
-        readonly IJwtHelper _jwtManager;
+        readonly IjwtManager _jwtManager;
 
         public RepoAuth(UserManager<AppUser> userManager, 
         SignInManager<AppUser> signInManager, 
         RoleManager<IdentityRole> roleManager, 
-        IJwtHelper jwtManager)
+        IjwtManager jwtManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
