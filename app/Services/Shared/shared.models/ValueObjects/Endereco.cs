@@ -1,6 +1,3 @@
-using System.Text.RegularExpressions;
-using shared.models.Exceptions;
-
 namespace shared.models.ValueObjects
 {
     public class Endereco
