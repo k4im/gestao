@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1HdFQgvenHbTWKMH2tdj5uAVtckoA7AdanTIzz1v/ZdQVoKRE2v2oUMtHPg35ZyQxxIe2uvJWqRBWOCc3OY6Rg==",
+  "dgSpecHash": "v+UaMQMbIO/1NUaeUCrjkV23XHkRG1GSuygEZRoz7o4YrHSeA1hJwbLCf2vAFt9wKONryUcYQvEYL6cOvQ3UEg==",
   "success": true,
   "projectFilePath": "/home/k4imdesktop/gestao/app/Services/projeto/projeto.service.tests/projeto.service.tests.csproj",
   "expectedPackageFiles": [
@@ -126,7 +126,7 @@
     "/home/k4imdesktop/.nuget/packages/xunit.extensibility.core/2.4.2/xunit.extensibility.core.2.4.2.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/xunit.extensibility.execution/2.4.2/xunit.extensibility.execution.2.4.2.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/xunit.runner.visualstudio/2.4.5/xunit.runner.visualstudio.2.4.5.nupkg.sha512",
-    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
   ],
   "logs": []
 }

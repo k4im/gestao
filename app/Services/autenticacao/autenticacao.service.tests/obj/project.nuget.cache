@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qEGCOqetu+XPGCIfbMwoWQo03UKNYYdkp+Vl56Od+t/JSulJkQj+gE0+thszJGpLgj3H14AfjZ1FtAjkglVDzg==",
+  "dgSpecHash": "cUbrgkr4TVekC/fydZVaE1L9cnZLf7ZMs6SkaA1cqE/suiCodNtkORj3isPXbWRJKkddTgq6uOK+T9GHZ0zgxw==",
   "success": true,
   "projectFilePath": "/home/k4imdesktop/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
   "expectedPackageFiles": [
@@ -152,7 +152,7 @@
     "/home/k4imdesktop/.nuget/packages/xunit.extensibility.core/2.4.2/xunit.extensibility.core.2.4.2.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/xunit.extensibility.execution/2.4.2/xunit.extensibility.execution.2.4.2.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/xunit.runner.visualstudio/2.4.5/xunit.runner.visualstudio.2.4.5.nupkg.sha512",
-    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
   ],
   "logs": []
 }

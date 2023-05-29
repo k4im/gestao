@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WvWu5AZgWIDSl3DSBusVqhVyXe9N9rstybmxQIL77aSop2I1kmfdQ1+v7O6f6EE+99aPbm+trmJ5W0dicYr/AQ==",
+  "dgSpecHash": "lxBppJhaQ2Q+bUY2G50lOo9GQGZVRQqUj6rK4/5WpUf2TKSpkVen/B1fK37tF+ne51JUTh+5OelllD753j9PEQ==",
   "success": true,
   "projectFilePath": "/home/k4imdesktop/gestao/app/Services/estoque/estoque.service.tests/estoque.service.tests.csproj",
   "expectedPackageFiles": [
@@ -126,7 +126,7 @@
     "/home/k4imdesktop/.nuget/packages/xunit.extensibility.core/2.4.2/xunit.extensibility.core.2.4.2.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/xunit.extensibility.execution/2.4.2/xunit.extensibility.execution.2.4.2.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/xunit.runner.visualstudio/2.4.5/xunit.runner.visualstudio.2.4.5.nupkg.sha512",
-    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
   ],
   "logs": []
 }

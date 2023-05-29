@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jlA5DzYAD8LTakFfQyzE5VJVB5S++0aq8u+bWoBNK0blYiwA+pf1vb6KK/sQqbeTNx0Es5493A2dDWrJyje6Bg==",
+  "dgSpecHash": "4fKzdELzp3GpGK7nIxnUTd7uUG13XTykoMX+utMwihv8quk+hKNvsNCv24ISYegsGXFfumi50m84yTNVMfWQYw==",
   "success": true,
   "projectFilePath": "/home/k4imdesktop/gestao/app/Services/Shared/shared.models/shared.models.csproj",
   "expectedPackageFiles": [
@@ -15,7 +15,7 @@
     "/home/k4imdesktop/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
-    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qEyWgETuEQ7rzZvxwfm7AZkVHdLoOKJ2A188JuPqxB9KbQ7y3bSrAtBB49sYwXr79oG7LECX/DECAcRcIzc4yw==",
+  "dgSpecHash": "CUihuTd/RQ2g0DoCLSwaH2UgdmnaNRZSfxjishxIRITHp9KO3NBD6kHGyKQ5Ro3A2c7C/ug1basI6RpVKm4WHA==",
   "success": true,
   "projectFilePath": "/home/k4imdesktop/gestao/app/Services/projeto/projeto.service/projeto.service.csproj",
   "expectedPackageFiles": [
@@ -58,7 +58,7 @@
     "/home/k4imdesktop/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
     "/home/k4imdesktop/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+    "/home/k4imdesktop/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
   ],
   "logs": []
 }
