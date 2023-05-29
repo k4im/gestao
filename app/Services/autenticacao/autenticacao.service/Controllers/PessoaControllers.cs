@@ -1,7 +1,7 @@
 namespace autenticacao.service.Controllers
 {
     [ApiController]
-    [Route("api/v.1/[controller]")]
+    [Route("api/v0.1/[controller]")]
     [Authorize]
     public class PessoaControllers : ControllerBase
     {

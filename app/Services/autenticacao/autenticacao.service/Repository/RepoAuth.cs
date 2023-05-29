@@ -7,14 +7,32 @@ namespace autenticacao.service.Repository
         readonly RoleManager<IdentityRole> _roleManager;
         readonly IjwtManager _jwtManager;
         readonly IChaveManager _chaveManager;
+        readonly DataContext _db;
 
-        public RepoAuth(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IjwtManager jwtManager, IChaveManager chaveManager)
+        public RepoAuth(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IjwtManager jwtManager, IChaveManager chaveManager, DataContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _jwtManager = jwtManager;
             _chaveManager = chaveManager;
+            _db = db;
+        }
+
+        public async Task<bool> desativarUsuario(string chave)
+        {
+            var usuario = await _userManager.FindByNameAsync(chave);
+            if(usuario == null) return false;
+            usuario.desativarUsuario();
+            try
+            {
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public Task<Response<AppUser>> listarUsuarios(int pagina, float resultado)
@@ -24,11 +42,15 @@ namespace autenticacao.service.Repository
 
         public async Task<ResponseLoginDTO> logar(LoginDTO loginModel)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginModel.ChaveDeAcesso, loginModel.Senha, false, true);
-            if(result.Succeeded)
+            var usuario = await _userManager.FindByNameAsync(loginModel.ChaveDeAcesso);
+            if(!usuario.FlagDesativado)
             {
-                var token = await _jwtManager.criarAccessToken(loginModel.ChaveDeAcesso);
-                return new ResponseLoginDTO(token, "");
+                var result = await _signInManager.PasswordSignInAsync(loginModel.ChaveDeAcesso, loginModel.Senha, false, true);
+                if(result.Succeeded)
+                {
+                    var token = await _jwtManager.criarAccessToken(loginModel.ChaveDeAcesso);
+                    return new ResponseLoginDTO(token, "");
+                }
             }
             return new ResponseLoginDTO("Senha ou usuario invalidos!", "Senha ou usuario invalidos!");
         }
