@@ -7509,19 +7509,19 @@
     ]
   },
   "packageFolders": {
-    "/home/k4imdesktop/.nuget/packages/": {}
+    "/home/oem/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/k4imdesktop/gestao/app/Services/projeto/projeto.service.tests/projeto.service.tests.csproj",
+      "projectUniqueName": "/home/oem/gestao/app/Services/projeto/projeto.service.tests/projeto.service.tests.csproj",
       "projectName": "projeto.service.tests",
-      "projectPath": "/home/k4imdesktop/gestao/app/Services/projeto/projeto.service.tests/projeto.service.tests.csproj",
-      "packagesPath": "/home/k4imdesktop/.nuget/packages/",
-      "outputPath": "/home/k4imdesktop/gestao/app/Services/projeto/projeto.service.tests/obj/",
+      "projectPath": "/home/oem/gestao/app/Services/projeto/projeto.service.tests/projeto.service.tests.csproj",
+      "packagesPath": "/home/oem/.nuget/packages/",
+      "outputPath": "/home/oem/gestao/app/Services/projeto/projeto.service.tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/k4imdesktop/.nuget/NuGet/NuGet.Config"
+        "/home/oem/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -7613,18 +7613,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.5, 7.0.5]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -9,6 +9,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
 builder.Services.AddScoped<IRepoPessoa, RepoPessoa>();
 builder.Services.AddScoped<IRepoAuth, RepoAuth>();
+builder.Services.AddScoped<IRefreshManager, RefreshManager>();
 builder.Services.AddScoped<IChaveManager, ChaveManager>();
 builder.Services.AddScoped<IjwtManager, jwtManager>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);

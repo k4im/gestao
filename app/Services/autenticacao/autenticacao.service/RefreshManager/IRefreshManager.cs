@@ -1,12 +1,12 @@
-namespace autenticacao.service.RefreshManager
+namespace autenticacao.service.RefreshManagers
 {
     public interface IRefreshManager
     {
-        Task<RefreshToken> BuscarRefreshToken(string username, string refreshToken);
+        Task<RefreshToken> BuscarRefreshToken(string chave, string refreshToken);
         RefreshToken GerarRefreshToken(string ChaveDeAcesso);
 
-        Task SalvarRefreshToken(RefreshToken request);
+        Task<bool> SalvarRefreshToken(RefreshToken request);
 
-        Task DeletarRefreshToken(string username);
+        Task<bool> DeletarRefreshToken(string username);
     }
 }
