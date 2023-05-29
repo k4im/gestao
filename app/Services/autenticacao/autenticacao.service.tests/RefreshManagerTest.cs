@@ -81,7 +81,7 @@ namespace autenticacao.service.tests
         [InlineData("teste")]
         public async Task deve_deletar_refresh_token(string chave)
         {
-                        //Arrange
+            //Arrange
             var mockMapper = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new ProfileMapper());
