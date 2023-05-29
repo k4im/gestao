@@ -11,8 +11,8 @@ using autenticacao.service.Data;
 namespace autenticacao.service.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230528173544_NovoTeste")]
-    partial class NovoTeste
+    [Migration("20230529200849_BancoPessoaUsuarios")]
+    partial class BancoPessoaUsuarios
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -238,6 +238,9 @@ namespace autenticacao.service.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("RToken")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Usuario")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

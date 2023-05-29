@@ -2,7 +2,6 @@ namespace autenticacao.service.Controllers
 {
     [ApiController]
     [Route("api/v0.1/[controller]")]
-    [Authorize]
     public class PessoaControllers : ControllerBase
     {
         readonly IRepoPessoa _repo;
@@ -12,8 +11,7 @@ namespace autenticacao.service.Controllers
             _repo = repo;
         }
 
-        [HttpGet("pessoas/{pagina?}/{resultado?}"),
-        ValidateAntiForgeryToken, AllowAnonymous]
+        [HttpGet("pessoas/{pagina?}/{resultado?}"), AllowAnonymous]
         public async Task<IActionResult> buscarPessoas(int pagina = 1, float resultado = 5)
         {
             var pessoas =  await _repo.buscarPessoas(pagina, resultado);
@@ -22,7 +20,7 @@ namespace autenticacao.service.Controllers
         }
 
         [HttpGet("pessoa/{id}"), 
-        ValidateAntiForgeryToken, AllowAnonymous]
+        AllowAnonymous]
         public async Task<IActionResult> buscarPessoa(int id)
         {
             var pessoa = await _repo.buscarPessoaId(id);
@@ -30,8 +28,7 @@ namespace autenticacao.service.Controllers
             return Ok(pessoa);
         }
 
-        [HttpPost("pessoa/adicionar"), ValidateAntiForgeryToken,
-        Authorize(Roles = "ADMIN")]
+        [HttpPost("pessoa/adicionar"),Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> adicionarPessoa(Pessoa model)
         {
             var result = await _repo.criarPessoa(model);
@@ -40,7 +37,7 @@ namespace autenticacao.service.Controllers
         }
     
         [HttpPut("pessoa/atualizar/{id}"), 
-        ValidateAntiForgeryToken, Authorize(Roles = "ADMIN")]
+        Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> atualizarPessoa(int id, Pessoa model)
         {
             var result = await _repo.atualiarPessoa(id, model);
@@ -49,7 +46,7 @@ namespace autenticacao.service.Controllers
         }
     
         [HttpDelete("pessoa/deletar/{id}"),
-        ValidateAntiForgeryToken, Authorize(Roles = "ADMIN")]
+        Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> deletarPessoa(int id)
         {
             var result = await _repo.deletarPessoa(id);

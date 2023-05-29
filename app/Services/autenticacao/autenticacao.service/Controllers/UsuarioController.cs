@@ -16,8 +16,8 @@ namespace autenticacao.service.Controllers
         }
 
         [HttpGet("usuarios/{pagina?}/{resultado?}"),
-        ValidateAntiForgeryToken, Authorize(Roles = "ADMIN")]
-        public async Task<IActionResult> buscarUsuarios(int pagina, float resultado)
+        Authorize(Roles = "ADMIN")]
+        public async Task<IActionResult> buscarUsuarios(int pagina = 1, float resultado = 5)
         {
             var usuarios = await _repoAuth.listarUsuarios(pagina, resultado);
             if(usuarios == null) return NotFound("Não existe usuarios criados!");
@@ -25,7 +25,7 @@ namespace autenticacao.service.Controllers
         }
 
         [HttpPost("usuarios/novo"),
-        ValidateAntiForgeryToken, Authorize(Roles = "ADMIN")]
+        Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> criarUsuario(NovoUsuarioDTO user)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
@@ -42,12 +42,20 @@ namespace autenticacao.service.Controllers
         }
 
         [HttpPost("usuarios/desativar/{chave}"),
-        ValidateAntiForgeryToken, Authorize(Roles = "ADMIN")]
+        Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> desativarUsuario(string chave)
         {
             var result = await _repoAuth.desativarUsuario(chave);
             return (result) ? Ok("Usuario desativado com sucesso!") 
             : StatusCode(500, "Não foi possivel desativar o usuario"); 
+        }
+
+        [HttpPost("usuarios/logout"),
+        Authorize]
+        public async Task<IActionResult> logOut()
+        {
+            await _repoAuth.logOut();
+            return Ok();
         }
     } 
 }

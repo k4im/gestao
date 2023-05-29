@@ -237,6 +237,9 @@ namespace autenticacao.service.Migrations
                     b.Property<string>("RToken")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Usuario")
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.ToTable("RTokens");
