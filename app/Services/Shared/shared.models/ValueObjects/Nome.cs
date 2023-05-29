@@ -1,5 +1,6 @@
 namespace shared.models.ValueObjects
 {
+    [Keyless]
     public class Nome
     {
         public Nome(string primeiroNome, string sobreNome)

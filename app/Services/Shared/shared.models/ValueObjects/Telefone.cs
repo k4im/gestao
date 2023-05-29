@@ -1,5 +1,6 @@
 namespace shared.models.ValueObjects
 {
+    [Keyless]
     public class Telefone
     {
         [DataType("VARCHAR(2)")]

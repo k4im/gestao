@@ -1,5 +1,6 @@
 namespace shared.models.ValueObjects
 {
+    [Keyless]
     public class Endereco
     {
          public string Cidade { get; private set; }

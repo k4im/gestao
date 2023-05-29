@@ -1,6 +1,6 @@
-
 namespace shared.models.ValueObjects
 {
+    [Keyless]
     public class CadastroPessoaFisica
     {
         protected CadastroPessoaFisica()

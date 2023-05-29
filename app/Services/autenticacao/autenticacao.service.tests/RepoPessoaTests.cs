@@ -34,19 +34,21 @@ namespace autenticacao.service.tests
             //Arrange
             _context = new DataContext(_contextOptions.Options);
             var pessoas = new List<Pessoa> {
-                new Pessoa(_nome, _endereco, _telefone, _cpf),
-                new Pessoa(_nome, _endereco, _telefone, _cpf),
-                new Pessoa(_nome, _endereco, _telefone, _cpf),
+                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
+                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
+                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
             };
             var repo = new RepoPessoa(_context);
-            foreach (var pessoa in pessoas) await repo.criarPessoa(pessoa);
+            foreach(var pessoa in pessoas) await repo.criarPessoa(pessoa);
             var response = new Response<Pessoa>(pessoas, 1, 3);
 
+            var expect = response.Data.Count;
             //Act
-            var result = await repo.buscarPessoas(1, 1);
+            var result = await repo.buscarPessoas(1, 3);
+            var actual = result.Data.Count;
 
             //Assert
-            Assert.NotNull(result);
+            Assert.Equal(expect, actual);
 
         }
 

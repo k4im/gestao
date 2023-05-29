@@ -9,7 +9,11 @@ namespace autenticacao.service.tests.Helpers
     {
         public static CadastroPessoaFisica factoryCpf()
         {
-            return  new CadastroPessoaFisica("012096332587");
+            var random = new Random(); 
+            const string pool = "1234567890";
+            var chars = Enumerable.Range(0, 11).Select(x => pool[random.Next(0, pool.Length)]);
+            var randomValue = new string(chars.ToArray());
+            return  new CadastroPessoaFisica($"{randomValue}");
         }
     }
 }
