@@ -34,9 +34,12 @@ namespace autenticacao.service.tests
             //Arrange
             _context = new DataContext(_contextOptions.Options);
             var pessoas = new List<Pessoa> {
-                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
-                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
-                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
+                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), 
+                FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
+                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), 
+                FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
+                new Pessoa(FakeNome.factoryNome(), FakeEndereco.factoryFakeEndereco(), 
+                FakeTelefone.factoryTelefone(), FakeCpf.factoryCpf()),
             };
             var repo = new RepoPessoa(_context);
             foreach(var pessoa in pessoas) await repo.criarPessoa(pessoa);

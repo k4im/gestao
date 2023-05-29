@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+  # --------------------------
+  # container swagger
+  # --------------------------  
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "container-swagger"
+    ports:
+      - "8085:8080"
+    environment:
+      URL: https://k4im.github.io/json/api.json
+    deploy:
+      resources:
+        limits:
+          cpus: ".50"
+          memory: 512M  
