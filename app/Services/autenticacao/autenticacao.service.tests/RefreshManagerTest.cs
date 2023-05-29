@@ -11,17 +11,14 @@ namespace autenticacao.service.tests
     {
         DbContextOptionsBuilder _contextOptions = FakeDbOptions.factoryDbInMemory();
         DataContext _context;
+        MapperConfiguration _mockMapper = new MapperConfiguration(cfg => {cfg.AddProfile(new ProfileMapper());});
         
         [Theory]
         [InlineData("teste")]
         public void deve_gerar_refresh_token(string chave)
         {
             //Arrange
-            var mockMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new ProfileMapper());
-            });
-            var mapper = mockMapper.CreateMapper();
+            var mapper = _mockMapper.CreateMapper();
             _context = new DataContext(_contextOptions.Options);
             var repoMM = new RefreshManager(_context, mapper);
 
@@ -37,11 +34,7 @@ namespace autenticacao.service.tests
         public async Task deve_adicionar_refresh_token(string chave)
         {
             //Arrange
-            var mockMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new ProfileMapper());
-            });
-            var mapper = mockMapper.CreateMapper();
+            var mapper = _mockMapper.CreateMapper();
             _context = new DataContext(_contextOptions.Options);
             var repoMM = new RefreshManager(_context, mapper);
 
@@ -59,17 +52,12 @@ namespace autenticacao.service.tests
         public async Task deve_retornar_refresh_token_table(string chave)
         {
             //Arrange
-            var mockMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new ProfileMapper());
-            });
-            var mapper = mockMapper.CreateMapper();
             _context = new DataContext(_contextOptions.Options);
+            var mapper = _mockMapper.CreateMapper();
             var repoMM = new RefreshManager(_context, mapper);
-        
-            //Act 
             var tokenTeste = repoMM.GerarRefreshToken(chave);
             var addToken = await repoMM.SalvarRefreshToken(tokenTeste);
+            //Act 
             var result = await repoMM.BuscarRefreshToken(chave, tokenTeste.Token);
 
             //Assert
@@ -82,17 +70,13 @@ namespace autenticacao.service.tests
         public async Task deve_deletar_refresh_token(string chave)
         {
             //Arrange
-            var mockMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new ProfileMapper());
-            });
-            var mapper = mockMapper.CreateMapper();
             _context = new DataContext(_contextOptions.Options);
+            var mapper = _mockMapper.CreateMapper();
             var repoMM = new RefreshManager(_context, mapper);
-        
-            //Act 
             var tokenTeste = repoMM.GerarRefreshToken(chave);
             var addToken = await repoMM.SalvarRefreshToken(tokenTeste);
+
+            //Act 
             var result = await repoMM.DeletarRefreshToken(tokenTeste.Token);
 
             //Assert
