@@ -1,10 +1,3 @@
-using autenticacao.service.Models.Tokens;
-using autenticacao.service.RefreshManagers;
-using autenticacao.service.tests.Helpers;
-using AutoMapper;
-using Moq;
-using autenticacao.service.AutoMapper;
-
 namespace autenticacao.service.tests
 {
     public class RefreshManagerTest

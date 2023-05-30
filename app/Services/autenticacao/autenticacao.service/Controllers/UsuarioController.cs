@@ -21,11 +21,10 @@ namespace autenticacao.service.Controllers
         {
             var usuarios = await _repoAuth.listarUsuarios(pagina, resultado);
             if(usuarios == null) return NotFound("Não existe usuarios criados!");
-            return Ok(usuarios);
+            return StatusCode(200, usuarios);
         }
 
-        [HttpPost("usuarios/novo"),
-        Authorize(Roles = "ADMIN")]
+        [HttpPost("usuarios/novo")]
         public async Task<IActionResult> criarUsuario(NovoUsuarioDTO user)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
@@ -33,10 +32,11 @@ namespace autenticacao.service.Controllers
             {
                 var result = await _repoAuth.registrarUsuario(user);
                 if(result == null) return StatusCode(500, "Algo deu errado!");
-                return Ok(result);
+                return StatusCode(200, result);
             }
-            catch (Exception)
+            catch (Exception e )
             {
+                Console.WriteLine(e.Message);
                 return StatusCode(500, "Algo deu errado!");
             }
         }
@@ -46,16 +46,32 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> desativarUsuario(string chave)
         {
             var result = await _repoAuth.desativarUsuario(chave);
-            return (result) ? Ok("Usuario desativado com sucesso!") 
+            return (result) ? StatusCode(200, "Usuario desativado com sucesso!") 
             : StatusCode(500, "Não foi possivel desativar o usuario"); 
         }
 
+        [HttpPost("usuarios/login")]
+        public async Task<IActionResult> login(LoginDTO login)
+        {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+            try
+            {
+                var result = await _repoAuth.logar(login);
+                if(result == null) return NotFound();
+                return StatusCode(200, result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return StatusCode(500, "Algo deu errado!");
+            }
+        }
         [HttpPost("usuarios/logout"),
         Authorize]
         public async Task<IActionResult> logOut()
         {
             await _repoAuth.logOut();
-            return Ok();
+            return StatusCode(200);
         }
     } 
 }

@@ -1,6 +1,6 @@
 namespace autenticacao.service.Data
 {
-    public class DataContext : IdentityDbContext
+    public class DataContext : IdentityDbContext<AppUser>
     {
         public DataContext(DbContextOptions options) : base(options)
         {}
@@ -16,13 +16,13 @@ namespace autenticacao.service.Data
                     builder.OwnsOne<Nome>(pessoa => pessoa.Nome)
                     .Property(nome => nome.PrimeiroNome)
                     .HasColumnName("PrimeiroNome")
-                    .IsRequired(false);
+                    .IsRequired(true);
 
 
                     builder.OwnsOne<Nome>(pessoa => pessoa.Nome)
                     .Property(nome => nome.SobreNome)
                     .HasColumnName("SobreNome")
-                    .IsRequired(false);
+                    .IsRequired(true);
 
                 });
             #endregion
@@ -75,7 +75,7 @@ namespace autenticacao.service.Data
                     builder.OwnsOne<CadastroPessoaFisica>(pessoa => pessoa.Cpf)
                     .Property(cpf => cpf.Cpf)
                     .HasColumnName("cpf")
-                    .IsRequired(false);
+                    .IsRequired(true);
                 });
             #endregion
         }

@@ -7,15 +7,17 @@ namespace autenticacao.service.Repository
         readonly RoleManager<IdentityRole> _roleManager;
         readonly IjwtManager _jwtManager;
         readonly IChaveManager _chaveManager;
+        readonly IRefreshManager _refreshManager;
         readonly DataContext _db;
 
-        public RepoAuth(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IjwtManager jwtManager, IChaveManager chaveManager, DataContext db)
+        public RepoAuth(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IjwtManager jwtManager, IChaveManager chaveManager, IRefreshManager refreshManager, DataContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _jwtManager = jwtManager;
             _chaveManager = chaveManager;
+            _refreshManager = refreshManager;
             _db = db;
         }
 
@@ -49,7 +51,8 @@ namespace autenticacao.service.Repository
                 if(result.Succeeded)
                 {
                     var token = await _jwtManager.criarAccessToken(loginModel.ChaveDeAcesso);
-                    return new ResponseLoginDTO(token, "");
+                    var RToken = _refreshManager.GerarRefreshToken(loginModel.ChaveDeAcesso);
+                    return new ResponseLoginDTO(token, RToken.Token);
                 }
             }
             return new ResponseLoginDTO("Senha ou usuario invalidos!", "Senha ou usuario invalidos!");

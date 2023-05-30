@@ -16,7 +16,7 @@ namespace autenticacao.service.Controllers
         {
             var pessoas =  await _repo.buscarPessoas(pagina, resultado);
             if(pessoas == null) return NotFound();
-            return Ok(pessoas);
+            return StatusCode(200, pessoas);
         }
 
         [HttpGet("pessoa/{id}"), 
@@ -25,14 +25,14 @@ namespace autenticacao.service.Controllers
         {
             var pessoa = await _repo.buscarPessoaId(id);
             if(pessoa == null) return NotFound();
-            return Ok(pessoa);
+            return StatusCode(200, pessoa);
         }
 
         [HttpPost("pessoa/adicionar"),Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> adicionarPessoa(Pessoa model)
         {
             var result = await _repo.criarPessoa(model);
-            return (result) ? Ok("Pessoa adicionada com sucesso!"): 
+            return (result) ? StatusCode(200, "Pessoa adicionada com sucesso!"): 
             StatusCode(500, "Não foi possivel adicionar a pessoa!");
         }
     
@@ -41,7 +41,7 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> atualizarPessoa(int id, Pessoa model)
         {
             var result = await _repo.atualiarPessoa(id, model);
-            return (result) ? Ok("Dados pessoais atualizados com sucesso!"): 
+            return (result) ? StatusCode(200, "Dados pessoais atualizados com sucesso!"): 
             StatusCode(500, "Não foi possivel atualizar os dados!");
         }
     
@@ -50,7 +50,7 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> deletarPessoa(int id)
         {
             var result = await _repo.deletarPessoa(id);
-            return (result) ? Ok("Pessoa removida com sucesso") : 
+            return (result) ? StatusCode(200, "Pessoa removida com sucesso") : 
             StatusCode(500, "Não foi possivel remover a pessoa") ;
         }
     }
