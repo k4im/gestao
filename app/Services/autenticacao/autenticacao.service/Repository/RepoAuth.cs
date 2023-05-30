@@ -52,6 +52,7 @@ namespace autenticacao.service.Repository
                 {
                     var token = await _jwtManager.criarAccessToken(loginModel.ChaveDeAcesso);
                     var RToken = _refreshManager.GerarRefreshToken(loginModel.ChaveDeAcesso);
+                    await _refreshManager.SalvarRefreshToken(RToken);
                     return new ResponseLoginDTO(token, RToken.Token);
                 }
             }

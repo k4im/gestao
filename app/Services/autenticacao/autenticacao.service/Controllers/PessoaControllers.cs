@@ -28,7 +28,7 @@ namespace autenticacao.service.Controllers
             return StatusCode(200, pessoa);
         }
 
-        [HttpPost("pessoa/adicionar"),Authorize(Roles = "ADMIN")]
+        [HttpPost("pessoa/adicionar")]
         public async Task<IActionResult> adicionarPessoa(Pessoa model)
         {
             var result = await _repo.criarPessoa(model);
