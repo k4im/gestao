@@ -50,7 +50,7 @@
                    "cidade": "Palhoça",
                    "bairro": "Bela Vista",
                    "rua": "Fernando Medeiros",
-                   "cep": "885523840", **Importante estar adicionando apenas inteiro**
+                   "cep": "885523840",
                    "numero": 2544
                  }
             
@@ -74,6 +74,37 @@
              </remarks>
              <response code="200">Retorna a pessoa com o dado atualizado</response>
              <response code="404">Retorna dado de pessoa não encontrada</response>
+        </member>
+        <member name="M:autenticacao.service.Controllers.UsuarioController.criarUsuario(autenticacao.service.Models.UserController.NovoUsuarioDTO)">
+            <summary>
+            Realizar login.
+            </summary>
+            <remarks>
+            Exemplo:
+                
+                {
+                  "senha": "Sua Senha",
+                  "papel": "ADMIN ou ATENDENTE"
+                }
+            </remarks>
+            <response code="200">Retorna a pessoa com o dado atualizado</response>
+            <response code="500">Retorna que algo deu errado</response>
+        </member>
+        <member name="M:autenticacao.service.Controllers.UsuarioController.login(autenticacao.service.Models.UserController.LoginDTO)">
+             <summary>
+             Realizar login.
+             </summary>
+             <remarks>
+             Exemplo:
+                 
+                 {
+                   "chaveDeAcesso": "Sua chave de acesso",
+                   "senha": "Sua senha"
+                 }
+            
+             </remarks>
+             <response code="200">Retorna a pessoa com o dado atualizado</response>
+             <response code="500">Retorna que algo deu errado</response>
         </member>
         <member name="T:autenticacao.service.Migrations.Users">
             <inheritdoc />

@@ -23,7 +23,19 @@ namespace autenticacao.service.Controllers
             if(usuarios == null) return NotFound("Não existe usuarios criados!");
             return StatusCode(200, usuarios);
         }
-
+        /// <summary>
+        /// Cria novo usuario.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///     
+        ///     {
+        ///       "senha": "Sua Senha",
+        ///       "papel": "ADMIN ou ATENDENTE"
+        ///     }
+        /// </remarks>
+        /// <response code="200">Retorna a pessoa com o dado atualizado</response>
+        /// <response code="500">Retorna que algo deu errado</response>
         [HttpPost("usuarios/novo")]
         public async Task<IActionResult> criarUsuario(NovoUsuarioDTO user)
         {
@@ -49,7 +61,20 @@ namespace autenticacao.service.Controllers
             return (result) ? StatusCode(200, "Usuario desativado com sucesso!") 
             : StatusCode(500, "Não foi possivel desativar o usuario"); 
         }
-
+        /// <summary>
+        /// Realizar login.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///     
+        ///     {
+        ///       "chaveDeAcesso": "Sua chave de acesso",
+        ///       "senha": "Sua senha"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Retorna a pessoa com o dado atualizado</response>
+        /// <response code="500">Retorna que algo deu errado</response>
         [HttpPost("usuarios/login")]
         public async Task<IActionResult> login(LoginDTO login)
         {
