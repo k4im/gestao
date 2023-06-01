@@ -11,25 +11,6 @@ namespace autenticacao.service.Controllers
             _repo = repo;
         }
 
-        // POST api/todo
-        /// <summary>
-        /// Cria um item na To-do list.
-        /// </summary>
-        /// <remarks>
-        /// Exemplo:
-        ///
-        ///     POST /Todo
-        ///     {
-        ///        "id": 1,
-        ///        "name": "Item1",
-        ///        "iscomplete": true
-        ///     }
-        ///
-        /// </remarks>
-        /// <param name="value"></param>
-        /// <returns>Um novo item criado</returns>
-        /// <response code="201">Retorna o novo item criado</response>
-        /// <response code="400">Se o item não for criado</response>  
         [HttpGet("pessoas/{pagina?}/{resultado?}"), AllowAnonymous]
         public async Task<IActionResult> buscarPessoas(int pagina = 1, float resultado = 5)
         {
@@ -47,6 +28,39 @@ namespace autenticacao.service.Controllers
             return StatusCode(200, pessoa);
         }
 
+        // POST 
+        /// <summary>
+        /// Cria uma nova pessoa.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     {
+        ///       "nome": {
+        ///         "primeiroNome": "Roger",
+        ///         "sobreNome": "Yakubets"
+        ///       },
+        ///       "endereco": {
+        ///         "cidade": "Lagoas",
+        ///         "bairro": "Riveira",
+        ///         "rua": "Manoel Antonio Siqueira",
+        ///         "cep": "8852513",
+        ///         "numero": 254
+        ///       },
+        ///       "telefone": {
+        ///         "codigoPais": "55",
+        ///         "codigoDeArea": "48",
+        ///         "numero": "99542365"
+        ///       },
+        ///       "cpf": {
+        ///         "cpf": "01234567891"
+        ///       }
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>Codigo 200 dizendo que o usuario foi criado com sucesso!</returns>
+        /// <response code="200">Retorna uma mensagem informando que foi criado com sucesso</response>
+        /// <response code="500">Retorna uma mensagem informando que não foi possivel criar o usuario</response>
         [HttpPost("pessoa/adicionar")]
         public async Task<IActionResult> adicionarPessoa(Pessoa model)
         {
@@ -55,6 +69,25 @@ namespace autenticacao.service.Controllers
             StatusCode(500, "Não foi possivel adicionar a pessoa!");
         }
 
+
+        /// <summary>
+        /// Atualiza o endereço de uma pessoa.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// Exemplo:
+        ///     
+        ///     {
+        ///       "cidade": "Palhoça",
+        ///       "bairro": "Bela Vista",
+        ///       "rua": "Fernando Medeiros",
+        ///       "cep": "885523840",
+        ///       "numero": 2544
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Retorna a pessoa com o dado atualizado</response>
+        /// <response code="404">Retorna dado de pessoa não encontrada</response>
         [HttpPut("pessoa/atualizar/endereco/{id}")]
         public async Task<IActionResult> atualizarPessoaEndereco(int id, Endereco model)
         {
@@ -62,7 +95,21 @@ namespace autenticacao.service.Controllers
             if (result == null) return StatusCode(404);
             return StatusCode(200, result);
         }
-
+        /// <summary>
+        /// Atualiza o telefone de uma pessoa.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///     
+        ///     {
+        ///       "codigoPais": "55",
+        ///       "codigoDeArea": "11",
+        ///       "numero": "84563368"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Retorna a pessoa com o dado atualizado</response>
+        /// <response code="404">Retorna dado de pessoa não encontrada</response>
         [HttpPut("pessoa/atualizar/telefone/{id}")]
         public async Task<IActionResult> atualizarTelefone(int id, Telefone model)
         {
