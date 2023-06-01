@@ -10,7 +10,7 @@ namespace autenticacao.service.Controllers
         {
             _repo = repo;
         }
-
+        
         [HttpGet("pessoas/{pagina?}/{resultado?}"), AllowAnonymous]
         public async Task<IActionResult> buscarPessoas(int pagina = 1, float resultado = 5)
         {

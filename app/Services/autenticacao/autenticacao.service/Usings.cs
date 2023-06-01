@@ -24,3 +24,4 @@ global using autenticacao.service.Models.Tokens;
 global using autenticacao.service.RefreshManagers;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using AutoMapper;
+global using Microsoft.OpenApi.Models;
