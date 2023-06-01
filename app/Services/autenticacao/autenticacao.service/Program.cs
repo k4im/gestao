@@ -8,7 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 #region swagger config
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Pessoas & usuarios API", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -32,7 +32,12 @@ builder.Services.AddSwaggerGen(option =>
             new string[]{}
         }
     });
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    option.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
 });
+builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 #endregion
 // builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Data"));
@@ -49,7 +54,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
-    
+
 builder.Services.Configure<IdentityOptions>(opt =>
 {
     opt.Password.RequiredLength = 3;
@@ -64,8 +69,10 @@ builder.Services.Configure<IdentityOptions>(opt =>
 
 #region  configurando jwt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-.AddJwtBearer(opt => {
-    opt.TokenValidationParameters = new TokenValidationParameters{
+.AddJwtBearer(opt =>
+{
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -88,11 +95,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors(c => {
+app.UseCors(c =>
+{
     c.AllowAnyOrigin();
     c.AllowAnyHeader();
     c.AllowAnyMethod();
-});  
+});
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

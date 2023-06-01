@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>autenticacao.service</name>
+    </assembly>
+    <members>
+        <member name="M:autenticacao.service.Controllers.PessoaControllers.buscarPessoas(System.Int32,System.Single)">
+             <summary>
+             Cria um item na To-do list.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Todo
+                 {
+                    "id": 1,
+                    "name": "Item1",
+                    "iscomplete": true
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item criado</returns>
+             <response code="201">Retorna o novo item criado</response>
+             <response code="400">Se o item não for criado</response>  
+        </member>
+        <member name="T:autenticacao.service.Migrations.Users">
+            <inheritdoc />
+        </member>
+        <member name="M:autenticacao.service.Migrations.Users.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:autenticacao.service.Migrations.Users.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:autenticacao.service.Migrations.Users.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

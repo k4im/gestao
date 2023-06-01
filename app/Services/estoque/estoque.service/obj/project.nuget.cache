@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cZuWgcnyES58uDTH/G2PbB+QE981bK8gU7lNqW15MhjI6BsqNwpN/V1FJL7rLoVyhKw9kVnRTGThY18OwVgtbQ==",
+  "dgSpecHash": "As6ZHS1z6BDX0pq/75jhT9z+4NmNYzMdLuhCAwVLienwjB9Lu+OacS7u+BbxBC9XxAWODtq+256SElXRPw1aYA==",
   "success": true,
   "projectFilePath": "/home/oem/gestao/app/Services/estoque/estoque.service/estoque.service.csproj",
   "expectedPackageFiles": [
@@ -45,7 +45,10 @@
     "/home/oem/.nuget/packages/moq.entityframeworkcore/7.0.0.2/moq.entityframeworkcore.7.0.0.2.nupkg.sha512",
     "/home/oem/.nuget/packages/mysqlconnector/2.2.5/mysqlconnector.2.2.5.nupkg.sha512",
     "/home/oem/.nuget/packages/pomelo.entityframeworkcore.mysql/7.0.0/pomelo.entityframeworkcore.mysql.7.0.0.nupkg.sha512",
+    "/home/oem/.nuget/packages/scrutor/3.3.0/scrutor.3.3.0.nupkg.sha512",
     "/home/oem/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "/home/oem/.nuget/packages/swashbuckle.aspnetcore.filters/7.0.6/swashbuckle.aspnetcore.filters.7.0.6.nupkg.sha512",
+    "/home/oem/.nuget/packages/swashbuckle.aspnetcore.filters.abstractions/7.0.6/swashbuckle.aspnetcore.filters.abstractions.7.0.6.nupkg.sha512",
     "/home/oem/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "/home/oem/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
     "/home/oem/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",

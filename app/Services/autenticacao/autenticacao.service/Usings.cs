@@ -25,3 +25,5 @@ global using autenticacao.service.RefreshManagers;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using AutoMapper;
 global using Microsoft.OpenApi.Models;
+global using System.Reflection;
+global using Swashbuckle.AspNetCore.Filters;
