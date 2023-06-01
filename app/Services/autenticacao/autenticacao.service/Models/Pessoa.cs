@@ -17,5 +17,15 @@ namespace autenticacao.service.Models
         public Telefone Telefone { get;}
         public CadastroPessoaFisica Cpf {get;}
 
+    
+        public void mudarEndereco(Endereco novoEndereco)
+        {
+            Endereco.atualizarEndereco(novoEndereco);
+        }
+
+        public void mudarTelefone(Telefone novoTel)
+        {
+            Telefone.atualizarTelefone(novoTel);
+        }
     }
 }

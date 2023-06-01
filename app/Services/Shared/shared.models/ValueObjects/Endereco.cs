@@ -49,5 +49,14 @@ namespace shared.models.ValueObjects
             // if (!Regex.IsMatch(rua, @"$[\\p{L}\\s]+$")) throw new CaracterInvalido("A rua não pode conter caracteres especiais");
             return rua;
         }
+
+        public void atualizarEndereco(Endereco novoEndereco)
+        {
+            if(novoEndereco.Cidade != this.Cidade) this.Cidade = novoEndereco.Cidade;
+            if(novoEndereco.Bairro != this.Bairro) this.Bairro = novoEndereco.Bairro;
+            if(novoEndereco.Rua != this.Rua) this.Rua = novoEndereco.Rua;
+            if(novoEndereco.Cep != this.Cep) this.Cep = novoEndereco.Cep;
+            if(novoEndereco.Numero != this.Numero) this.Numero = novoEndereco.Numero;
+        }
     }
 }

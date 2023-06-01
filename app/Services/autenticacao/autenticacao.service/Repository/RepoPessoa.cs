@@ -28,6 +28,36 @@ namespace autenticacao.service.Repository
             }
         }
 
+        public async Task<Pessoa> atualizarEndereco(int id, Endereco model)
+        {
+            try
+            {
+                var pessoa = await buscarPessoaId(id);
+                pessoa.mudarEndereco(model);
+                await _db.SaveChangesAsync();
+                return await buscarPessoaId(id);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Não foi possivel atualizar o dado!");
+            }
+        }
+
+        public async Task<Pessoa> atualizarTelefone(int id, Telefone model)
+        {
+            try
+            {
+                var pessoa = await buscarPessoaId(id);
+                pessoa.mudarTelefone(model);
+                await _db.SaveChangesAsync();
+                return await buscarPessoaId(id);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Não foi possivel atualizar o dado!");
+            }
+        }
+
         public async Task<Pessoa> buscarPessoaId(int id)
         {
             var pessoa = await _db.Pessoas.FirstOrDefaultAsync(x => x.Id == id);

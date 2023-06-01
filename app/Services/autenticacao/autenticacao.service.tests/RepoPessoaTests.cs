@@ -14,7 +14,7 @@ namespace autenticacao.service.tests
         Fixture _fixture = new Fixture();
 
         [Fact]
-        public async void DeveRetornarTrueAoCriarUsuario()
+        public async void deve_retornar_true_ao_criar_usuario()
         {
             //Arrange
             _contextOptions = new DbContextOptionsBuilder().UseInMemoryDatabase(new Guid().ToString());
@@ -29,7 +29,7 @@ namespace autenticacao.service.tests
         }
 
         [Fact]
-        public async void DeveRetornarListaDePessoas()
+        public async void deve_retornar_lista_de_pessoas()
         {
             //Arrange
             _context = new DataContext(_contextOptions.Options);
@@ -56,7 +56,7 @@ namespace autenticacao.service.tests
         }
 
         [Fact]
-        public async void DeveDeletarPessoa()
+        public async void deve_deletar_pessoa_e_retornar_true()
         {
             //Arrange
             _context = new DataContext(_contextOptions.Options);
@@ -72,7 +72,7 @@ namespace autenticacao.service.tests
 
 
         [Fact]
-        public async void DeveAcharPorId()
+        public async void deve_achar_pelo_id_e_retornar_pessoa()
         {
             //Arrange
             _context = new DataContext(_contextOptions.Options);
@@ -84,12 +84,12 @@ namespace autenticacao.service.tests
             var result = await repo.buscarPessoaId(1);
 
             //Assert
-            Assert.NotNull(result);
+            Assert.IsType<Pessoa>(result);
         }
 
 
         [Fact]
-        public async void DeveAtualizarPessoa()
+        public async void deve_atualizar_pessoa_e_retornar_true()
         {
             //Arrange
             _context = new DataContext(_contextOptions.Options);
@@ -103,6 +103,41 @@ namespace autenticacao.service.tests
 
             //Assert
             Assert.True(result);
+        }
+
+        [Fact]
+        public async void deve_atualizar_endereco()
+        {
+            //Arrange
+            _context = new DataContext(_contextOptions.Options);
+            var repo = new RepoPessoa(_context);
+            var pessoa = new Pessoa(_nome, _endereco, _telefone, _cpf);
+            var atualizada = new Pessoa(_nome, _endereco, _telefone, _cpf);
+            await repo.criarPessoa(pessoa);
+
+            //Act
+            var result = await repo.atualizarEndereco(1, FakeEndereco.factoryFakeEndereco());
+
+            //Assert
+            Assert.IsType<Pessoa>(result);
+        }
+
+
+        [Fact]
+        public async void deve_atualizar_telefone()
+        {
+            //Arrange
+            _context = new DataContext(_contextOptions.Options);
+            var repo = new RepoPessoa(_context);
+            var pessoa = new Pessoa(_nome, _endereco, _telefone, _cpf);
+            var atualizada = new Pessoa(_nome, _endereco, _telefone, _cpf);
+            await repo.criarPessoa(pessoa);
+
+            //Act
+            var result = await repo.atualizarTelefone(1, FakeTelefone.factoryTelefone());
+
+            //Assert
+            Assert.IsType<Pessoa>(result);
         }
     }
 }

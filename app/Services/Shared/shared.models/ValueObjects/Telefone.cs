@@ -35,6 +35,12 @@ namespace shared.models.ValueObjects
             if (!Regex.IsMatch(codigoDeArea, "^[0-9]*$")) throw new CaracterInvalido("Codigo de area precisa conter apenas numeros");
             if (!Regex.IsMatch(numero, "^[0-9]*$")) throw new CaracterInvalido("Numero de telefone precisa conter apenas numeros");
         }
-   
+
+        public void atualizarTelefone(Telefone novoTel)
+        {
+            if(this.CodigoPais != novoTel.CodigoPais) this.CodigoDeArea = novoTel.CodigoPais;
+            if(this.CodigoDeArea != novoTel.CodigoDeArea) this.CodigoDeArea = novoTel.CodigoDeArea;
+            if(this.Numero != novoTel.Numero) this.Numero = novoTel.Numero;
+        }
     }
 }
