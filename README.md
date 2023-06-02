@@ -8,7 +8,7 @@ Toda a comunicação entre os serviços estará acontecendo de forma assincrona,
 
 ![image](https://github.com/k4im/gestao/assets/108486349/7020b8b2-d9af-491b-8cc8-f5dd42967b51)
 
-## Comunicação entre os sistemas
+## Comunicação entre os serviços
 A comunicação no sistema funciona de forma assincrona, como citado acima. 
 
 Neste caso a cada projeto novo adicionado ao serviço de projetos dispara uma mensagem que será enviada para o broker.
@@ -21,10 +21,12 @@ Para cada mensagem consumida o serviço de estoque realiza a lógica de subtraç
 
 Atualmente o sistema consta com 4 serviços rodando, sendo eles:
 
-**Serviço de estoque:** estará realizando toda a administração relacionadas a produtos, sendo a adição, atualização e removoção de novos produtos, assim como tratativas relacionadas a quantidades de produtos que estão sendo utilizados por projetos.
+- **Serviço de estoque:** estará realizando toda a administração relacionadas a produtos, sendo a adição, atualização e removoção de novos produtos, assim como tratativas relacionadas a quantidades de produtos que estão sendo utilizados por projetos.
 
-**Serviço de projetos:** estará realizando toda a parte administrativa relacionada a projetos, realizando os metodos de **CRUD,** também estará criando uma exchange e fila para enviar as novas mensagens ao broker assim que um projeto for criado, cada mensagem relacionado a este serviço conterá apenas o nome do projeto, nome do produto e a quantidade de produtos que foram utilizadas.
+* **Serviço de projetos:** estará realizando toda a parte administrativa relacionada a projetos, realizando os metodos de **CRUD,** também estará criando uma exchange e fila para enviar as novas mensagens ao broker assim que um projeto for criado, cada mensagem relacionado a este serviço conterá apenas o nome do projeto, nome do produto e a quantidade de produtos que foram utilizadas.
 
-**Serviço de autenticacao:** este serviço estará realizando a parte de autenticação de cada novo usuario, assim como a criação de novos funcionarios e administradores para o sistema, para cada usuario criado será necessário estar tendo uma pessoa, seja ela funcionario ou administrador referenciando a este usuario. Após ter esta pessoa criada, será possivel estar realizando a criação de um novo usuario, para isso será apenas necessário estar informando o papel e senha que será utilizada para criar tal usuario, após realizado o procedimento será retornado a chave de acesso para login.
++ **Serviço de autenticacao:** este serviço estará realizando a parte de autenticação de cada novo usuario, assim como a criação de novos funcionarios e administradores para o sistema, para cada usuario criado será necessário estar tendo uma pessoa, seja ela funcionario ou administrador referenciando a este usuario. Após ter esta pessoa criada, será possivel estar realizando a criação de um novo usuario, para isso será apenas necessário estar informando o papel e senha que será utilizada para criar tal usuario, após realizado o procedimento será retornado a chave de acesso para login.
 
-**Serviço de fornecedores:** este serviço será responsavel por toda parte relacionadas a fornecedores, sendo os metodos CRUDS e suas principais regras de negocio.
+- **Serviço de fornecedores:** este serviço será responsavel por toda parte relacionadas a fornecedores, sendo os metodos CRUDS e suas principais regras de negocio.
+
+
