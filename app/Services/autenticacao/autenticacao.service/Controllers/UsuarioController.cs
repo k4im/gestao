@@ -15,6 +15,14 @@ namespace autenticacao.service.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retorna a lista de usuarios de forma paginada.
+        /// </summary>
+        /// <remarks>
+        /// **Caso não seja adicionado um valor de pagina ou resultado, será atribuido como padrão o valor para pagina de 1 e o valor para o resultado por pagina de 5.**
+        /// </remarks>
+        /// <returns code="200">Retorna codigo 200 com a lista de usuarios</returns>
+        /// <returns code="404">Informa que não existe uma lista de usuario</returns>
         [HttpGet("usuarios/{pagina?}/{resultado?}"),
         Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> buscarUsuarios(int pagina = 1, float resultado = 5)
@@ -23,6 +31,7 @@ namespace autenticacao.service.Controllers
             if (usuarios == null) return NotFound("Não existe usuarios criados!");
             return StatusCode(200, usuarios);
         }
+
         /// <summary>
         /// Cria novo usuario.
         /// </summary>
@@ -53,6 +62,14 @@ namespace autenticacao.service.Controllers
             }
         }
 
+        /// <summary>
+        /// Ira realizar a operação de desativar um usuario
+        /// </summary>
+        /// <remarks>
+        /// Caso o usuario seja desativado o mesmo não conseguira realizar mais login. É possivel estar reativando o usuario, porém enquanto o status permanecer o mesmo não tera mais acesso.
+        /// </remarks>
+        /// <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
+        /// <returns code="500">Informa que não foi possivel realizar a operação</returns>
         [HttpPost("usuarios/desativar/{chave}"),
         Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> desativarUsuario([FromRoute] string chave)
@@ -61,6 +78,7 @@ namespace autenticacao.service.Controllers
             return (result) ? StatusCode(200, "Usuario desativado com sucesso!")
             : StatusCode(500, "Não foi possivel desativar o usuario");
         }
+
         /// <summary>
         /// Realizar login.
         /// </summary>
@@ -91,7 +109,10 @@ namespace autenticacao.service.Controllers
                 return StatusCode(500, "Algo deu errado!");
             }
         }
-
+        /// <summary>
+        /// Ira realizar o LogOut do usuario que está atualmente conectado
+        /// </summary>
+        /// <returns code="200">Informa que o usuario conseguiu se desconectar</returns>
         [HttpPost("usuarios/logout"),
         Authorize]
         public async Task<IActionResult> logOut()
@@ -100,7 +121,11 @@ namespace autenticacao.service.Controllers
             return StatusCode(200, "Você realizou logout");
         }
 
-
+        /// <summary>
+        /// Ira realizar a operação de reativar um usuario
+        /// </summary>
+        /// <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
+        /// <returns code="500">Informa que não foi possivel realizar a operação</returns>
         [HttpPost("usuarios/reativar/{chave}"),
         Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> reavitarUsuario([FromRoute] string chave)

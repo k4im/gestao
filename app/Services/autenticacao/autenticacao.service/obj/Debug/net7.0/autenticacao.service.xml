@@ -4,6 +4,19 @@
         <name>autenticacao.service</name>
     </assembly>
     <members>
+        <member name="M:autenticacao.service.Controllers.PessoaControllers.buscarPessoas(System.Int32,System.Single)">
+            <summary>
+            Retorna uma lista paginada de Pessoas.
+            </summary>
+        </member>
+        <member name="M:autenticacao.service.Controllers.PessoaControllers.buscarPessoa(System.Int32)">
+            <summary>
+            Ira retornar uma pessoa a partir de um ID.
+            </summary>
+            <param name="id"></param>
+            <returns code="200">Retorna a pessoa pertencente ao id</returns>
+            <returns code="404">Informa que não existe uma pessoa com tal ID</returns>
+        </member>
         <member name="M:autenticacao.service.Controllers.PessoaControllers.adicionarPessoa(autenticacao.service.Models.Pessoa)">
              <summary>
              Cria uma nova pessoa.
@@ -75,6 +88,16 @@
              <response code="200">Retorna a pessoa com o dado atualizado</response>
              <response code="404">Retorna dado de pessoa não encontrada</response>
         </member>
+        <member name="M:autenticacao.service.Controllers.UsuarioController.buscarUsuarios(System.Int32,System.Single)">
+            <summary>
+            Retorna a lista de usuarios de forma paginada.
+            </summary>
+            <remarks>
+            **Caso não seja adicionado um valor de pagina ou resultado, será atribuido como padrão o valor para pagina de 1 e o valor para o resultado por pagina de 5.**
+            </remarks>
+            <returns code="200">Retorna codigo 200 com a lista de usuarios</returns>
+            <returns code="404">Informa que não existe uma lista de usuario</returns>
+        </member>
         <member name="M:autenticacao.service.Controllers.UsuarioController.criarUsuario(autenticacao.service.Models.UserController.NovoUsuarioDTO)">
             <summary>
             Cria novo usuario.
@@ -89,6 +112,16 @@
             </remarks>
             <response code="200">Retorna a pessoa com o dado atualizado</response>
             <response code="500">Retorna que algo deu errado</response>
+        </member>
+        <member name="M:autenticacao.service.Controllers.UsuarioController.desativarUsuario(System.String)">
+            <summary>
+            Ira realizar a operação de desativar um usuario
+            </summary>
+            <remarks>
+            Caso o usuario seja desativado o mesmo não conseguira realizar mais login. É possivel estar reativando o usuario, porém enquanto o status permanecer o mesmo não tera mais acesso.
+            </remarks>
+            <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
+            <returns code="500">Informa que não foi possivel realizar a operação</returns>
         </member>
         <member name="M:autenticacao.service.Controllers.UsuarioController.login(autenticacao.service.Models.UserController.LoginDTO)">
              <summary>
@@ -105,6 +138,19 @@
              </remarks>
              <response code="200">Retorna a pessoa com o dado atualizado</response>
              <response code="500">Retorna que algo deu errado</response>
+        </member>
+        <member name="M:autenticacao.service.Controllers.UsuarioController.logOut">
+            <summary>
+            Ira realizar o LogOut do usuario que está atualmente conectado
+            </summary>
+            <returns code="200">Informa que o usuario conseguiu se desconectar</returns>
+        </member>
+        <member name="M:autenticacao.service.Controllers.UsuarioController.reavitarUsuario(System.String)">
+            <summary>
+            Ira realizar a operação de reativar um usuario
+            </summary>
+            <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
+            <returns code="500">Informa que não foi possivel realizar a operação</returns>
         </member>
         <member name="T:autenticacao.service.Migrations.Users">
             <inheritdoc />

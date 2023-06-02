@@ -11,6 +11,9 @@ namespace autenticacao.service.Controllers
             _repo = repo;
         }
 
+        /// <summary>
+        /// Retorna uma lista paginada de Pessoas.
+        /// </summary>
         [HttpGet("pessoas/{pagina?}/{resultado?}"), AllowAnonymous]
         public async Task<IActionResult> buscarPessoas(int pagina = 1, float resultado = 5)
         {
@@ -19,6 +22,12 @@ namespace autenticacao.service.Controllers
             return StatusCode(200, pessoas);
         }
 
+        /// <summary>
+        /// Ira retornar uma pessoa a partir de um ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns code="200">Retorna a pessoa pertencente ao id</returns>
+        /// <returns code="404">Informa que não existe uma pessoa com tal ID</returns>
         [HttpGet("pessoa/{id}"),
         AllowAnonymous]
         public async Task<IActionResult> buscarPessoa(int id)
@@ -118,7 +127,9 @@ namespace autenticacao.service.Controllers
             return StatusCode(200, result);
         }
 
-
+        /// <summary>
+        /// Ira realizar a removeção de uma pessoa a partir de um ID.
+        /// </summary>
         [HttpDelete("pessoa/deletar/{id}"),
         Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> deletarPessoa(int id)
