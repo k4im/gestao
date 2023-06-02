@@ -37,9 +37,14 @@ namespace autenticacao.service.Repository
             }
         }
 
-        public Task<Response<AppUser>> listarUsuarios(int pagina, float resultado)
+        public async Task<Response<AppUser>> listarUsuarios(int pagina, float resultado)
         {
-            throw new NotImplementedException();
+            var resultadoPaginas = resultado;
+            var pessoas = await _db.Users.ToListAsync();
+            var totalDePaginas = Math.Ceiling(pessoas.Count() / resultadoPaginas);
+            var usersPaginados = pessoas.Skip((pagina - 1) * (int)resultadoPaginas).Take((int)resultadoPaginas).ToList();
+            var paginasTotal = (int)totalDePaginas;
+            return new Response<AppUser>(usersPaginados, pagina, paginasTotal);
         }
 
         public async Task<ResponseLoginDTO> logar(LoginDTO loginModel)
@@ -59,9 +64,25 @@ namespace autenticacao.service.Repository
             return new ResponseLoginDTO("Senha ou usuario invalidos!", "Senha ou usuario invalidos!");
         }
 
-        public Task logOut()
+        public async Task logOut()
         {
-            throw new NotImplementedException();
+            await _signInManager.SignOutAsync();
+        }
+
+        public async Task<bool> reativarUsuario(string chave)
+        {
+            var usuario = await _userManager.FindByEmailAsync(chave);
+            if (usuario == null) return false;
+            usuario.reativarUsuario();
+            try
+            {
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public async Task<ResponseRegistroDTO> registrarUsuario(NovoUsuarioDTO user)

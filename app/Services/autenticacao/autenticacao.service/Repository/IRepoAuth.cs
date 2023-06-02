@@ -5,6 +5,7 @@ namespace autenticacao.service.Repository
         Task<Response<AppUser>> listarUsuarios(int pagina, float resultado);
         Task<ResponseRegistroDTO> registrarUsuario(NovoUsuarioDTO user);
         Task<bool> desativarUsuario(string chave);
+        Task<bool> reativarUsuario(string chave);
         Task<ResponseLoginDTO> logar(LoginDTO loginModel);
         Task logOut();
 

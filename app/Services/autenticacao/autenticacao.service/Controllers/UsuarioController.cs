@@ -91,12 +91,23 @@ namespace autenticacao.service.Controllers
                 return StatusCode(500, "Algo deu errado!");
             }
         }
+
         [HttpPost("usuarios/logout"),
         Authorize]
         public async Task<IActionResult> logOut()
         {
             await _repoAuth.logOut();
-            return StatusCode(200);
+            return StatusCode(200, "Você realizou logout");
+        }
+
+
+        [HttpPost("usuarios/reativar/{chave}"),
+        Authorize(Roles = "ADMIN")]
+        public async Task<IActionResult> reavitarUsuario([FromRoute] string chave)
+        {
+            var result = await _repoAuth.reativarUsuario(chave);
+            return (result) ? StatusCode(200, "Usuario reativado com sucesso!")
+            : StatusCode(500, "Não foi possivel desativar o usuario");
         }
     }
 }
