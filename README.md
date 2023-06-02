@@ -34,6 +34,8 @@ Para consumir os serviços será necessário estar eviando as requisições para
 
 O motivo de ser utilizado um gateway, é que por ser tratarem de projetos distintos os mesmos não serão expostos para rede externa, todos os serviços estarão tendo a comunicação apenas funcionando no ambiente onde foi realizado o deploy, então para se estar conseguindo consumir os mesmo será necessário estar enviando as requisições para o **Kong.**
 
+Kong estará rodando em:
+- **localhost:8000/**
 ## Autenticação
 
 Toda a parte de autenticação está sendo feita por **JWT**, para estar consumindo os serviços será primariamente necessário estar realizando a autenticação com o usuario e recebendo o Access token e refresh token, o mesmo é valido por apenas 1h, 
