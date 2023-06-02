@@ -20,7 +20,7 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> buscarUsuarios(int pagina = 1, float resultado = 5)
         {
             var usuarios = await _repoAuth.listarUsuarios(pagina, resultado);
-            if(usuarios == null) return NotFound("Não existe usuarios criados!");
+            if (usuarios == null) return NotFound("Não existe usuarios criados!");
             return StatusCode(200, usuarios);
         }
         /// <summary>
@@ -39,14 +39,14 @@ namespace autenticacao.service.Controllers
         [HttpPost("usuarios/novo")]
         public async Task<IActionResult> criarUsuario(NovoUsuarioDTO user)
         {
-            if(!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             try
             {
                 var result = await _repoAuth.registrarUsuario(user);
-                if(result == null) return StatusCode(500, "Algo deu errado!");
+                if (result == null) return StatusCode(500, "Algo deu errado!");
                 return StatusCode(200, result);
             }
-            catch (Exception e )
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return StatusCode(500, "Algo deu errado!");
@@ -55,11 +55,11 @@ namespace autenticacao.service.Controllers
 
         [HttpPost("usuarios/desativar/{chave}"),
         Authorize(Roles = "ADMIN")]
-        public async Task<IActionResult> desativarUsuario(string chave)
+        public async Task<IActionResult> desativarUsuario([FromRoute] string chave)
         {
             var result = await _repoAuth.desativarUsuario(chave);
-            return (result) ? StatusCode(200, "Usuario desativado com sucesso!") 
-            : StatusCode(500, "Não foi possivel desativar o usuario"); 
+            return (result) ? StatusCode(200, "Usuario desativado com sucesso!")
+            : StatusCode(500, "Não foi possivel desativar o usuario");
         }
         /// <summary>
         /// Realizar login.
@@ -78,11 +78,11 @@ namespace autenticacao.service.Controllers
         [HttpPost("usuarios/login")]
         public async Task<IActionResult> login(LoginDTO login)
         {
-            if(!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             try
             {
                 var result = await _repoAuth.logar(login);
-                if(result == null) return NotFound();
+                if (result == null) return NotFound();
                 return StatusCode(200, result);
             }
             catch (Exception e)
@@ -98,5 +98,5 @@ namespace autenticacao.service.Controllers
             await _repoAuth.logOut();
             return StatusCode(200);
         }
-    } 
+    }
 }

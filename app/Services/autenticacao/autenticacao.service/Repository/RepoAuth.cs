@@ -23,8 +23,8 @@ namespace autenticacao.service.Repository
 
         public async Task<bool> desativarUsuario(string chave)
         {
-            var usuario = await _userManager.FindByNameAsync(chave);
-            if(usuario == null) return false;
+            var usuario = await _userManager.FindByEmailAsync(chave);
+            if (usuario == null) return false;
             usuario.desativarUsuario();
             try
             {
@@ -45,10 +45,10 @@ namespace autenticacao.service.Repository
         public async Task<ResponseLoginDTO> logar(LoginDTO loginModel)
         {
             var usuario = await _userManager.FindByNameAsync(loginModel.ChaveDeAcesso);
-            if(!usuario.FlagDesativado)
+            if (!usuario.FlagDesativado)
             {
                 var result = await _signInManager.PasswordSignInAsync(loginModel.ChaveDeAcesso, loginModel.Senha, false, true);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     var token = await _jwtManager.criarAccessToken(loginModel.ChaveDeAcesso);
                     var RToken = _refreshManager.GerarRefreshToken(loginModel.ChaveDeAcesso);
@@ -73,17 +73,17 @@ namespace autenticacao.service.Repository
                 Email = chave,
                 EmailConfirmed = true,
                 Role = user.Papel
-                
+
             };
             var result = await _userManager.CreateAsync(NovoUsuario, user.Senha);
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 await criarRoles();
                 await _userManager.SetLockoutEnabledAsync(NovoUsuario, false);
-                await _userManager.AddToRoleAsync(NovoUsuario, user.Papel);     
+                await _userManager.AddToRoleAsync(NovoUsuario, user.Papel);
             }
-            if(!result.Succeeded && result.Errors.Count() > 0) Console.WriteLine("Erro");
-            
+            if (!result.Succeeded && result.Errors.Count() > 0) Console.WriteLine("Erro");
+
             return new ResponseRegistroDTO(chave);
         }
 
