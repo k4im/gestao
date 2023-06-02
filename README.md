@@ -27,6 +27,6 @@ Atualmente o sistema consta com 4 serviços rodando, sendo eles:
 
 + **Serviço de autenticacao:** este serviço estará realizando a parte de autenticação de cada novo usuario, assim como a criação de novos funcionarios e administradores para o sistema, para cada usuario criado será necessário estar tendo uma pessoa, seja ela funcionario ou administrador referenciando a este usuario. Após ter esta pessoa criada, será possivel estar realizando a criação de um novo usuario, para isso será apenas necessário estar informando o papel e senha que será utilizada para criar tal usuario, após realizado o procedimento será retornado a chave de acesso para login.
 
-- **Serviço de fornecedores:** este serviço será responsavel por toda parte relacionadas a fornecedores, sendo os metodos CRUDS e suas principais regras de negocio.
+- **Serviço de fornecedores:** este serviço será responsavel por toda parte relacionadas a fornecedores, sendo os metodos **CRUD** e suas principais regras de negocio.
 
 
