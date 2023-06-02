@@ -109,6 +109,7 @@ namespace autenticacao.service.Controllers
                 return StatusCode(500, "Algo deu errado!");
             }
         }
+
         /// <summary>
         /// Ira realizar o LogOut do usuario que está atualmente conectado
         /// </summary>

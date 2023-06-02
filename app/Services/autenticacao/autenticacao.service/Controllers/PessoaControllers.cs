@@ -104,6 +104,7 @@ namespace autenticacao.service.Controllers
             if (result == null) return StatusCode(404);
             return StatusCode(200, result);
         }
+        
         /// <summary>
         /// Atualiza o telefone de uma pessoa.
         /// </summary>
