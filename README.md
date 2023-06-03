@@ -36,10 +36,31 @@ O motivo de ser utilizado um gateway, é que por ser tratarem de projetos distin
 
 Kong estará rodando em:
 >**localhost:8000/**
+
 ## Autenticação
 
 Toda a parte de autenticação está sendo feita por **JWT**, para estar consumindo os serviços será primariamente necessário estar realizando a autenticação com o usuario e recebendo o Access token e refresh token, o mesmo é valido por apenas 1h, 
 após realizado a tratativa necessário pela parte que consome, basta estar adicionando este token ao header no momento da requisição ao **gateway**.
 
 É necessário que a parte que consuma tenha um controle de quanto tempo se passou, para então poder reenviar uma requisição com o token de refresh solicitando um novo Access token.
+
+## Objeto de valores & entidade de pessoas
+
+![image](https://github.com/k4im/gestao/assets/108486349/d9f77dde-57f9-489e-9267-20b5640fffcf)
+
+A entidade de pessoa é composta por quatro objetos de valores, sendo eles os objetos expostos acima, cada objeto de valor individualmente estará se auto validando 
+entre os quatro objetos apenas dois objetos tem motivos para mudarem, sendo eles o endereço e o telefone de uma pessoa.
+
+Como adicionar uma nova pessoa:
+
+- Primeiramente cada pessoa necessita de um nome, neste caso o mesmo deve ser composto apenas por letras, não podendo conter numeros ou caracteres especiais, caso exista caracteres especiais ou numeros, no momento de criação de uma nova pessoa será levantado uma exceção, impedindo a execução da função.
+
+* Para cada endereço é necessário preencher todos os campos descritos no objeto neste caso é necessário que no campo de cep, esteja constando apenas numeros, pois o mesmo é composto apenas de numeros, caso seja adicionado letras ou caracteres especiais o sistema estará levantando uma exeção, impedindo a execução da função.
+
++ Para cada telefone, o campo **codigo de pais** assim como o campo **codigo de area** devem conter apenas dois numeros, caso seja adicionado numeros a mais nestes dois campos o sistema levantará uma exeção impedindo a execução da função, também é importante que em todos os campos de telefone seja adicionado apenas numeros, caso o contrario será levantada uma exceção informando a necessidade apenas de numeros no campo do obejto.
+
++ Para cada cpf, é necessário estar inserindo apenas os numeros, um cpf não pode estar contendo menos ou mais de 11 caracteres numericos, caso o contrario será levantada uma exceção impedindo a função de executar.
+
+Após todos os campos serem preenchidos corretamente o sistema irá criar uma nova pessoa, para realizar uma atualização nesta entdidade é possivel estar realizando a troca de endereço & telefone.
+
 
