@@ -48,8 +48,7 @@ após realizado a tratativa necessário pela parte que consome, basta estar adic
 
 ![image](https://github.com/k4im/gestao/assets/108486349/d9f77dde-57f9-489e-9267-20b5640fffcf)
 
-A entidade de pessoa é composta por quatro objetos de valores, sendo eles os objetos expostos acima, cada objeto de valor individualmente estará se auto validando 
-entre os quatro objetos apenas dois objetos tem motivos para mudarem, sendo eles o endereço e o telefone de uma pessoa.
+A entidade de pessoa é composta por quatro objetos de valores, sendo eles os objetos expostos acima, cada objeto de valor individualmente estará se auto validando, entre os quatro objetos apenas dois objetos tem motivos para mudarem, sendo eles o endereço e o telefone de uma pessoa.
 
 Como adicionar uma nova pessoa:
 
