@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Fn6JM2lGnvR5bOAkr4AeqTKjFhRchH3XecuOjsYHQzWWjsUFWTU6D9SdAmLmrvLspo4mbUra9V+x0RsL3k/Idg==",
+  "dgSpecHash": "VWNXm+O1h+R0t16X5++LCaA7K5KggKl3a99wZymGo0Vf/Vx3JpdVOyivHjrtbknbkDHE8jdkyMXsSoF1vjvd0w==",
   "success": true,
   "projectFilePath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
   "expectedPackageFiles": [
@@ -155,7 +155,9 @@
     "/home/oem/.nuget/packages/xunit.core/2.4.2/xunit.core.2.4.2.nupkg.sha512",
     "/home/oem/.nuget/packages/xunit.extensibility.core/2.4.2/xunit.extensibility.core.2.4.2.nupkg.sha512",
     "/home/oem/.nuget/packages/xunit.extensibility.execution/2.4.2/xunit.extensibility.execution.2.4.2.nupkg.sha512",
-    "/home/oem/.nuget/packages/xunit.runner.visualstudio/2.4.5/xunit.runner.visualstudio.2.4.5.nupkg.sha512"
+    "/home/oem/.nuget/packages/xunit.runner.visualstudio/2.4.5/xunit.runner.visualstudio.2.4.5.nupkg.sha512",
+    "/home/oem/.nuget/packages/microsoft.netcore.app.ref/7.0.5/microsoft.netcore.app.ref.7.0.5.nupkg.sha512",
+    "/home/oem/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nGxzesNV78K3wj9w/0m9aYxby8fzpeuelZ5gT60UYJjKahv5bVKVQVBrNHHQcatD5N76qf3/jlqrglxuBrwgFw==",
+  "dgSpecHash": "rMnQY96XiTkftgzlp81VoaffN/4xta0BrntpGpvIOIHHqwKqIH6b37AEOhjZj7QigTBGj5sGjpaprwras9qo4Q==",
   "success": true,
   "projectFilePath": "/home/oem/gestao/app/Services/projeto/projeto.service/projeto.service.csproj",
   "expectedPackageFiles": [
@@ -60,7 +60,10 @@
     "/home/oem/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/home/oem/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/oem/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
-    "/home/oem/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    "/home/oem/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "/home/oem/.nuget/packages/microsoft.netcore.app.ref/7.0.5/microsoft.netcore.app.ref.7.0.5.nupkg.sha512",
+    "/home/oem/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512",
+    "/home/oem/.nuget/packages/microsoft.netcore.app.host.linux-x64/7.0.5/microsoft.netcore.app.host.linux-x64.7.0.5.nupkg.sha512"
   ],
   "logs": []
 }

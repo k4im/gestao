@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5nyzqxW4bLqX4G5wc0kwuELNqE9vBaxSYxMGbIiixJH48MOXL6pe1rTyUlyRPelMNTgwvpT7oRkvxa9xhFdadA==",
+  "dgSpecHash": "W8/0zHp47wOCE3uFTe44h57DJkiU/XyfbsmPtRKcL4O3XzK/D05tuB/4TUdgkVJXVgTFtNTGqYvuOB0/loBrFw==",
   "success": true,
   "projectFilePath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
   "expectedPackageFiles": [
@@ -65,7 +65,10 @@
     "/home/oem/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/home/oem/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/oem/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
-    "/home/oem/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    "/home/oem/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "/home/oem/.nuget/packages/microsoft.netcore.app.ref/7.0.5/microsoft.netcore.app.ref.7.0.5.nupkg.sha512",
+    "/home/oem/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512",
+    "/home/oem/.nuget/packages/microsoft.netcore.app.host.linux-x64/7.0.5/microsoft.netcore.app.host.linux-x64.7.0.5.nupkg.sha512"
   ],
   "logs": []
 }
