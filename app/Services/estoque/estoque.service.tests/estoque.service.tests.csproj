@@ -30,4 +30,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\estoque.service\estoque.service.csproj" />
+  </ItemGroup>
+
 </Project>
