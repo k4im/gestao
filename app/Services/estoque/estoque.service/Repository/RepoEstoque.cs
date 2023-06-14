@@ -11,29 +11,60 @@ namespace estoque.service.Repository
             _db = db;
         }
 
-        public bool adicionarProduto(object model)
+        public Task<bool> adicionarProduto(Produto model)
         {
             throw new NotImplementedException();
         }
 
-        public bool atualizarProduto(int id, object model)
+        public Task<bool> atualizarProduto(int id, Produto model)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<object> buscarProdutoId(int id)
+        public async Task<Produto> buscarProdutoId(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var produto = await _db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
+                if (produto == null) return null;
+                return produto;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public async Task<Response<object>> buscarProdutos(int pagina, float resultado)
+        public async Task<Response<Produto>> buscarProdutos(int pagina, float resultado)
         {
-            throw new NotImplementedException();
+            var resultadoPaginas = resultado;
+            var pessoas = await _db.Produtos.ToListAsync();
+            var totalDePaginas = Math.Ceiling(pessoas.Count() / resultadoPaginas);
+            var produtosPaginados = pessoas.Skip((pagina - 1) * (int)resultadoPaginas).Take((int)resultadoPaginas).ToList();
+            var paginasTotal = (int)totalDePaginas;
+            return new Response<Produto>(produtosPaginados, pagina, paginasTotal);
         }
 
-        public bool removerProduto(int id)
+        public async Task<bool> removerProduto(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var produto = await _db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
+                if (produto == null) return false;
+                _db.Remove(produto);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                Console.WriteLine("Não é possivel realizar esta operação, a mesma já foi realizada");
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Não foi possivel realizar a operação: {e.Message}");
+                return false;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wBsjVR6dEZIsggbvSHtpmHCUuuC+EJjyBQDY2zjXspW4XAUgE1IgLBsFgMGC7ssT19GGzlIpL5cflzuM+NBxnA==",
+  "dgSpecHash": "NS1EhsuiRj/4VffATYXlcFOBehu4TVWfJBUqIsf9MvG0M8TbNzwbeOSFBVnG1xNkU0WNrJtt3tZWhcRi8U/uOw==",
   "success": true,
   "projectFilePath": "/home/oem/gestao/app/Services/estoque/estoque.service/estoque.service.csproj",
   "expectedPackageFiles": [

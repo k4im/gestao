@@ -5,6 +5,6 @@ namespace estoque.service.Data
         public DataContext(DbContextOptions options) : base(options)
         { }
 
-        public DbSet<Projeto> Projetos { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
     }
 }

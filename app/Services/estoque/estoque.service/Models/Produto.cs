@@ -1,0 +1,39 @@
+using estoque.service.Exceptions;
+
+namespace estoque.service.Models
+{
+    public class Produto
+    {
+        public Produto(string nome, double valor, int quantidade)
+        {
+            Nome = verificarNome(nome);
+            Valor = verificarValorProduto(valor);
+            Quantidade = verificarQuantidade(quantidade);
+        }
+
+        public int Id { get; }
+        public string Nome { get; }
+        public double Valor { get; }
+        public int Quantidade { get; }
+
+
+        double verificarValorProduto(double valor)
+        {
+            if (valor < 0) throw new Exception("O valor não pode ser um valor menor que 0");
+            return valor;
+        }
+
+        int verificarQuantidade(int quantidade)
+        {
+            if (quantidade < 0) throw new Exception("A quantidade não pode ser um valor menor que 0");
+            return quantidade;
+        }
+
+        string verificarNome(string nome)
+        {
+            if (string.IsNullOrEmpty(nome)) throw new CampoVazio("O nome não pode estar vazio!");
+            if (!Regex.IsMatch(nome, @"^[a-zA-Z ]+$")) throw new CaracterInvalido("O nome não pode conter caracteres especiais");
+            return nome;
+        }
+    }
+}

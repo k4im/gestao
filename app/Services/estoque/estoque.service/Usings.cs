@@ -1,4 +1,3 @@
-global using estoque.service.Models.ValueObject;
 global using System.Text.RegularExpressions;
 global using Microsoft.EntityFrameworkCore;
 global using estoque.service.Models;
