@@ -1,5 +1,3 @@
-using shared.models;
-
 namespace estoque.service.Repository
 {
     public class RepoEstoque : IRepoEstoque

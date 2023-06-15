@@ -1,9 +1,3 @@
-using estoque.service.Data;
-using estoque.service.Models;
-using estoque.service.Repository;
-using estoque.service.tests.Helpers;
-using Microsoft.EntityFrameworkCore;
-
 namespace estoque.service.tests
 {
     public class RepoEstoqueTeste
@@ -17,11 +11,10 @@ namespace estoque.service.tests
             var context = new DataContext(_contextOpt.Options);
             var novoProduto = new Produto("Produto", 55.5, 4);
             var _repo = new RepoEstoque(context);
-            await _repo.adicionarProduto(novoProduto);
-
+            var resultAdd = await _repo.adicionarProduto(novoProduto);
             //Act
             var result = await _repo.buscarProdutoId(1);
-
+            Console.WriteLine(result);
             //Assert
             Assert.IsType<Produto>(result);
         }
@@ -77,5 +70,6 @@ namespace estoque.service.tests
             //Assert
             Assert.Equal(expect, result);
         }
+
     }
 }
