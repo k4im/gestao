@@ -11,10 +11,10 @@ namespace estoque.service.Models
             Quantidade = verificarQuantidade(quantidade);
         }
 
-        public int Id { get; }
-        public string Nome { get; }
-        public double Valor { get; }
-        public int Quantidade { get; }
+        public int Id { get; private set; }
+        public string Nome { get; private set; }
+        public double Valor { get; private set; }
+        public int Quantidade { get; private set; }
 
 
         double verificarValorProduto(double valor)

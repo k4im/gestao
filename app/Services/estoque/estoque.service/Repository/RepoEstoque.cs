@@ -11,14 +11,45 @@ namespace estoque.service.Repository
             _db = db;
         }
 
-        public Task<bool> adicionarProduto(Produto model)
+        public async Task<bool> adicionarProduto(Produto model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _db.Produtos.Add(model);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                Console.WriteLine("Não foi possivel realizar a operação, a mesma já foi realizada por outro usuario!");
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Não foi possivel realizar a operação: {e.Message}");
+                return false;
+            }
         }
 
-        public Task<bool> atualizarProduto(int id, Produto model)
+        public async Task<bool> atualizarProduto(int id, Produto model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var produto = await buscarProdutoId(id);
+                produto = model;
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                Console.WriteLine("Não foi possivel realizar a operação, a mesma já foi realizada por outro usuario!");
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Não foi possivel realizar a operação: {e.Message}");
+                return false;
+            }
         }
 
         public async Task<Produto> buscarProdutoId(int id)

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NS1EhsuiRj/4VffATYXlcFOBehu4TVWfJBUqIsf9MvG0M8TbNzwbeOSFBVnG1xNkU0WNrJtt3tZWhcRi8U/uOw==",
+  "dgSpecHash": "6UwNGoj5TOLLaDIqBBAJBjlQ61vouePbdhcSqX6/7cc+a0brsYz5UB4dOnXPoLfmu9DmLV/R5hlQ6ia/bBAC6Q==",
   "success": true,
   "projectFilePath": "/home/oem/gestao/app/Services/estoque/estoque.service/estoque.service.csproj",
   "expectedPackageFiles": [
@@ -60,10 +60,7 @@
     "/home/oem/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/home/oem/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/oem/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
-    "/home/oem/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/home/oem/.nuget/packages/microsoft.netcore.app.ref/7.0.5/microsoft.netcore.app.ref.7.0.5.nupkg.sha512",
-    "/home/oem/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512",
-    "/home/oem/.nuget/packages/microsoft.netcore.app.host.linux-x64/7.0.5/microsoft.netcore.app.host.linux-x64.7.0.5.nupkg.sha512"
+    "/home/oem/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": []
 }

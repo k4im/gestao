@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NHn0uERVOa1rJcF7C187tGRrex6Il7FCs/ZYH26UjT4ILfGbm+Ng4x/PhWcq9IWOnqaYaK0KEV6cf7kl/AOy8A==",
+  "dgSpecHash": "QLj4RdUtc/gqZR8NflLikOwfnwDw1IOFjTCbnkwwTxI/SHhfHYzht7Wy9Lt2HnnIduMsrjiI4LJ96sk/Zw6O9g==",
   "success": true,
   "projectFilePath": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj",
   "expectedPackageFiles": [
@@ -14,9 +14,7 @@
     "/home/oem/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "/home/oem/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "/home/oem/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
-    "/home/oem/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
-    "/home/oem/.nuget/packages/microsoft.netcore.app.ref/7.0.5/microsoft.netcore.app.ref.7.0.5.nupkg.sha512",
-    "/home/oem/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
+    "/home/oem/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
