@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using estoque.service.Exceptions;
 
 namespace estoque.service.Models
@@ -10,10 +11,15 @@ namespace estoque.service.Models
             Valor = verificarValorProduto(valor);
             Quantidade = verificarQuantidade(quantidade);
         }
-
         public int Id { get; private set; }
+
+        [Required]
         public string Nome { get; private set; }
+
+        [Required]
         public double Valor { get; private set; }
+
+        [Required]
         public int Quantidade { get; private set; }
 
 

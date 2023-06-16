@@ -8,7 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 #region swagger config
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Estoque API", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Pessoas & usuarios API", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -41,6 +41,7 @@ builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 #endregion
 // builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Data"));
+builder.Services.AddScoped<IRepoEstoque, RepoEstoque>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 #region  configurando jwt

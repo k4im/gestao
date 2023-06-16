@@ -140,3 +140,15 @@
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/estoque.service.xml
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/FluentAssertions.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/System.Drawing.Common.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/System.Security.Cryptography.ProtectedData.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/System.Security.Permissions.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/System.Windows.Extensions.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll
+/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll

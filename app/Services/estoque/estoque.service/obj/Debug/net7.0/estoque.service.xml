@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>estoque.service</name>
+    </assembly>
+    <members>
+        <member name="M:estoque.service.Controllers.ProdutosController.buscarProdutos(System.Int32,System.Int32)">
+            <summary>
+            Este metodo estarpa realizando retornando uma lista contendo as pagina atual, total por pagina e uma lista contendo os produtos.
+            </summary>
+            <response code="200">Retorna a lista com os dados necessários</response>
+            <response code="404">Informa que não foi possivel localizar a lista de produtos</response>
+        </member>
+        <member name="M:estoque.service.Controllers.ProdutosController.buscarProdutoId(System.Nullable{System.Int32})">
+            <summary>
+             Estará realizando o a pesquisa de um produto a partir de um ID   
+            </summary>
+            <response code="200">Retorna o produto</response>
+            <response code="404">Informa que não foi possivel estar encontrando o produto.</response>
+            <response code="400">Retorna BadRequest e informa que é necessário ter um id para pequisa</response>
+        </member>
+        <member name="M:estoque.service.Controllers.ProdutosController.adicionarProduto(estoque.service.Models.Produto)">
+             <summary>
+             Irá realizar a adição de um produto no banco de dados.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 {
+                   "nome": "Chapa MDF Branca",
+                   "valor": 150.00,
+                   "quantidade": 3
+                 }
+            
+             </remarks>
+             <response code="201">Informa que o produto foi criado com sucesso!</response>
+             <response code="400">BadRequest, informa o campo que está errado no modelo</response>
+             <response code="500">Informa que algo deu errado do lado do servidor</response>
+        </member>
+        <member name="M:estoque.service.Controllers.ProdutosController.atualizarProduto(System.Nullable{System.Int32},estoque.service.Models.Produto)">
+             <summary>
+             Irá realizar update de um produto.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 {
+                   "nome": "Chapa MDF Verde",
+                   "valor": 150.00,
+                   "quantidade": 3
+                 }
+            
+             </remarks>
+             <response code="200">Informa que o produto foi atualizado com sucesso!</response>
+             <response code="400">BadRequest, informa o campo que está errado no modelo</response>
+             <response code="500">Informa que algo deu errado do lado do servidor</response>
+        </member>
+        <member name="M:estoque.service.Controllers.ProdutosController.deletarProduto(System.Nullable{System.Int32})">
+            <summary>
+            Realiza e remoção de um produto.
+            </summary>
+            <response code="404">Informa que não foi possivel localizar um produto com este ID</response>
+            <response code="200">Informa que o produto foi deletado com sucesso</response>
+            <response code="500">Informa que não foi possivel realizar a operação, erro do lado do servidor</response>
+        </member>
+    </members>
+</doc>

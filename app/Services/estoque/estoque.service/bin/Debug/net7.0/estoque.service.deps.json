@@ -12,6 +12,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Dapper": "2.0.123",
           "Dapper.Contrib": "2.0.78",
+          "FluentAssertions": "6.11.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.5",
           "Microsoft.AspNetCore.OpenApi": "7.0.3",
           "Microsoft.EntityFrameworkCore": "7.0.5",
@@ -21,6 +22,7 @@
           "Pomelo.EntityFrameworkCore.MySql": "7.0.0",
           "Swashbuckle.AspNetCore": "6.4.0",
           "Swashbuckle.AspNetCore.Filters": "7.0.6",
+          "System.Configuration.ConfigurationManager": "7.0.0",
           "System.IdentityModel.Tokens.Jwt": "6.30.1",
           "shared.models": "1.0.0"
         },
@@ -53,7 +55,7 @@
       },
       "Castle.Core/5.0.0": {
         "dependencies": {
-          "System.Diagnostics.EventLog": "6.0.0"
+          "System.Diagnostics.EventLog": "7.0.0"
         },
         "runtime": {
           "lib/net6.0/Castle.Core.dll": {
@@ -78,6 +80,17 @@
           "lib/net5.0/Dapper.Contrib.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.0.78.45418"
+          }
+        }
+      },
+      "FluentAssertions/6.11.0": {
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "7.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/FluentAssertions.dll": {
+            "assemblyVersion": "6.11.0.0",
+            "fileVersion": "6.11.0.0"
           }
         }
       },
@@ -312,6 +325,22 @@
           }
         }
       },
+      "Microsoft.Win32.SystemEvents/7.0.0": {
+        "runtime": {
+          "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
       "Mono.TextTemplating/2.2.1": {
         "dependencies": {
           "System.CodeDom": "4.4.0"
@@ -448,7 +477,39 @@
           }
         }
       },
-      "System.Diagnostics.EventLog/6.0.0": {},
+      "System.Configuration.ConfigurationManager/7.0.0": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "7.0.0",
+          "System.Security.Cryptography.ProtectedData": "7.0.0",
+          "System.Security.Permissions": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
+      "System.Diagnostics.EventLog/7.0.0": {},
+      "System.Drawing.Common/7.0.0": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/System.Drawing.Common.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/6.30.1": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "6.30.1",
@@ -468,6 +529,33 @@
         }
       },
       "System.Security.Cryptography.Cng/4.5.0": {},
+      "System.Security.Cryptography.ProtectedData/7.0.0": {
+        "runtime": {
+          "lib/net7.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
+      "System.Security.Permissions/7.0.0": {
+        "dependencies": {
+          "System.Windows.Extensions": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/System.Security.Permissions.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
       "System.Text.Encoding/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -482,6 +570,25 @@
         }
       },
       "System.Threading.Tasks.Extensions/4.5.4": {},
+      "System.Windows.Extensions/7.0.0": {
+        "dependencies": {
+          "System.Drawing.Common": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/System.Windows.Extensions.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/System.Windows.Extensions.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
       "shared.models/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.5"
@@ -532,6 +639,13 @@
       "sha512": "sha512-sUfDVIf8LlHNiz3MfUFodeyRiemfN1JFkPxYjCxFWlwNPg1iQ49mB+0E89TkywWs4X8fiRWOVDQgtH5FtzK5Kw==",
       "path": "dapper.contrib/2.0.78",
       "hashPath": "dapper.contrib.2.0.78.nupkg.sha512"
+    },
+    "FluentAssertions/6.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aBaagwdNtVKkug1F3imGXUlmoBd8ZUZX8oQ5niThaJhF79SpESe1Gzq7OFuZkQdKD5Pa4Mone+jrbas873AT4g==",
+      "path": "fluentassertions/6.11.0",
+      "hashPath": "fluentassertions.6.11.0.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
@@ -750,6 +864,13 @@
       "path": "microsoft.openapi/1.4.3",
       "hashPath": "microsoft.openapi.1.4.3.nupkg.sha512"
     },
+    "Microsoft.Win32.SystemEvents/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2nXPrhdAyAzir0gLl8Yy8S5Mnm/uBSQQA7jEsILOS1MTyS7DbmV1NgViMtvV1sfCD1ebITpNwb1NIinKeJgUVQ==",
+      "path": "microsoft.win32.systemevents/7.0.0",
+      "hashPath": "microsoft.win32.systemevents.7.0.0.nupkg.sha512"
+    },
     "Mono.TextTemplating/2.2.1": {
       "type": "package",
       "serviceable": true,
@@ -841,12 +962,26 @@
       "path": "system.codedom/4.4.0",
       "hashPath": "system.codedom.4.4.0.nupkg.sha512"
     },
-    "System.Diagnostics.EventLog/6.0.0": {
+    "System.Configuration.ConfigurationManager/7.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lcyUiXTsETK2ALsZrX+nWuHSIQeazhqPphLfaRxzdGaG93+0kELqpgEHtwWOlQe7+jSFnKwaCAgL4kjeZCQJnw==",
-      "path": "system.diagnostics.eventlog/6.0.0",
-      "hashPath": "system.diagnostics.eventlog.6.0.0.nupkg.sha512"
+      "sha512": "sha512-WvRUdlL1lB0dTRZSs5XcQOd5q9MYNk90GkbmRmiCvRHThWiojkpGqWdmEDJdXyHbxG/BhE5hmVbMfRLXW9FJVA==",
+      "path": "system.configuration.configurationmanager/7.0.0",
+      "hashPath": "system.configuration.configurationmanager.7.0.0.nupkg.sha512"
+    },
+    "System.Diagnostics.EventLog/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eUDP47obqQm3SFJfP6z+Fx2nJ4KKTQbXB4Q9Uesnzw9SbYdhjyoGXuvDn/gEmFY6N5Z3bFFbpAQGA7m6hrYJCw==",
+      "path": "system.diagnostics.eventlog/7.0.0",
+      "hashPath": "system.diagnostics.eventlog.7.0.0.nupkg.sha512"
+    },
+    "System.Drawing.Common/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KIX+oBU38pxkKPxvLcLfIkOV5Ien8ReN78wro7OF5/erwcmortzeFx+iBswlh2Vz6gVne0khocQudGwaO1Ey6A==",
+      "path": "system.drawing.common/7.0.0",
+      "hashPath": "system.drawing.common.7.0.0.nupkg.sha512"
     },
     "System.IdentityModel.Tokens.Jwt/6.30.1": {
       "type": "package",
@@ -868,6 +1003,20 @@
       "sha512": "sha512-WG3r7EyjUe9CMPFSs6bty5doUqT+q9pbI80hlNzo2SkPkZ4VTuZkGWjpp77JB8+uaL4DFPRdBsAY+DX3dBK92A==",
       "path": "system.security.cryptography.cng/4.5.0",
       "hashPath": "system.security.cryptography.cng.4.5.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xSPiLNlHT6wAHtugASbKAJwV5GVqQK351crnILAucUioFqqieDN79evO1rku1ckt/GfjIn+b17UaSskoY03JuA==",
+      "path": "system.security.cryptography.protecteddata/7.0.0",
+      "hashPath": "system.security.cryptography.protecteddata.7.0.0.nupkg.sha512"
+    },
+    "System.Security.Permissions/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Vmp0iRmCEno9BWiskOW5pxJ3d9n+jUqKxvX4GhLwFhnQaySZmBN2FuC0N5gjFHgyFMUjC5sfIJ8KZfoJwkcMmA==",
+      "path": "system.security.permissions/7.0.0",
+      "hashPath": "system.security.permissions.7.0.0.nupkg.sha512"
     },
     "System.Text.Encoding/4.3.0": {
       "type": "package",
@@ -896,6 +1045,13 @@
       "sha512": "sha512-zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    },
+    "System.Windows.Extensions/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bR4qdCmssMMbo9Fatci49An5B1UaVJZHKNq70PRgzoLYIlitb8Tj7ns/Xt5Pz1CkERiTjcVBDU2y1AVrPBYkaw==",
+      "path": "system.windows.extensions/7.0.0",
+      "hashPath": "system.windows.extensions.7.0.0.nupkg.sha512"
     },
     "shared.models/1.0.0": {
       "type": "project",

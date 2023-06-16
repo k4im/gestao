@@ -5,6 +5,7 @@
 /home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/estoque.service.runtimeconfig.json
 /home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/estoque.service.dll
 /home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/estoque.service.pdb
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/estoque.service.xml
 /home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/AutoMapper.dll
 /home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Castle.Core.dll
@@ -59,6 +60,18 @@
 /home/oem/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.csproj.CopyComplete
 /home/oem/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.dll
 /home/oem/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/refint/estoque.service.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.xml
 /home/oem/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.pdb
 /home/oem/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.genruntimeconfig.cache
 /home/oem/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/ref/estoque.service.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/FluentAssertions.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/System.Drawing.Common.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/System.Security.Cryptography.ProtectedData.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/System.Security.Permissions.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/System.Windows.Extensions.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll
+/home/oem/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll

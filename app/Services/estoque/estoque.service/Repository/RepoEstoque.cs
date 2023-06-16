@@ -29,7 +29,7 @@ namespace estoque.service.Repository
             }
         }
 
-        public async Task<bool> atualizarProduto(int id, Produto model)
+        public async Task<bool> atualizarProduto(int? id, Produto model)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace estoque.service.Repository
             }
         }
 
-        public async Task<Produto> buscarProdutoId(int id)
+        public async Task<Produto> buscarProdutoId(int? id)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace estoque.service.Repository
             return new Response<Produto>(produtosPaginados, pagina, paginasTotal);
         }
 
-        public async Task<bool> removerProduto(int id)
+        public async Task<bool> removerProduto(int? id)
         {
             try
             {
