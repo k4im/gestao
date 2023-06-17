@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {}
+    "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {}
   },
   "projects": {
-    "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
+    "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj",
+        "projectUniqueName": "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj",
         "projectName": "shared.models",
-        "projectPath": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj",
-        "packagesPath": "/home/oem/.nuget/packages/",
-        "outputPath": "/home/oem/gestao/app/Services/Shared/shared.models/obj/",
+        "projectPath": "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj",
+        "packagesPath": "/home/k4im/.nuget/packages/",
+        "outputPath": "/home/k4im/gestao/app/Services/Shared/shared.models/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/oem/.nuget/NuGet/NuGet.Config"
+          "/home/k4im/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -58,10 +58,6 @@
             {
               "name": "Microsoft.AspNetCore.App.Ref",
               "version": "[7.0.5, 7.0.5]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.5, 7.0.5]"
             }
           ],
           "frameworkReferences": {
@@ -69,35 +65,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
+    "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
+        "projectUniqueName": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
         "projectName": "autenticacao.service",
-        "projectPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
-        "packagesPath": "/home/oem/.nuget/packages/",
-        "outputPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/obj/",
+        "projectPath": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
+        "packagesPath": "/home/k4im/.nuget/packages/",
+        "outputPath": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/oem/.nuget/NuGet/NuGet.Config"
+          "/home/k4im/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/share/dotnet/sdk/7.0.302/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
-                "projectPath": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj"
+              "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
+                "projectPath": "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj"
               }
             }
           }
@@ -194,14 +189,6 @@
             {
               "name": "Microsoft.AspNetCore.App.Ref",
               "version": "[7.0.5, 7.0.5]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[7.0.5, 7.0.5]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.5, 7.0.5]"
             }
           ],
           "frameworkReferences": {
@@ -212,7 +199,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
         }
       }
     }

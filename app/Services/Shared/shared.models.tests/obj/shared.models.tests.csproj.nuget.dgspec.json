@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/oem/gestao/app/Services/Shared/shared.models.tests/shared.models.tests.csproj": {}
+    "/home/k4im/gestao/app/Services/Shared/shared.models.tests/shared.models.tests.csproj": {}
   },
   "projects": {
-    "/home/oem/gestao/app/Services/Shared/shared.models.tests/shared.models.tests.csproj": {
+    "/home/k4im/gestao/app/Services/Shared/shared.models.tests/shared.models.tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/oem/gestao/app/Services/Shared/shared.models.tests/shared.models.tests.csproj",
+        "projectUniqueName": "/home/k4im/gestao/app/Services/Shared/shared.models.tests/shared.models.tests.csproj",
         "projectName": "shared.models.tests",
-        "projectPath": "/home/oem/gestao/app/Services/Shared/shared.models.tests/shared.models.tests.csproj",
-        "packagesPath": "/home/oem/.nuget/packages/",
-        "outputPath": "/home/oem/gestao/app/Services/Shared/shared.models.tests/obj/",
+        "projectPath": "/home/k4im/gestao/app/Services/Shared/shared.models.tests/shared.models.tests.csproj",
+        "packagesPath": "/home/k4im/.nuget/packages/",
+        "outputPath": "/home/k4im/gestao/app/Services/Shared/shared.models.tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/oem/.nuget/NuGet/NuGet.Config"
+          "/home/k4im/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -26,8 +26,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
-                "projectPath": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj"
+              "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
+                "projectPath": "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj"
               }
             }
           }
@@ -82,10 +82,6 @@
             {
               "name": "Microsoft.AspNetCore.App.Ref",
               "version": "[7.0.5, 7.0.5]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.5, 7.0.5]"
             }
           ],
           "frameworkReferences": {
@@ -93,21 +89,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
+    "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj",
+        "projectUniqueName": "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj",
         "projectName": "shared.models",
-        "projectPath": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj",
-        "packagesPath": "/home/oem/.nuget/packages/",
-        "outputPath": "/home/oem/gestao/app/Services/Shared/shared.models/obj/",
+        "projectPath": "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj",
+        "packagesPath": "/home/k4im/.nuget/packages/",
+        "outputPath": "/home/k4im/gestao/app/Services/Shared/shared.models/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/oem/.nuget/NuGet/NuGet.Config"
+          "/home/k4im/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -151,10 +147,6 @@
             {
               "name": "Microsoft.AspNetCore.App.Ref",
               "version": "[7.0.5, 7.0.5]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.5, 7.0.5]"
             }
           ],
           "frameworkReferences": {
@@ -162,7 +154,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
         }
       }
     }

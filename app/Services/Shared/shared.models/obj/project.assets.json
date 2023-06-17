@@ -518,19 +518,19 @@
     ]
   },
   "packageFolders": {
-    "/home/oem/.nuget/packages/": {}
+    "/home/k4im/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj",
+      "projectUniqueName": "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj",
       "projectName": "shared.models",
-      "projectPath": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj",
-      "packagesPath": "/home/oem/.nuget/packages/",
-      "outputPath": "/home/oem/gestao/app/Services/Shared/shared.models/obj/",
+      "projectPath": "/home/k4im/gestao/app/Services/Shared/shared.models/shared.models.csproj",
+      "packagesPath": "/home/k4im/.nuget/packages/",
+      "outputPath": "/home/k4im/gestao/app/Services/Shared/shared.models/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/oem/.nuget/NuGet/NuGet.Config"
+        "/home/k4im/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -570,12 +570,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.5, 7.0.5]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
       }
     }
   }

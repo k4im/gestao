@@ -35,10 +35,12 @@ namespace autenticacao.service.Repository
                 var pessoa = await buscarPessoaId(id);
                 pessoa.mudarEndereco(model);
                 await _db.SaveChangesAsync();
-                return await buscarPessoaId(id);
+                var pessoaAtualizada = await buscarPessoaId(id);
+                return pessoaAtualizada;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 throw new Exception("Não foi possivel atualizar o dado!");
             }
         }

@@ -88,6 +88,11 @@
              <response code="200">Retorna a pessoa com o dado atualizado</response>
              <response code="404">Retorna dado de pessoa não encontrada</response>
         </member>
+        <member name="M:autenticacao.service.Controllers.PessoaControllers.deletarPessoa(System.Int32)">
+            <summary>
+            Ira realizar a removeção de uma pessoa a partir de um ID.
+            </summary>
+        </member>
         <member name="M:autenticacao.service.Controllers.UsuarioController.buscarUsuarios(System.Int32,System.Single)">
             <summary>
             Retorna a lista de usuarios de forma paginada.
