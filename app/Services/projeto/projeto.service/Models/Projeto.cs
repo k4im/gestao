@@ -75,5 +75,10 @@ namespace projeto.service.Models
             if (!Regex.IsMatch(nome, @"^[a-zA-Z ]+$")) throw new Exception("A rua não pode conter caracteres especiais");
             return nome;
         }
+
+        public void AtualizarStatus(StatusProjeto model)
+        {
+            if (this.Status.Status != model.Status) this.Status.AtualizacaoDoStatus(model.Status);
+        }
     }
 }
