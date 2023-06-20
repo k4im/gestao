@@ -1635,19 +1635,10 @@
           "Pomelo.EntityFrameworkCore.MySql": "7.0.0",
           "Swashbuckle.AspNetCore": "6.4.0",
           "Swashbuckle.AspNetCore.Filters": "7.0.6",
-          "System.IdentityModel.Tokens.Jwt": "6.30.1",
-          "shared.models": "1.0.0"
+          "System.IdentityModel.Tokens.Jwt": "6.30.1"
         },
         "runtime": {
           "autenticacao.service.dll": {}
-        }
-      },
-      "shared.models/1.0.0": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.5"
-        },
-        "runtime": {
-          "shared.models.dll": {}
         }
       }
     }
@@ -2723,11 +2714,6 @@
       "hashPath": "xunit.runner.visualstudio.2.4.5.nupkg.sha512"
     },
     "autenticacao.service/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "shared.models/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

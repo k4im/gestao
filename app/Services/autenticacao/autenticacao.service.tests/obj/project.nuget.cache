@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+4W3FYLUDOQV+3dUZK8qLmedUWuurEiNxKsVoimLLKKt0RQLO0k48gzf1cmtxNNNptl1J4/LCZlb6q6Tt7rrnw==",
+  "dgSpecHash": "+se+RjJ/y1Zmc7TZf6PapbVZ4+WDIsEdglZb1blHH7+8FICs8aBGbTIXBBcf/OQPQ4f5x1ApFi8NZ/GSqOLj6g==",
   "success": true,
   "projectFilePath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
   "expectedPackageFiles": [

@@ -185,8 +185,6 @@
 /home/oem/gestao/app/Services/autenticacao/autenticacao.service/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 /home/oem/gestao/app/Services/autenticacao/autenticacao.service/bin/Debug/net7.0/System.CodeDom.dll
 /home/oem/gestao/app/Services/autenticacao/autenticacao.service/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
-/home/oem/gestao/app/Services/autenticacao/autenticacao.service/bin/Debug/net7.0/shared.models.dll
-/home/oem/gestao/app/Services/autenticacao/autenticacao.service/bin/Debug/net7.0/shared.models.pdb
 /home/oem/gestao/app/Services/autenticacao/autenticacao.service/obj/Debug/net7.0/autenticacao.service.csproj.AssemblyReference.cache
 /home/oem/gestao/app/Services/autenticacao/autenticacao.service/obj/Debug/net7.0/autenticacao.service.GeneratedMSBuildEditorConfig.editorconfig
 /home/oem/gestao/app/Services/autenticacao/autenticacao.service/obj/Debug/net7.0/autenticacao.service.AssemblyInfoInputs.cache
