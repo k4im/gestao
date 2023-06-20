@@ -435,3 +435,8 @@
 /home/k4im/gestao/app/Services/autenticacao/autenticacao.service.tests/obj/Debug/net7.0/autenticacao.service.tests.pdb
 /home/k4im/gestao/app/Services/autenticacao/autenticacao.service.tests/obj/Debug/net7.0/autenticacao.service.tests.genruntimeconfig.cache
 /home/k4im/gestao/app/Services/autenticacao/autenticacao.service.tests/obj/Debug/net7.0/ref/autenticacao.service.tests.dll
+/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
+/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/bin/Debug/net7.0/Scrutor.dll
+/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.dll
+/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
+/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/bin/Debug/net7.0/autenticacao.service.xml

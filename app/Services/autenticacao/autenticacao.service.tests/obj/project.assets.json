@@ -8847,19 +8847,19 @@
     ]
   },
   "packageFolders": {
-    "/home/k4im/.nuget/packages/": {}
+    "/home/oem/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
+      "projectUniqueName": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
       "projectName": "autenticacao.service.tests",
-      "projectPath": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
-      "packagesPath": "/home/k4im/.nuget/packages/",
-      "outputPath": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service.tests/obj/",
+      "projectPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
+      "packagesPath": "/home/oem/.nuget/packages/",
+      "outputPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/k4im/.nuget/NuGet/NuGet.Config"
+        "/home/oem/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -8871,8 +8871,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
-              "projectPath": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj"
+            "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
+              "projectPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj"
             }
           }
         }
@@ -8955,18 +8955,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.5, 7.0.5]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -51,7 +51,7 @@
              <response code="200">Retorna uma mensagem informando que foi criado com sucesso</response>
              <response code="500">Retorna uma mensagem informando que não foi possivel criar o usuario</response>
         </member>
-        <member name="M:autenticacao.service.Controllers.PessoaControllers.atualizarPessoaEndereco(System.Int32,shared.models.ValueObjects.Endereco)">
+        <member name="M:autenticacao.service.Controllers.PessoaControllers.atualizarPessoaEndereco(System.Int32,autenticacao.service.Models.ValueObjects.Endereco)">
              <summary>
              Atualiza o endereço de uma pessoa.
              </summary>
@@ -71,7 +71,7 @@
              <response code="200">Retorna a pessoa com o dado atualizado</response>
              <response code="404">Retorna dado de pessoa não encontrada</response>
         </member>
-        <member name="M:autenticacao.service.Controllers.PessoaControllers.atualizarTelefone(System.Int32,shared.models.ValueObjects.Telefone)">
+        <member name="M:autenticacao.service.Controllers.PessoaControllers.atualizarTelefone(System.Int32,autenticacao.service.Models.ValueObjects.Telefone)">
              <summary>
              Atualiza o telefone de uma pessoa.
              </summary>
