@@ -4,6 +4,28 @@ namespace projeto.service.Data
     {
         public DataContext(DbContextOptions options) : base(options)
         { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Fluent API for specifying concurrency token
+            modelBuilder.Entity<Projeto>()
+                .Property(projeto => projeto.RowVersion)
+                .IsConcurrencyToken();
+
+
+            modelBuilder.Entity<Projeto>(builder =>
+            {
+                builder.OwnsOne<StatusProjeto>(projeto => projeto.Status)
+                .Property(status => status.Status)
+                .HasColumnName("Status");
+            });
+
+            modelBuilder.Entity<Projeto>(builder =>
+            {
+                builder.OwnsOne<ChapaUtilizada>(projeto => projeto.Chapa)
+                .Property(chapa => chapa.Chapa)
+                .HasColumnName("ChapaUtilizada");
+            });
+        }
 
         public DbSet<Projeto> Projetos { get; set; }
     }

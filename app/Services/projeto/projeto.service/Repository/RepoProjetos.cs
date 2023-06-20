@@ -3,6 +3,12 @@ namespace projeto.service.Repository
     public class RepoProjetos : IRepoProjetos
     {
         readonly DataContext _db;
+
+        public RepoProjetos(DataContext db)
+        {
+            _db = db;
+        }
+
         public async Task<bool> AtualizarStatus(StatusProjeto model, int? id)
         {
             try
@@ -44,7 +50,7 @@ namespace projeto.service.Repository
         {
             try
             {
-                _db.Add(model);
+                _db.Projetos.Add(model);
                 await _db.SaveChangesAsync();
                 return true;
             }
@@ -55,7 +61,7 @@ namespace projeto.service.Repository
             }
             catch (Exception e)
             {
-                Console.Write($"Não foi possivel realizar a operação: {e.Message}");
+                throw new Exception($"Não foi possivel realizar a operação: {e.Message}");
                 return false;
             }
         }

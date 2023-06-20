@@ -14,14 +14,14 @@ namespace projeto.service.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("projetos/{pagina?}/{resultadoPorPagina?}"), ValidateAntiForgeryToken, Authorize(Roles = "ADMIN, ATENDENTE")]
+        [HttpGet("projetos/{pagina?}/{resultadoPorPagina?}"), Authorize(Roles = "ADMIN, ATENDENTE")]
         public async Task<IActionResult> GetAllProjects(int pagina = 1, float resultadoPorPagina = 5)
         {
             var projetos = await _repo.BuscarProdutos(pagina, resultadoPorPagina);
             return Ok(projetos);
         }
 
-        [HttpGet("projeto/{id?}"), ValidateAntiForgeryToken, Authorize(Roles = "ADMIN, ATENDENTE")]
+        [HttpGet("projeto/{id?}"), Authorize(Roles = "ADMIN, ATENDENTE")]
         public async Task<IActionResult> GetById(int? id)
         {
             var item = await _repo.BuscarPorId(id);
@@ -29,7 +29,7 @@ namespace projeto.service.Controllers
             return Ok(item);
         }
 
-        [HttpPost("Create"), ValidateAntiForgeryToken, Authorize(Roles = "ADMIN, ATENDENTE")]
+        [HttpPost("Create")]
         public async Task<IActionResult> CreateProject(Projeto model)
         {
 
@@ -51,7 +51,7 @@ namespace projeto.service.Controllers
         }
 
 
-        [HttpPut("update/{id}"), ValidateAntiForgeryToken, Authorize(Roles = "ADMIN")]
+        [HttpPut("update/{id}"), Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> UpdateProject(StatusProjeto model, int? id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -67,7 +67,7 @@ namespace projeto.service.Controllers
             }
         }
 
-        [HttpDelete("delete/{id}"), ValidateAntiForgeryToken, Authorize(Roles = "ADMIN")]
+        [HttpDelete("delete/{id}"), Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> DeleteProject(int? id)
         {
             if (id == null) return NotFound();

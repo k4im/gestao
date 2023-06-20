@@ -30,4 +30,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\projeto.service\projeto.service.csproj" />
+  </ItemGroup>
+
 </Project>
