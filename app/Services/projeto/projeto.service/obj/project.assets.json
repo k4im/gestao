@@ -957,19 +957,6 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
-      },
-      "shared.models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.5"
-        },
-        "compile": {
-          "bin/placeholder/shared.models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/shared.models.dll": {}
-        }
       }
     }
   },
@@ -2770,11 +2757,6 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "shared.models/1.0.0": {
-      "type": "project",
-      "path": "../../Shared/shared.models/shared.models.csproj",
-      "msbuildProject": "../../Shared/shared.models/shared.models.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2794,8 +2776,7 @@
       "RabbitMQ.Client >= 6.5.0",
       "Swashbuckle.AspNetCore >= 6.4.0",
       "Swashbuckle.AspNetCore.Filters >= 7.0.6",
-      "System.IdentityModel.Tokens.Jwt >= 6.30.1",
-      "shared.models >= 1.0.0"
+      "System.IdentityModel.Tokens.Jwt >= 6.30.1"
     ]
   },
   "packageFolders": {
@@ -2822,11 +2803,7 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {
-            "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj": {
-              "projectPath": "/home/oem/gestao/app/Services/Shared/shared.models/shared.models.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
