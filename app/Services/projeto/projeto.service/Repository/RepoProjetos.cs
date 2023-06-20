@@ -61,7 +61,7 @@ namespace projeto.service.Repository
             }
             catch (Exception e)
             {
-                throw new Exception($"Não foi possivel realizar a operação: {e.Message}");
+                Console.WriteLine($"Não foi possivel realizar a operação: {e.Message}");
                 return false;
             }
         }

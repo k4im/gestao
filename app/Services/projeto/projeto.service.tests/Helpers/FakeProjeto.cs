@@ -12,7 +12,7 @@ namespace projeto.service.tests.Helpers
             return new Projeto("Projeto FAKE", status, DateTime.UtcNow, DateTime.UtcNow.AddHours(1), chapa, "asdasd", 5, 155.5);
         }
 
-        static StatusProjeto factoryProjetoStatus() => new StatusProjeto("Producao");
+        static StatusProjeto factoryProjetoStatus() => new StatusProjeto("Rodando");
 
         static ChapaUtilizada factoryChapaUtilizada() => new ChapaUtilizada("Chapa branca");
     }

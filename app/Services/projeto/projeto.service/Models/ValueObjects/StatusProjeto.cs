@@ -15,7 +15,7 @@ namespace projeto.service.Models.ValueObjects
         void ValidarStatus(string status)
         {
             if (string.IsNullOrWhiteSpace(status)) throw new Exception("O status não pode estar nulo!");
-            // if (!Regex.IsMatch(Status, @"^[a-zA-Z ]+$")) throw new Exception("o status não pode conter caracteres especiais");
+            if (!Regex.IsMatch(status, @"^[a-zA-Z ]+$")) throw new Exception("o status não pode conter caracteres especiais");
         }
 
         public void AtualizacaoDoStatus(string novoStatus)
