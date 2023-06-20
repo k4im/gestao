@@ -8,6 +8,5 @@ global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.OpenApi.Models;
 global using Swashbuckle.AspNetCore.Filters;
-global using shared.models;
 global using estoque.service.Repository;
 global using Microsoft.AspNetCore.Mvc;

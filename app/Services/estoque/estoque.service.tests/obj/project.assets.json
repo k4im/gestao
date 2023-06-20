@@ -2854,8 +2854,7 @@
           "Swashbuckle.AspNetCore": "6.4.0",
           "Swashbuckle.AspNetCore.Filters": "7.0.6",
           "System.Configuration.ConfigurationManager": "7.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.30.1",
-          "shared.models": "1.0.0"
+          "System.IdentityModel.Tokens.Jwt": "6.30.1"
         },
         "compile": {
           "bin/placeholder/estoque.service.dll": {}
@@ -2866,19 +2865,6 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
-      },
-      "shared.models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.5"
-        },
-        "compile": {
-          "bin/placeholder/shared.models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/shared.models.dll": {}
-        }
       }
     }
   },
@@ -9009,11 +8995,6 @@
       "type": "project",
       "path": "../estoque.service/estoque.service.csproj",
       "msbuildProject": "../estoque.service/estoque.service.csproj"
-    },
-    "shared.models/1.0.0": {
-      "type": "project",
-      "path": "../../Shared/shared.models/shared.models.csproj",
-      "msbuildProject": "../../Shared/shared.models/shared.models.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -9036,19 +9017,19 @@
     ]
   },
   "packageFolders": {
-    "/home/k4im/.nuget/packages/": {}
+    "/home/oem/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/k4im/gestao/app/Services/estoque/estoque.service.tests/estoque.service.tests.csproj",
+      "projectUniqueName": "/home/oem/gestao/app/Services/estoque/estoque.service.tests/estoque.service.tests.csproj",
       "projectName": "estoque.service.tests",
-      "projectPath": "/home/k4im/gestao/app/Services/estoque/estoque.service.tests/estoque.service.tests.csproj",
-      "packagesPath": "/home/k4im/.nuget/packages/",
-      "outputPath": "/home/k4im/gestao/app/Services/estoque/estoque.service.tests/obj/",
+      "projectPath": "/home/oem/gestao/app/Services/estoque/estoque.service.tests/estoque.service.tests.csproj",
+      "packagesPath": "/home/oem/.nuget/packages/",
+      "outputPath": "/home/oem/gestao/app/Services/estoque/estoque.service.tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/k4im/.nuget/NuGet/NuGet.Config"
+        "/home/oem/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -9060,8 +9041,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/k4im/gestao/app/Services/estoque/estoque.service/estoque.service.csproj": {
-              "projectPath": "/home/k4im/gestao/app/Services/estoque/estoque.service/estoque.service.csproj"
+            "/home/oem/gestao/app/Services/estoque/estoque.service/estoque.service.csproj": {
+              "projectPath": "/home/oem/gestao/app/Services/estoque/estoque.service/estoque.service.csproj"
             }
           }
         }
@@ -9148,18 +9129,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.5, 7.0.5]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
       }
     }
   }

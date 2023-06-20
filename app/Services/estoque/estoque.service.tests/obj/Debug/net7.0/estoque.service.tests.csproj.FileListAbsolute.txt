@@ -114,7 +114,6 @@
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Microsoft.OpenApi.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
-/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/shared.models.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -127,7 +126,6 @@
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/estoque.service.pdb
-/home/oem/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/shared.models.pdb
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/obj/Debug/net7.0/estoque.service.tests.csproj.CopyComplete
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/obj/Debug/net7.0/estoque.service.tests.dll
 /home/oem/gestao/app/Services/estoque/estoque.service.tests/obj/Debug/net7.0/refint/estoque.service.tests.dll
