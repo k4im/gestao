@@ -1,30 +1,6 @@
 version: '3.4'
 
 services:
-  
-  # --------------------------
-  # Banco de dados dos serviços
-  # --------------------------
-  db-services:
-    container_name: container-db-services
-    image: mysql
-    restart: always
-    environment:
-      MYSQL_PASSWORD: "root"
-      MYSQL_ROOT_PASSWORD: "root"
-    ports:
-      - 3306:3306
-    volumes:
-      - db-services:/var/lib/mysql
-    networks:
-      - kong-net  
-    deploy:
-      resources:
-        limits:
-          cpus: ".50"
-          memory: 1024M      
-  
-  
   # --------------------------
   # Banco de dados kong
   # --------------------------  
@@ -125,12 +101,7 @@ services:
   # --------------------------  
   icarusestoque:
     container_name: container-estoque
-    image: icarusestoque
-    build:
-      context: .
-      dockerfile: icarus.estoque/Dockerfile
-    depends_on:
-      - db-services
+    image: k4im/estoque:v0.1
     networks:
       - kong-net
     deploy:
@@ -144,12 +115,7 @@ services:
   # --------------------------  
   icarusprojetos:
     container_name: container-projetos
-    image: icarusprojetos
-    build:
-      context: .
-      dockerfile: icarus.projetos/Dockerfile
-    depends_on:
-      - db-services
+    image: k4im/projeto:v0.1
     networks:
       - kong-net
     deploy:
@@ -184,11 +150,8 @@ services:
   # Serviço de auth
   # --------------------------  
   icarusjwt:
-    image: icarus-auth
+    image: k4im/autenticacao:v0.1
     container_name: container-auth
-    build:
-      context: .
-      dockerfile: icarus.jwtManager/Dockerfile
     networks:
       - kong-net
     deploy:
@@ -197,22 +160,6 @@ services:
           cpus: ".60"
           memory: 1024M        
 
-  # --------------------------
-  # Serviço de fornecedores
-  # --------------------------  
-  icarus-fornecedores:
-    image: icarus-fornecedores
-    container_name: container-fornecedores
-    build:
-      context: .
-      dockerfile: icarus.fornecedores/Dockerfile
-    networks:
-      - kong-net
-    deploy:
-      resources:
-        limits:
-          cpus: ".50"
-          memory: 1024M        
 
   # --------------------------
   # container swagger
