@@ -1,0 +1,240 @@
+version: '3.4'
+
+services:
+  
+  # --------------------------
+  # Banco de dados dos serviços
+  # --------------------------
+  db-services:
+    container_name: container-db-services
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_PASSWORD: "root"
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - 3306:3306
+    volumes:
+      - db-services:/var/lib/mysql
+    networks:
+      - kong-net  
+    deploy:
+      resources:
+        limits:
+          cpus: ".50"
+          memory: 1024M      
+  
+  
+  # --------------------------
+  # Banco de dados kong
+  # --------------------------  
+  kong-database:
+    image: postgres:9.6
+    container_name: kong-database
+    environment:
+      - POSTGRES_USER=kong
+      - POSTGRES_DB=kong
+      - POSTGRES_PASSWORD=kong
+    volumes:
+      - "db-data-kong-postgres:/var/lib/postgresql/data"
+    networks:
+      - kong-net
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2048M  
+  
+
+  # --------------------------
+  # Kong migrations
+  # --------------------------  
+  kong-migrations:
+    image: kong
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
+      - KONG_PG_PASSWORD=kong
+      - KONG_CASSANDRA_CONTACT_POINTS=kong-database
+    command: kong migrations bootstrap
+    restart: on-failure
+    depends_on:
+      - kong-database
+    networks:
+      - kong-net
+
+  # --------------------------
+  # Api kong
+  # --------------------------  
+  kong:
+    image: kong
+    container_name: kong
+    environment:
+      - LC_CTYPE=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
+      - KONG_PG_USER=kong
+      - KONG_PG_PASSWORD=kong
+      - KONG_CASSANDRA_CONTACT_POINTS=kong-database
+      - KONG_PROXY_ACCESS_LOG=/dev/stdout
+      - KONG_ADMIN_ACCESS_LOG=/dev/stdout
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl
+    restart: on-failure
+    ports:
+      - 8000:8000
+      - 8443:8443
+      - 8001:8001
+      - 8444:8444
+    links:
+      - kong-database:kong-database
+    depends_on:
+      - kong-migrations
+    networks:
+      - kong-net  
+    deploy:
+      resources:
+        limits:
+          cpus: '.80'
+          memory: 2048M  
+  
+  # --------------------------
+  # konga
+  # --------------------------  
+  konga:
+    image: pantsel/konga
+    ports:
+      - 1337:1337
+    links:
+      - kong:kong
+    container_name: konga
+    environment:
+      - NODE_ENV=production
+    networks:
+      - kong-net  
+    deploy:
+      resources:
+        limits:
+          cpus: ".65"
+          memory: 512M        
+       
+  # --------------------------
+  # Serviço de estoque
+  # --------------------------  
+  icarusestoque:
+    container_name: container-estoque
+    image: icarusestoque
+    build:
+      context: .
+      dockerfile: icarus.estoque/Dockerfile
+    depends_on:
+      - db-services
+    networks:
+      - kong-net
+    deploy:
+      resources:
+        limits:
+          cpus: ".50"
+          memory: 1024M        
+
+  # --------------------------
+  # Serviço de projetos
+  # --------------------------  
+  icarusprojetos:
+    container_name: container-projetos
+    image: icarusprojetos
+    build:
+      context: .
+      dockerfile: icarus.projetos/Dockerfile
+    depends_on:
+      - db-services
+    networks:
+      - kong-net
+    deploy:
+      resources:
+        limits:
+          cpus: ".50"
+          memory: 1024M        
+
+  # --------------------------
+  # Servidor de bus
+  # --------------------------  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: container-broker
+    environment:
+    - RABBITMQ_DEFAULT_USER=admin
+    - RABBITMQ_DEFAULT_PASS=admin
+    hostname: broker
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+      - db-broker:/var/lib/rabbitmq
+    networks:
+      - kong-net
+    deploy:
+      resources:
+        limits:
+          memory: 256M   
+
+  # --------------------------
+  # Serviço de auth
+  # --------------------------  
+  icarusjwt:
+    image: icarus-auth
+    container_name: container-auth
+    build:
+      context: .
+      dockerfile: icarus.jwtManager/Dockerfile
+    networks:
+      - kong-net
+    deploy:
+      resources:
+        limits:
+          cpus: ".60"
+          memory: 1024M        
+
+  # --------------------------
+  # Serviço de fornecedores
+  # --------------------------  
+  icarus-fornecedores:
+    image: icarus-fornecedores
+    container_name: container-fornecedores
+    build:
+      context: .
+      dockerfile: icarus.fornecedores/Dockerfile
+    networks:
+      - kong-net
+    deploy:
+      resources:
+        limits:
+          cpus: ".50"
+          memory: 1024M        
+
+  # --------------------------
+  # container swagger
+  # --------------------------  
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "container-swagger"
+    ports:
+      - "8085:8080"
+    environment:
+      URL: https://k4im.github.io/json/api.json
+
+    deploy:
+      resources:
+        limits:
+          cpus: ".50"
+          memory: 512M  
+volumes:
+  db-services:
+  db-data-kong-postgres:
+  db-broker:
+
+networks:
+    kong-net:
+        external: true
