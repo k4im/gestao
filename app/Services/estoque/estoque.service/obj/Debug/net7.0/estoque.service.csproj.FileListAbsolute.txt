@@ -51,8 +51,6 @@
 /home/k4im/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll
 /home/k4im/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll
 /home/k4im/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll
-/home/k4im/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/shared.models.dll
-/home/k4im/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/shared.models.pdb
 /home/k4im/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.csproj.AssemblyReference.cache
 /home/k4im/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.GeneratedMSBuildEditorConfig.editorconfig
 /home/k4im/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.AssemblyInfoInputs.cache
