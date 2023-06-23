@@ -131,8 +131,7 @@ namespace autenticacao.service.Controllers
         /// <summary>
         /// Ira realizar a removeção de uma pessoa a partir de um ID.
         /// </summary>
-        [HttpDelete("pessoa/deletar/{id}"),
-        Authorize(Roles = "ADMIN")]
+        [HttpDelete("pessoa/deletar/{id}")]
         public async Task<IActionResult> deletarPessoa(int id)
         {
             var result = await _repo.deletarPessoa(id);

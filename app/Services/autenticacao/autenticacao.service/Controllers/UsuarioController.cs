@@ -23,8 +23,7 @@ namespace autenticacao.service.Controllers
         /// </remarks>
         /// <returns code="200">Retorna codigo 200 com a lista de usuarios</returns>
         /// <returns code="404">Informa que não existe uma lista de usuario</returns>
-        [HttpGet("usuarios/{pagina?}/{resultado?}"),
-        Authorize(Roles = "ADMIN")]
+        [HttpGet("usuarios/{pagina?}/{resultado?}")]
         public async Task<IActionResult> buscarUsuarios(int pagina = 1, float resultado = 5)
         {
             var usuarios = await _repoAuth.listarUsuarios(pagina, resultado);
@@ -70,8 +69,7 @@ namespace autenticacao.service.Controllers
         /// </remarks>
         /// <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
         /// <returns code="500">Informa que não foi possivel realizar a operação</returns>
-        [HttpPost("usuarios/desativar/{chave}"),
-        Authorize(Roles = "ADMIN")]
+        [HttpPost("usuarios/desativar/{chave}")]
         public async Task<IActionResult> desativarUsuario([FromRoute] string chave)
         {
             var result = await _repoAuth.desativarUsuario(chave);
@@ -127,8 +125,7 @@ namespace autenticacao.service.Controllers
         /// </summary>
         /// <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
         /// <returns code="500">Informa que não foi possivel realizar a operação</returns>
-        [HttpPost("usuarios/reativar/{chave}"),
-        Authorize(Roles = "ADMIN")]
+        [HttpPost("usuarios/reativar/{chave}")]
         public async Task<IActionResult> reavitarUsuario([FromRoute] string chave)
         {
             var result = await _repoAuth.reativarUsuario(chave);

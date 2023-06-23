@@ -18,7 +18,7 @@ namespace projeto.service.Controllers
         /// Estará realizando a paginação e retornando uma lista completamente paginada de todos os projetos no banco de dados
         /// </summary>
         /// <response code="200">Retorna a lista com todos os projetos paginados</response>
-        [HttpGet("projetos/{pagina?}/{resultadoPorPagina?}"), Authorize(Roles = "ADMIN, ATENDENTE")]
+        [HttpGet("projetos/{pagina?}/{resultadoPorPagina?}")]
         public async Task<IActionResult> GetAllProjects(int pagina = 1, float resultadoPorPagina = 5)
         {
             var projetos = await _repo.BuscarProdutos(pagina, resultadoPorPagina);
@@ -30,7 +30,7 @@ namespace projeto.service.Controllers
         /// </summary>
         /// <response code="200"> Retorna o projeto</response>
         /// <response code="404"> Não existe um projeto com este ID</response>
-        [HttpGet("projeto/{id?}"), Authorize(Roles = "ADMIN, ATENDENTE")]
+        [HttpGet("projeto/{id?}")]
         public async Task<IActionResult> GetById(int? id)
         {
             var item = await _repo.BuscarPorId(id);
@@ -88,7 +88,7 @@ namespace projeto.service.Controllers
         /// <response code="200"> Informa que tudo ocorreu como esperado</response>
         /// <response code="409"> Informa que houve um erro de conflito</response>
         /// <response code="404"> Informa que não foi possivel encontrar um produto com este ID</response>
-        [HttpPut("update/{id}"), Authorize(Roles = "ADMIN")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateProject(StatusProjeto model, int? id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -110,7 +110,7 @@ namespace projeto.service.Controllers
         /// <response code="204"> Retorna No content caso o projeto tenha sido deletado corretamente</response>
         /// <response code="409"> Informa que houve um erro de conflito</response>
         /// <response code="404"> Informa que não foi possivel encontrar um produto com este ID</response>
-        [HttpDelete("delete/{id}"), Authorize(Roles = "ADMIN")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteProject(int? id)
         {
             if (id == null) return NotFound();
