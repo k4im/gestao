@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PnsfV89hr6C7uGw26+504QsEMxoSXYERdbwIqBosi5VyzYUfuOlbQQf7RgTXsLR1WlPpkwvMyr2mzN6TP7brcw==",
+  "dgSpecHash": "A2p/L34Ol3M9gt+v/SqPM+hvS5T51alxnKIF82LU/o13vgGbA4GZsn/FKUogZjKy7K9Jl6zrYsfiHSQGPRz8og==",
   "success": true,
   "projectFilePath": "/home/k4im/gestao/app/Services/estoque/estoque.service/estoque.service.csproj",
   "expectedPackageFiles": [
@@ -68,7 +68,7 @@
     "/home/k4im/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
     "/home/k4im/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/home/k4im/.nuget/packages/system.windows.extensions/7.0.0/system.windows.extensions.7.0.0.nupkg.sha512",
-    "/home/k4im/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
+    "/home/k4im/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.7/microsoft.aspnetcore.app.ref.7.0.7.nupkg.sha512"
   ],
   "logs": []
 }

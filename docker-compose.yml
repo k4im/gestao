@@ -177,6 +177,7 @@ services:
         limits:
           cpus: ".50"
           memory: 512M  
+
 volumes:
   db-services:
   db-data-kong-postgres:
