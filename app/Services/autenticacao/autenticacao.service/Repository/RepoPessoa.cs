@@ -3,10 +3,16 @@ namespace autenticacao.service.Repository
     public class RepoPessoa : IRepoPessoa
     {
         readonly DataContext _db;
-
+        readonly Logger.Logger _logger;
         public RepoPessoa(DataContext db)
         {
             _db = db;
+        }
+
+        public RepoPessoa(DataContext db, Logger.Logger logger)
+        {
+            _db = db;
+            _logger = logger;
         }
 
         public async Task<bool> atualiarPessoa(int id, Pessoa pessoa)
@@ -54,8 +60,9 @@ namespace autenticacao.service.Repository
                 await _db.SaveChangesAsync();
                 return await buscarPessoaId(id);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.logarFatal($"Não foi possivel realizar a operação: {e.Message}");
                 throw new Exception("Não foi possivel atualizar o dado!");
             }
         }
@@ -69,10 +76,10 @@ namespace autenticacao.service.Repository
         public async Task<Response<Pessoa>> buscarPessoas(int pagina, float resultado)
         {
             var resultadoPaginas = resultado;
-            var pessoas =  await _db.Pessoas.ToListAsync();
+            var pessoas = await _db.Pessoas.ToListAsync();
             var totalDePaginas = Math.Ceiling(pessoas.Count() / resultadoPaginas);
             var pessoasPaginada = pessoas.Skip((pagina - 1) * (int)resultadoPaginas).Take((int)resultadoPaginas).ToList();
-            var paginasTotal = (int) totalDePaginas;
+            var paginasTotal = (int)totalDePaginas;
             return new Response<Pessoa>(pessoasPaginada, pagina, paginasTotal);
         }
 
@@ -86,7 +93,7 @@ namespace autenticacao.service.Repository
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                _logger.logarFatal($"Não foi possivel realizar a operação: {e.Message}");
                 return false;
             }
 
@@ -101,8 +108,9 @@ namespace autenticacao.service.Repository
                 await _db.SaveChangesAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.logarFatal($"Não foi possivel realizar a operação: {e.Message}");
                 return false;
             }
         }

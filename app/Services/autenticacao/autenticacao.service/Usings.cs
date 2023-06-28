@@ -28,3 +28,6 @@ global using Swashbuckle.AspNetCore.Filters;
 global using System.Text.RegularExpressions;
 global using autenticacao.service.Exceptions;
 global using autenticacao.service.Models.ValueObjects;
+global using Serilog;
+global using Serilog.Sinks.Graylog;
+global using autenticacao.service.Logger;

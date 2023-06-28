@@ -49,7 +49,8 @@
              </remarks>
              <returns>Codigo 200 dizendo que o usuario foi criado com sucesso!</returns>
              <response code="200">Retorna uma mensagem informando que foi criado com sucesso</response>
-             <response code="500">Retorna uma mensagem informando que não foi possivel criar o usuario</response>
+             <response code="500">Retorna uma mensagem informando que não foi possivel criar o usuario, erro interno</response>
+             <response code="400">Retorna uma mensagem informando que não foi possivel criar o usuario, argumento invalido</response>
         </member>
         <member name="M:autenticacao.service.Controllers.PessoaControllers.atualizarPessoaEndereco(System.Int32,autenticacao.service.Models.ValueObjects.Endereco)">
              <summary>
@@ -70,6 +71,7 @@
              </remarks>
              <response code="200">Retorna a pessoa com o dado atualizado</response>
              <response code="404">Retorna dado de pessoa não encontrada</response>
+             <response code="400">Informa que não foi possivel atualizar devido a erro de model</response>
         </member>
         <member name="M:autenticacao.service.Controllers.PessoaControllers.atualizarTelefone(System.Int32,autenticacao.service.Models.ValueObjects.Telefone)">
              <summary>

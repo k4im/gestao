@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj": {}
+    "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj": {}
   },
   "projects": {
-    "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj": {
+    "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
+        "projectUniqueName": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
         "projectName": "autenticacao.service.tests",
-        "projectPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
+        "projectPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service.tests/autenticacao.service.tests.csproj",
         "packagesPath": "/home/oem/.nuget/packages/",
-        "outputPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service.tests/obj/",
+        "outputPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service.tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/oem/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
-                "projectPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj"
+              "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
+                "projectPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj"
               }
             }
           }
@@ -115,18 +115,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.108/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
+    "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
+        "projectUniqueName": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
         "projectName": "autenticacao.service",
-        "projectPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
+        "projectPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
         "packagesPath": "/home/oem/.nuget/packages/",
-        "outputPath": "/home/oem/gestao/app/Services/autenticacao/autenticacao.service/obj/",
+        "outputPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/oem/.nuget/NuGet/NuGet.Config"
@@ -207,6 +207,26 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Serilog": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Serilog.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Serilog.Sinks.Graylog": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -239,7 +259,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.108/RuntimeIdentifierGraph.json"
         }
       }
     }

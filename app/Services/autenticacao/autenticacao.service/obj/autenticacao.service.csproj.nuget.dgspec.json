@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {}
+    "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {}
   },
   "projects": {
-    "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
+    "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
+        "projectUniqueName": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
         "projectName": "autenticacao.service",
-        "projectPath": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
-        "packagesPath": "/home/k4im/.nuget/packages/",
-        "outputPath": "/home/k4im/gestao/app/Services/autenticacao/autenticacao.service/obj/",
+        "projectPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
+        "packagesPath": "/home/oem/.nuget/packages/",
+        "outputPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/k4im/.nuget/NuGet/NuGet.Config"
+          "/home/oem/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -92,6 +92,26 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Serilog": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Serilog.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Serilog.Sinks.Graylog": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -116,12 +136,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.7, 7.0.7]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -130,7 +144,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.108/RuntimeIdentifierGraph.json"
         }
       }
     }

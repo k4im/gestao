@@ -5,10 +5,13 @@ namespace autenticacao.service.Controllers
     public class PessoaControllers : ControllerBase
     {
         readonly IRepoPessoa _repo;
+        readonly Logger.Logger _logger;
 
-        public PessoaControllers(IRepoPessoa repo)
+
+        public PessoaControllers(IRepoPessoa repo, Logger.Logger logger)
         {
             _repo = repo;
+            _logger = logger;
         }
 
         /// <summary>
@@ -18,7 +21,12 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> buscarPessoas(int pagina = 1, float resultado = 5)
         {
             var pessoas = await _repo.buscarPessoas(pagina, resultado);
-            if (pessoas == null) return NotFound();
+            if (pessoas == null)
+            {
+                _logger.logarAviso($"Não foi possivel identificar uma lista de pessoas...");
+                return StatusCode(404);
+            }
+            _logger.logarInfo("Retornado lista de pessoas");
             return StatusCode(200, pessoas);
         }
 
@@ -33,7 +41,12 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> buscarPessoa(int id)
         {
             var pessoa = await _repo.buscarPessoaId(id);
-            if (pessoa == null) return NotFound();
+            if (pessoa == null)
+            {
+                _logger.logarAviso($"Não foi possivel identificar uma pessoa cadastrada com este ID: {id}");
+                return StatusCode(404);
+            }
+            _logger.logarInfo($"Localizado pessoa com ID: {id}");
             return StatusCode(200, pessoa);
         }
 
@@ -69,13 +82,24 @@ namespace autenticacao.service.Controllers
         /// </remarks>
         /// <returns>Codigo 200 dizendo que o usuario foi criado com sucesso!</returns>
         /// <response code="200">Retorna uma mensagem informando que foi criado com sucesso</response>
-        /// <response code="500">Retorna uma mensagem informando que não foi possivel criar o usuario</response>
+        /// <response code="500">Retorna uma mensagem informando que não foi possivel criar o usuario, erro interno</response>
+        /// <response code="400">Retorna uma mensagem informando que não foi possivel criar o usuario, argumento invalido</response>
         [HttpPost("pessoa/adicionar")]
         public async Task<IActionResult> adicionarPessoa(Pessoa model)
         {
+            if (!ModelState.IsValid)
+            {
+                _logger.logarAviso("Não foi possivel criar a pessoa com este modelo.. [Modelo Invalido]");
+                return StatusCode(400, "Argumento invalido");
+            }
             var result = await _repo.criarPessoa(model);
-            return (result) ? StatusCode(200, "Pessoa adicionada com sucesso!") :
-            StatusCode(500, "Não foi possivel adicionar a pessoa!");
+            if (result)
+            {
+                _logger.logarInfo("Adicionado pessoa com sucesso...");
+                return StatusCode(200, "Pessoa adicionada com sucesso!");
+            }
+            _logger.logarErro("Não foi possivel adicionar o pessoa, devido a um problema interno...");
+            return StatusCode(500, "Não foi possivel adicionar a pessoa!");
         }
 
 
@@ -97,14 +121,25 @@ namespace autenticacao.service.Controllers
         /// </remarks>
         /// <response code="200">Retorna a pessoa com o dado atualizado</response>
         /// <response code="404">Retorna dado de pessoa não encontrada</response>
+        /// <response code="400">Informa que não foi possivel atualizar devido a erro de model</response>
         [HttpPut("pessoa/atualizar/endereco/{id}")]
         public async Task<IActionResult> atualizarPessoaEndereco(int id, Endereco model)
         {
+            if (!ModelState.IsValid)
+            {
+                _logger.logarAviso($"Não foi possivel atualizar o endereço do ID: {id}. [Modelo Invalido]");
+                return StatusCode(400, ModelState);
+            }
             var result = await _repo.atualizarEndereco(id, model);
-            if (result == null) return StatusCode(404);
+            if (result == null)
+            {
+                _logger.logarAviso($"Não existe uma pessoa para este ID: {id}");
+                return StatusCode(404);
+            }
+            _logger.logarInfo($"Realizado atualização de endereço no ID: {id}");
             return StatusCode(200, result);
         }
-        
+
         /// <summary>
         /// Atualiza o telefone de uma pessoa.
         /// </summary>
@@ -123,8 +158,17 @@ namespace autenticacao.service.Controllers
         [HttpPut("pessoa/atualizar/telefone/{id}")]
         public async Task<IActionResult> atualizarTelefone(int id, Telefone model)
         {
+            if (!ModelState.IsValid)
+            {
+                _logger.logarErro($"Não foi possivel atualizar telefone do ID: {id}. [Modelo invalido]");
+            }
             var result = await _repo.atualizarTelefone(id, model);
-            if (result == null) return StatusCode(404);
+            if (result == null)
+            {
+                _logger.logarAviso($"Não foi possivel atualizar telefone para o ID: {id}");
+                return StatusCode(404);
+            }
+            _logger.logarInfo($"Realizado atualizacao de telefone do ID: {id}");
             return StatusCode(200, result);
         }
 
@@ -135,8 +179,13 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> deletarPessoa(int id)
         {
             var result = await _repo.deletarPessoa(id);
-            return (result) ? StatusCode(200, "Pessoa removida com sucesso") :
-            StatusCode(500, "Não foi possivel remover a pessoa");
+            if (result)
+            {
+                _logger.logarInfo($"Deletado usuario com ID: {id}");
+                return StatusCode(200, "Pessoa removida com sucesso");
+            }
+            _logger.logarErro($"Erro ao tentar realizar remoção da pessoa com ID: {id}");
+            return StatusCode(500, "Não foi possivel remover a pessoa");
         }
     }
 }

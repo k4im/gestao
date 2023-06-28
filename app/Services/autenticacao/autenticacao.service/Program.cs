@@ -46,6 +46,7 @@ builder.Services.AddScoped<IRepoAuth, RepoAuth>();
 builder.Services.AddScoped<IRefreshManager, RefreshManager>();
 builder.Services.AddScoped<IChaveManager, ChaveManager>();
 builder.Services.AddScoped<IjwtManager, jwtManager>();
+builder.Services.AddScoped<Logger>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
