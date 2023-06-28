@@ -25,19 +25,19 @@ namespace autenticacao.service.Logger
 
         public void logarErro(string mensagem)
         {
-            _logger.Information($"[{DateTime.UtcNow}] - [ERRO]: {mensagem}");
+            _logger.Error($"[{DateTime.UtcNow}] - [ERRO]: {mensagem}");
         }
 
         public void logarAviso(string mensagem)
         {
-            _logger.Warning($"[{DateTime.UtcNow}] - [ERRO]: {mensagem}");
+            _logger.Warning($"[{DateTime.UtcNow}] - [AVISO]: {mensagem}");
 
         }
 
 
         public void logarFatal(string mensagem)
         {
-            _logger.Fatal($"[{DateTime.UtcNow}] - [ERRO]: {mensagem}");
+            _logger.Fatal($"[{DateTime.UtcNow}] - [FATAL]: {mensagem}");
 
         }
     }
