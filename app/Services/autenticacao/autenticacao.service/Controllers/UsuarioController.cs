@@ -6,9 +6,9 @@ namespace autenticacao.service.Controllers
     {
         readonly IRepoAuth _repoAuth;
         readonly IRefreshManager _refreshManager;
-        readonly ILogger<UsuarioController> _logger;
+        readonly Logger.Logger _logger;
 
-        public UsuarioController(IRepoAuth repoAuth, IRefreshManager refreshManager, ILogger<UsuarioController> logger)
+        public UsuarioController(IRepoAuth repoAuth, IRefreshManager refreshManager, Logger.Logger logger = null)
         {
             _repoAuth = repoAuth;
             _refreshManager = refreshManager;
@@ -27,7 +27,12 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> buscarUsuarios(int pagina = 1, float resultado = 5)
         {
             var usuarios = await _repoAuth.listarUsuarios(pagina, resultado);
-            if (usuarios == null) return NotFound("Não existe usuarios criados!");
+            if (usuarios == null)
+            {
+                _logger.logarAviso("Não existem usuarios criados");
+                return StatusCode(404);
+            }
+            _logger.logarInfo("Retornado lista de usuarios");
             return StatusCode(200, usuarios);
         }
 
@@ -47,16 +52,25 @@ namespace autenticacao.service.Controllers
         [HttpPost("usuarios/novo")]
         public async Task<IActionResult> criarUsuario(NovoUsuarioDTO user)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+            {
+                _logger.logarErro("Não foi possivel criar o usuario, [Modelo Invalido]");
+                return BadRequest(ModelState);
+            }
             try
             {
                 var result = await _repoAuth.registrarUsuario(user);
-                if (result == null) return StatusCode(500, "Algo deu errado!");
+                if (result == null)
+                {
+                    _logger.logarAviso("Não foi possivel criar o usuario");
+                    return StatusCode(500, "Algo deu errado!");
+                }
+                _logger.logarInfo($"Realizado criação do usuario, chave: {result.ChaveDeAcesso}");
                 return StatusCode(200, result);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                _logger.logarErro(e.Message);
                 return StatusCode(500, "Algo deu errado!");
             }
         }
@@ -73,8 +87,13 @@ namespace autenticacao.service.Controllers
         public async Task<IActionResult> desativarUsuario([FromRoute] string chave)
         {
             var result = await _repoAuth.desativarUsuario(chave);
-            return (result) ? StatusCode(200, "Usuario desativado com sucesso!")
-            : StatusCode(500, "Não foi possivel desativar o usuario");
+            if (result)
+            {
+                _logger.logarInfo($"Realizado desativação do usuario: {chave} ");
+                return StatusCode(200, "Usuario desativado com sucesso!");
+            }
+            _logger.logarAviso($"Não foi possivel desativar o usuario: {chave}");
+            return StatusCode(500, "Não foi possivel desativar o usuario");
         }
 
         /// <summary>
@@ -98,12 +117,17 @@ namespace autenticacao.service.Controllers
             try
             {
                 var result = await _repoAuth.logar(login);
-                if (result == null) return NotFound();
+                if (result == null)
+                {
+                    _logger.logarAviso("Não foi encontado o usuario");
+                    return NotFound();
+                }
+                _logger.logarInfo($"Realizado o login do usuario: {login.ChaveDeAcesso}");
                 return StatusCode(200, result);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                _logger.logarErro($"Não foi possivel logar o usuario: [{login.ChaveDeAcesso}] - {e.Message}");
                 return StatusCode(500, "Algo deu errado!");
             }
         }

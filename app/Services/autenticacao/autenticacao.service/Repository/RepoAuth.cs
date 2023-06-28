@@ -9,7 +9,7 @@ namespace autenticacao.service.Repository
         readonly IChaveManager _chaveManager;
         readonly IRefreshManager _refreshManager;
         readonly DataContext _db;
-
+        readonly Logger.Logger _logger;
         public RepoAuth(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IjwtManager jwtManager, IChaveManager chaveManager, IRefreshManager refreshManager, DataContext db)
         {
             _userManager = userManager;
@@ -19,6 +19,18 @@ namespace autenticacao.service.Repository
             _chaveManager = chaveManager;
             _refreshManager = refreshManager;
             _db = db;
+        }
+
+        public RepoAuth(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IjwtManager jwtManager, IChaveManager chaveManager, IRefreshManager refreshManager, DataContext db, Logger.Logger logger)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            _jwtManager = jwtManager;
+            _chaveManager = chaveManager;
+            _refreshManager = refreshManager;
+            _db = db;
+            _logger = logger;
         }
 
         public async Task<bool> desativarUsuario(string chave)
@@ -31,8 +43,9 @@ namespace autenticacao.service.Repository
                 await _db.SaveChangesAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.logarErro($"Não foi possivel realizar a desativação do usuario: {e.Message}");
                 return false;
             }
         }
@@ -61,6 +74,7 @@ namespace autenticacao.service.Repository
                     return new ResponseLoginDTO(token, RToken.Token);
                 }
             }
+            _logger.logarAviso($"Não foi possivel realizar o login do usuario: {loginModel.ChaveDeAcesso}");
             return new ResponseLoginDTO("Senha ou usuario invalidos!", "Senha ou usuario invalidos!");
         }
 
@@ -79,8 +93,9 @@ namespace autenticacao.service.Repository
                 await _db.SaveChangesAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.logarErro($"Não foi possivel reativar o usuario com chave - {chave}: {e.Message}");
                 return false;
             }
         }
@@ -103,8 +118,14 @@ namespace autenticacao.service.Repository
                 await _userManager.SetLockoutEnabledAsync(NovoUsuario, false);
                 await _userManager.AddToRoleAsync(NovoUsuario, user.Papel);
             }
-            if (!result.Succeeded && result.Errors.Count() > 0) Console.WriteLine("Erro");
-
+            if (!result.Succeeded && result.Errors.Count() > 0)
+            {
+                foreach (var erro in result.Errors)
+                {
+                    _logger.logarErro($"Não foi possivel criar o usuario: {erro.Description}");
+                }
+            }
+            _logger.logarInfo($"Criado novo usuario: [{NovoUsuario.UserName}]");
             return new ResponseRegistroDTO(chave);
         }
 

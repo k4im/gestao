@@ -24,12 +24,14 @@ namespace autenticacao.service.Repository
                 await _db.SaveChangesAsync();
                 return true;
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
+                _logger.logarErro($"Não foi possivel realizar a operação de atualização pessoa: {e.Message}");
                 return false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.logarErro($"Não foi possivel realizar a operação de atualização pessoa: {e.Message}");
                 return false;
             }
         }
@@ -46,7 +48,7 @@ namespace autenticacao.service.Repository
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger.logarErro($"Não foi possivel realizar a operação de atualização de endereço: {e.Message}");
                 throw new Exception("Não foi possivel atualizar o dado!");
             }
         }
@@ -62,7 +64,7 @@ namespace autenticacao.service.Repository
             }
             catch (Exception e)
             {
-                _logger.logarFatal($"Não foi possivel realizar a operação: {e.Message}");
+                _logger.logarFatal($"Não foi possivel realizar a operação de atualização de telefone: {e.Message}");
                 throw new Exception("Não foi possivel atualizar o dado!");
             }
         }
@@ -93,7 +95,7 @@ namespace autenticacao.service.Repository
             }
             catch (Exception e)
             {
-                _logger.logarFatal($"Não foi possivel realizar a operação: {e.Message}");
+                _logger.logarFatal($"Não foi possivel realizar a operação de criar pessoa: {e.Message}");
                 return false;
             }
 
@@ -110,7 +112,7 @@ namespace autenticacao.service.Repository
             }
             catch (Exception e)
             {
-                _logger.logarFatal($"Não foi possivel realizar a operação: {e.Message}");
+                _logger.logarFatal($"Não foi possivel realizar a operação deletar pessoa: {e.Message}");
                 return false;
             }
         }
