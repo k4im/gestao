@@ -18,7 +18,7 @@ namespace autenticacao.service.Controllers
         /// Retorna uma lista paginada de Pessoas.
         /// </summary>
         [HttpGet("pessoas/{pagina?}/{resultado?}")]
-        [AllowAnonymous]
+        [Authorize(Roles="ADMIN, ATENDENTE")]
         public async Task<IActionResult> buscarPessoas(int pagina = 1, float resultado = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -39,7 +39,7 @@ namespace autenticacao.service.Controllers
         /// <returns code="200">Retorna a pessoa pertencente ao id</returns>
         /// <returns code="404">Informa que não existe uma pessoa com tal ID</returns>
         [HttpGet("pessoa/{id}")]
-        [AllowAnonymous]
+        [Authorize(Roles="ADMIN, ATENDENTE")]
         public async Task<IActionResult> buscarPessoa(int id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
