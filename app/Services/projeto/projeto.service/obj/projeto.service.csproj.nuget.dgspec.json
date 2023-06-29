@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/oem/github/gestao/app/Services/projeto/projeto.service/projeto.service.csproj": {}
+    "/home/k4im/github/gestao/app/Services/projeto/projeto.service/projeto.service.csproj": {}
   },
   "projects": {
-    "/home/oem/github/gestao/app/Services/projeto/projeto.service/projeto.service.csproj": {
+    "/home/k4im/github/gestao/app/Services/projeto/projeto.service/projeto.service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/oem/github/gestao/app/Services/projeto/projeto.service/projeto.service.csproj",
+        "projectUniqueName": "/home/k4im/github/gestao/app/Services/projeto/projeto.service/projeto.service.csproj",
         "projectName": "projeto.service",
-        "projectPath": "/home/oem/github/gestao/app/Services/projeto/projeto.service/projeto.service.csproj",
-        "packagesPath": "/home/oem/.nuget/packages/",
-        "outputPath": "/home/oem/github/gestao/app/Services/projeto/projeto.service/obj/",
+        "projectPath": "/home/k4im/github/gestao/app/Services/projeto/projeto.service/projeto.service.csproj",
+        "packagesPath": "/home/k4im/.nuget/packages/",
+        "outputPath": "/home/k4im/github/gestao/app/Services/projeto/projeto.service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/oem/.nuget/NuGet/NuGet.Config"
+          "/home/k4im/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -116,6 +116,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.7, 7.0.7]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -124,7 +130,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.108/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
         }
       }
     }

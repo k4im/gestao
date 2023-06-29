@@ -17,7 +17,8 @@ namespace autenticacao.service.Controllers
         /// <summary>
         /// Retorna uma lista paginada de Pessoas.
         /// </summary>
-        [HttpGet("pessoas/{pagina?}/{resultado?}"), AllowAnonymous]
+        [HttpGet("pessoas/{pagina?}/{resultado?}")]
+        [AllowAnonymous]
         public async Task<IActionResult> buscarPessoas(int pagina = 1, float resultado = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -37,8 +38,8 @@ namespace autenticacao.service.Controllers
         /// <param name="id"></param>
         /// <returns code="200">Retorna a pessoa pertencente ao id</returns>
         /// <returns code="404">Informa que não existe uma pessoa com tal ID</returns>
-        [HttpGet("pessoa/{id}"),
-        AllowAnonymous]
+        [HttpGet("pessoa/{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> buscarPessoa(int id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -87,6 +88,7 @@ namespace autenticacao.service.Controllers
         /// <response code="500">Retorna uma mensagem informando que não foi possivel criar o usuario, erro interno</response>
         /// <response code="400">Retorna uma mensagem informando que não foi possivel criar o usuario, argumento invalido</response>
         [HttpPost("pessoa/adicionar")]
+        [Authorize(Roles="ADMIN")]
         public async Task<IActionResult> adicionarPessoa(Pessoa model)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -126,6 +128,7 @@ namespace autenticacao.service.Controllers
         /// <response code="404">Retorna dado de pessoa não encontrada</response>
         /// <response code="400">Informa que não foi possivel atualizar devido a erro de model</response>
         [HttpPut("pessoa/atualizar/endereco/{id}")]
+        [Authorize(Roles="ADMIN")]
         public async Task<IActionResult> atualizarPessoaEndereco(int id, Endereco model)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -161,6 +164,7 @@ namespace autenticacao.service.Controllers
         /// <response code="200">Retorna a pessoa com o dado atualizado</response>
         /// <response code="404">Retorna dado de pessoa não encontrada</response>
         [HttpPut("pessoa/atualizar/telefone/{id}")]
+        [Authorize(Roles="ADMIN")]
         public async Task<IActionResult> atualizarTelefone(int id, Telefone model)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -182,6 +186,7 @@ namespace autenticacao.service.Controllers
         /// Ira realizar a removeção de uma pessoa a partir de um ID.
         /// </summary>
         [HttpDelete("pessoa/deletar/{id}")]
+        [Authorize(Roles="ADMIN")]
         public async Task<IActionResult> deletarPessoa(int id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
