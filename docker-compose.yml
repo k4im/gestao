@@ -8,9 +8,9 @@ services:
     image: postgres:9.6
     container_name: kong-database
     environment:
-      - POSTGRES_USER=kong
+      - POSTGRES_USER=${KONG_USER}
       - POSTGRES_DB=kong
-      - POSTGRES_PASSWORD=kong
+      - POSTGRES_PASSWORD=${KONG_PWD}
     volumes:
       - "db-data-kong-postgres:/var/lib/postgresql/data"
     networks:
@@ -30,7 +30,7 @@ services:
     environment:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
-      - KONG_PG_PASSWORD=kong
+      - KONG_PG_PASSWORD=${KONG_PWD}
       - KONG_CASSANDRA_CONTACT_POINTS=kong-database
     command: kong migrations bootstrap
     restart: on-failure
@@ -50,8 +50,8 @@ services:
       - LC_ALL=en_US.UTF-8
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
-      - KONG_PG_USER=kong
-      - KONG_PG_PASSWORD=kong
+      - KONG_PG_USER=${KONG_USER}
+      - KONG_PG_PASSWORD=${KONG_PWD}
       - KONG_CASSANDRA_CONTACT_POINTS=kong-database
       - KONG_PROXY_ACCESS_LOG=/dev/stdout
       - KONG_ADMIN_ACCESS_LOG=/dev/stdout
@@ -101,7 +101,7 @@ services:
   # --------------------------  
   icarusestoque:
     container_name: container-estoque
-    image: k4im/estoque:v0.1
+    image: k4im/estoque:${ICARUS_VER}
     networks:
       - kong-net
     deploy:
@@ -115,7 +115,7 @@ services:
   # --------------------------  
   icarusprojetos:
     container_name: container-projetos
-    image: k4im/projeto:v0.1
+    image: k4im/projeto:${ICARUS_VER}
     networks:
       - kong-net
     deploy:
@@ -131,8 +131,8 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: container-broker
     environment:
-    - RABBITMQ_DEFAULT_USER=admin
-    - RABBITMQ_DEFAULT_PASS=admin
+    - RABBITMQ_DEFAULT_USER=${RABBIT_USER}
+    - RABBITMQ_DEFAULT_PASS=${RABBIT_PWD}
     hostname: broker
     ports:
         - 5672:5672
@@ -150,7 +150,7 @@ services:
   # Serviço de auth
   # --------------------------  
   icarusjwt:
-    image: k4im/autenticacao:v0.1
+    image: k4im/autenticacao:${ICARUS_VER}
     container_name: container-auth
     networks:
       - kong-net
@@ -170,7 +170,7 @@ services:
     ports:
       - "8085:8080"
     environment:
-      URL: https://k4im.github.io/json/api.json
+      URL: ${SWAGGER_JSON}
 
     deploy:
       resources:
