@@ -7,7 +7,7 @@ namespace autenticacao.service.jwtManager
         readonly RoleManager<IdentityRole> _roleManager;
         readonly IConfiguration _config;
 
-        public jwtManager(UserManager<AppUser> userManager, 
+        public jwtManager(UserManager<AppUser> userManager,
         SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IConfiguration config)
         {
             _userManager = userManager;
@@ -19,7 +19,7 @@ namespace autenticacao.service.jwtManager
         public async Task<string> criarAccessToken(string chaveDeAcesso)
         {
             var usuario = await _userManager.FindByNameAsync(chaveDeAcesso);
-            
+
             var claims = gerarClaims(usuario);
 
             var secretKey = _config["Jwt:SecretKey"];
@@ -32,10 +32,10 @@ namespace autenticacao.service.jwtManager
                 claims: claims,
                 expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: creds,
-                audience : _config["Jwt:Audience"],
-                issuer : _config["Jwt:Issuer"]
+                audience: _config["Jwt:Audience"],
+                issuer: _config["Jwt:Issuer"]
             );
-        
+
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;
         }
@@ -46,11 +46,11 @@ namespace autenticacao.service.jwtManager
             {
                 new Claim("name", user.UserName),
                 new Claim("email", user.Email),
-                new Claim("Role", user.Role),
+                new Claim("role", user.Role),
                 new Claim("key", _config["Jwt:Key"])
             };
 
-            return claims;;
+            return claims; ;
         }
     }
 }

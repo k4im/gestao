@@ -2,6 +2,7 @@ namespace autenticacao.service.Controllers
 {
     [ApiController]
     [Route("api/v0.1/[controller]")]
+
     public class UsuarioController : ControllerBase
     {
         readonly IRepoAuth _repoAuth;
@@ -24,6 +25,7 @@ namespace autenticacao.service.Controllers
         /// <returns code="200">Retorna codigo 200 com a lista de usuarios</returns>
         /// <returns code="404">Informa que não existe uma lista de usuario</returns>
         [HttpGet("usuarios/{pagina?}/{resultado?}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> buscarUsuarios(int pagina = 1, float resultado = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -52,6 +54,7 @@ namespace autenticacao.service.Controllers
         /// <response code="200">Retorna a pessoa com o dado atualizado</response>
         /// <response code="500">Retorna que algo deu errado</response>
         [HttpPost("usuarios/novo")]
+        [AllowAnonymous]
         public async Task<IActionResult> criarUsuario(NovoUsuarioDTO user)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -87,6 +90,7 @@ namespace autenticacao.service.Controllers
         /// <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
         /// <returns code="500">Informa que não foi possivel realizar a operação</returns>
         [HttpPost("usuarios/desativar/{chave}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> desativarUsuario([FromRoute] string chave)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);

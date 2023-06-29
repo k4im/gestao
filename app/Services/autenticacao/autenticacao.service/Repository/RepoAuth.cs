@@ -108,15 +108,16 @@ namespace autenticacao.service.Repository
                 UserName = chave,
                 Email = chave,
                 EmailConfirmed = true,
-                Role = user.Papel
+                Role = user.Papel.ToUpper()
 
             };
             var result = await _userManager.CreateAsync(NovoUsuario, user.Senha);
             if (result.Succeeded)
             {
                 await criarRoles();
+                var appRole = await _roleManager.FindByNameAsync(NovoUsuario.Role);
                 await _userManager.SetLockoutEnabledAsync(NovoUsuario, false);
-                await _userManager.AddToRoleAsync(NovoUsuario, user.Papel);
+                await _userManager.AddToRoleAsync(NovoUsuario, "ADMIN");
             }
             if (!result.Succeeded && result.Errors.Count() > 0)
             {

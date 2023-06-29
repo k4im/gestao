@@ -52,9 +52,11 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 #region aspnet Identity Config
+
 builder.Services.AddIdentity<AppUser, IdentityRole>()
-    .AddEntityFrameworkStores<DataContext>()
-    .AddDefaultTokenProviders();
+    .AddRoles<IdentityRole>()
+    .AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<DataContext>();
 
 builder.Services.Configure<IdentityOptions>(opt =>
 {
@@ -66,18 +68,26 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(50);
     opt.Lockout.MaxFailedAccessAttempts = 2;
 });
+
 #endregion
 
 #region  configurando jwt
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(
+    opt =>
+    {
+        opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }
+)
 .AddJwtBearer(opt =>
 {
     opt.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
-        ValidateAudience = true,
+        ValidateAudience = false,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
+
 
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
@@ -85,6 +95,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
     };
 });
+builder.Services.AddAuthorization();
 #endregion
 builder.Services.AddCors();
 
