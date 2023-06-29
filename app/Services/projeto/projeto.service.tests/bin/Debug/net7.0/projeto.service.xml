@@ -4,5 +4,59 @@
         <name>projeto.service</name>
     </assembly>
     <members>
+        <member name="M:projeto.service.Controllers.ProjetoController.GetAllProjects(System.Int32,System.Single)">
+            <summary>
+            Estará realizando a paginação e retornando uma lista completamente paginada de todos os projetos no banco de dados
+            </summary>
+            <response code="200">Retorna a lista com todos os projetos paginados</response>
+        </member>
+        <member name="M:projeto.service.Controllers.ProjetoController.GetById(System.Nullable{System.Int32})">
+            <summary>
+            Estará realizando a operação de busca de um projeto a partir de um ID
+            </summary>
+            <response code="200"> Retorna o projeto</response>
+            <response code="404"> Não existe um projeto com este ID</response>
+        </member>
+        <member name="M:projeto.service.Controllers.ProjetoController.CreateProject(projeto.service.Models.Projeto)">
+             <summary>
+             Ira adicionar um novo projeto ao banco de dados, também estará realizando o envio do projeto para o service BUS
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 {
+                   "nome": "Cozinha",
+                   "status": {
+                     "status": "Em produção"
+                   },
+                   "dataInicio": "2023-06-21T15:29:24.256Z",
+                   "dataEntrega": "2023-08-25T15:29:24.256Z",
+                   "chapa": {
+                     "chapa": "Chapa Branca"
+                   },
+                   "descricao": "Projeto feito para o Ronaldo",
+                   "quantidadeDeChapa": 5, # Chapas utilizadas
+                   "valor": 3500.00
+                 }
+            
+             </remarks>
+             <response code="201"> Informa que tudo ocorreu como esperado</response>
+        </member>
+        <member name="M:projeto.service.Controllers.ProjetoController.UpdateProject(projeto.service.Models.ValueObjects.StatusProjeto,System.Nullable{System.Int32})">
+            <summary>
+            Estará realizando a atualização exclusivamente do status do projeto
+            </summary>
+            <response code="200"> Informa que tudo ocorreu como esperado</response>
+            <response code="409"> Informa que houve um erro de conflito</response>
+            <response code="404"> Informa que não foi possivel encontrar um produto com este ID</response>
+        </member>
+        <member name="M:projeto.service.Controllers.ProjetoController.DeleteProject(System.Nullable{System.Int32})">
+            <summary>
+            Estará realizando a operação de remoção do projeto do banco de dados
+            </summary>
+            <response code="204"> Retorna No content caso o projeto tenha sido deletado corretamente</response>
+            <response code="409"> Informa que houve um erro de conflito</response>
+            <response code="404"> Informa que não foi possivel encontrar um produto com este ID</response>
+        </member>
     </members>
 </doc>

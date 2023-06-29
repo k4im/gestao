@@ -19,6 +19,7 @@ namespace projeto.service.Controllers
         /// </summary>
         /// <response code="200">Retorna a lista com todos os projetos paginados</response>
         [HttpGet("projetos/{pagina?}/{resultadoPorPagina?}")]
+        [Authorize(Roles ="ADMIN, ATENDENTE")]
         public async Task<IActionResult> GetAllProjects(int pagina = 1, float resultadoPorPagina = 5)
         {
             var projetos = await _repo.BuscarProdutos(pagina, resultadoPorPagina);
@@ -31,6 +32,7 @@ namespace projeto.service.Controllers
         /// <response code="200"> Retorna o projeto</response>
         /// <response code="404"> Não existe um projeto com este ID</response>
         [HttpGet("projeto/{id?}")]
+        [Authorize(Roles ="ADMIN, ATENDENTE")]
         public async Task<IActionResult> GetById(int? id)
         {
             var item = await _repo.BuscarPorId(id);
@@ -62,6 +64,7 @@ namespace projeto.service.Controllers
         /// </remarks>
         /// <response code="201"> Informa que tudo ocorreu como esperado</response>
         [HttpPost("Create")]
+        [Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> CreateProject(Projeto model)
         {
 
@@ -89,6 +92,7 @@ namespace projeto.service.Controllers
         /// <response code="409"> Informa que houve um erro de conflito</response>
         /// <response code="404"> Informa que não foi possivel encontrar um produto com este ID</response>
         [HttpPut("update/{id}")]
+        [Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> UpdateProject(StatusProjeto model, int? id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -111,6 +115,7 @@ namespace projeto.service.Controllers
         /// <response code="409"> Informa que houve um erro de conflito</response>
         /// <response code="404"> Informa que não foi possivel encontrar um produto com este ID</response>
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> DeleteProject(int? id)
         {
             if (id == null) return NotFound();

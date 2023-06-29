@@ -104,6 +104,8 @@
             </remarks>
             <returns code="200">Retorna codigo 200 com a lista de usuarios</returns>
             <returns code="404">Informa que não existe uma lista de usuario</returns>
+            <returns code="401">Informa que não está autorizado para a funcao</returns>
+            <returns code="403">Informa que não tem privilégios para a funcao</returns>
         </member>
         <member name="M:autenticacao.service.Controllers.UsuarioController.criarUsuario(autenticacao.service.Models.UserController.NovoUsuarioDTO)">
             <summary>
@@ -119,6 +121,8 @@
             </remarks>
             <response code="200">Retorna a pessoa com o dado atualizado</response>
             <response code="500">Retorna que algo deu errado</response>
+            <returns code="401">Informa que não está autorizado para a funcao</returns>
+            <returns code="403">Informa que não tem privilégios para a funcao</returns>
         </member>
         <member name="M:autenticacao.service.Controllers.UsuarioController.desativarUsuario(System.String)">
             <summary>
@@ -129,6 +133,8 @@
             </remarks>
             <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
             <returns code="500">Informa que não foi possivel realizar a operação</returns>
+            <returns code="401">Informa que não está autorizado para a funcao</returns>
+            <returns code="403">Informa que não tem privilégios para a funcao</returns>
         </member>
         <member name="M:autenticacao.service.Controllers.UsuarioController.login(autenticacao.service.Models.UserController.LoginDTO)">
              <summary>
@@ -145,6 +151,8 @@
              </remarks>
              <response code="200">Retorna a pessoa com o dado atualizado</response>
              <response code="500">Retorna que algo deu errado</response>
+             <returns code="401">Informa que não está autorizado para a funcao</returns>
+             <returns code="403">Informa que não tem privilégios para a funcao</returns>
         </member>
         <member name="M:autenticacao.service.Controllers.UsuarioController.logOut">
             <summary>
@@ -158,6 +166,8 @@
             </summary>
             <returns code="200">Informa que foi possivel estar desativando o usuario</returns>
             <returns code="500">Informa que não foi possivel realizar a operação</returns>
+            <returns code="401">Informa que não está autorizado para a funcao</returns>
+            <returns code="403">Informa que não tem privilégios para a funcao</returns>
         </member>
         <member name="T:autenticacao.service.Migrations.Users">
             <inheritdoc />
