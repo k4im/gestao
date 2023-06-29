@@ -19,7 +19,7 @@ namespace estoque.service.Controllers
         /// <response code="200">Retorna a lista com os dados necessários</response>
         /// <response code="404">Informa que não foi possivel localizar a lista de produtos</response>
         [HttpGet("{pagina?}/{resultado?}")]
-        [AllowAnonymous]
+        [Authorize(Roles="ADMIN, ATENDENTE")]
         public async Task<IActionResult> buscarProdutos(int pagina = 1, int resultado = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -40,7 +40,7 @@ namespace estoque.service.Controllers
         /// <response code="404">Informa que não foi possivel estar encontrando o produto.</response>
         /// <response code="400">Retorna BadRequest e informa que é necessário ter um id para pequisa</response>
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        [Authorize(Roles="ADMIN, ATENDENTE")]
         public async Task<IActionResult> buscarProdutoId(int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
