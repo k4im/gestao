@@ -42,6 +42,7 @@ builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 // builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Data"));
 builder.Services.AddScoped<IRepoEstoque, RepoEstoque>();
+builder.Services.AddScoped<GrayLogger>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 #region  configurando jwt

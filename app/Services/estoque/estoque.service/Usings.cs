@@ -10,3 +10,8 @@ global using Microsoft.OpenApi.Models;
 global using Swashbuckle.AspNetCore.Filters;
 global using estoque.service.Repository;
 global using Microsoft.AspNetCore.Mvc;
+global using Serilog;
+global using Serilog.Sinks.Graylog;
+global using estoque.service.Logger;
+global using System.Security.Claims;
+global using Microsoft.AspNetCore.Authorization;

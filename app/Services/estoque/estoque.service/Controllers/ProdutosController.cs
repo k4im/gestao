@@ -1,3 +1,4 @@
+
 namespace estoque.service.Controllers
 {
     [ApiController]
@@ -5,10 +6,11 @@ namespace estoque.service.Controllers
     public class ProdutosController : ControllerBase
     {
         readonly IRepoEstoque _repo;
-
-        public ProdutosController(IRepoEstoque repo)
+        readonly GrayLogger _logger;
+        public ProdutosController(IRepoEstoque repo, GrayLogger logger)
         {
             _repo = repo;
+            _logger = logger;
         }
 
         /// <summary>
@@ -17,10 +19,17 @@ namespace estoque.service.Controllers
         /// <response code="200">Retorna a lista com os dados necessários</response>
         /// <response code="404">Informa que não foi possivel localizar a lista de produtos</response>
         [HttpGet("{pagina?}/{resultado?}")]
+        [AllowAnonymous]
         public async Task<IActionResult> buscarProdutos(int pagina = 1, int resultado = 5)
         {
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var produtos = await _repo.buscarProdutos(pagina, resultado);
-            if (produtos == null) return StatusCode(404, "Não foi possivel identificar nenhum produto!");
+            if (produtos == null)
+            {
+                _logger.logarAviso($"Não foi possivel buscar uma lista de produtos. Requirido por: [{currentUser}]");
+                return StatusCode(404, "Não foi possivel identificar nenhum produto!");
+            }
+            _logger.logarInfo($"Retornado lista de produtos para: [{currentUser}]");
             return StatusCode(200, produtos);
         }
 
@@ -31,12 +40,23 @@ namespace estoque.service.Controllers
         /// <response code="404">Informa que não foi possivel estar encontrando o produto.</response>
         /// <response code="400">Retorna BadRequest e informa que é necessário ter um id para pequisa</response>
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> buscarProdutoId(int? id)
         {
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             if (id == 0 || id < 0) return StatusCode(404, "Por favor insira um id valido");
-            if (id == null) return StatusCode(400, "Por favor informe um Id");
+            if (id == null)
+            {
+                _logger.logarAviso($"ID INVALIDO: [{id}]. Requirido por [{currentUser}]");
+                return StatusCode(400, "Por favor informe um Id");
+            }
             var produto = await _repo.buscarProdutoId(id);
-            if (produto == null) return StatusCode(404, "Produto não encontrado!");
+            if (produto == null)
+            {
+                _logger.logarAviso($"Não existe um produto com ID [{id}]. Ação feita por [{currentUser}]");
+                return StatusCode(404, "Produto não encontrado!");
+            }
+            _logger.logarInfo($"Retornado produto para: [{currentUser}]");
             return StatusCode(200, produto);
         }
 
@@ -57,11 +77,22 @@ namespace estoque.service.Controllers
         /// <response code="400">BadRequest, informa o campo que está errado no modelo</response>
         /// <response code="500">Informa que algo deu errado do lado do servidor</response>
         [HttpPost("novo_produto")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> adicionarProduto(Produto model)
         {
-            if (!ModelState.IsValid) return StatusCode(400, ModelState);
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            if (!ModelState.IsValid)
+            {
+                _logger.logarErro($"Modelo invalido ao tentar adicionar um produto. Ação feita por [{currentUser}]");
+            }
             var result = await _repo.adicionarProduto(model);
-            return result ? StatusCode(201, "Produto adicionado com sucesso") : StatusCode(500, "Algo deu errado!");
+            if (result)
+            {
+                _logger.logarInfo($"Adicionado produto com nome [{model.Nome}]. Ação realizada por [{currentUser}]");
+                return StatusCode(201, "Produto adicionado com sucesso");
+            }
+            _logger.logarFatal($"Erro interno ao tentar adicionar produto. Ação feita por [{currentUser}]");
+            return StatusCode(500, "Algo deu errado!");
         }
 
         /// <summary>
@@ -81,13 +112,32 @@ namespace estoque.service.Controllers
         /// <response code="400">BadRequest, informa o campo que está errado no modelo</response>
         /// <response code="500">Informa que algo deu errado do lado do servidor</response>
         [HttpPut("produto_atualizar/{id?}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> atualizarProduto(int? id, Produto model)
         {
-            if (id == 0 || id < 0) return StatusCode(404, "Por favor insira um id valido");
-            if (id == null) return StatusCode(404, "Por favor insira um id para atualizar");
-            if (!ModelState.IsValid) return StatusCode(400, ModelState);
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            if (id == 0 || id < 0)
+            {
+                _logger.logarAviso($"ID INVALIDO: [{id}]. Requirido por [{currentUser}]");
+                return StatusCode(404, "Por favor insira um id valido");
+            }
+            if (id == null)
+            {
+                _logger.logarAviso($"ID INVALIDO: [{id}]. Requirido por [{currentUser}]");
+                return StatusCode(404, "Por favor insira um id para atualizar");
+            }
+            if (!ModelState.IsValid)
+            {
+                _logger.logarErro($"Modelo invalido ao tentar atualizar produto. Ação feita por [{currentUser}]");
+                return StatusCode(400, ModelState);
+            }
             var result = await _repo.atualizarProduto(id, model);
-            return (result) ? StatusCode(200, "Produto atualizado com sucesso!") : StatusCode(500, "Não foi possivel atualizar o produto!");
+            if (result)
+            {
+                _logger.logarInfo($"Atualizado produto comID: [{id}]. Ação feita por [{currentUser}]");
+                return StatusCode(200, "Produto atualizado com sucesso!");
+            }
+            return StatusCode(500, "Não foi possivel atualizar o produto!");
         }
 
         /// <summary>
@@ -97,12 +147,28 @@ namespace estoque.service.Controllers
         /// <response code="200">Informa que o produto foi deletado com sucesso</response>
         /// <response code="500">Informa que não foi possivel realizar a operação, erro do lado do servidor</response>
         [HttpDelete("produto_delete/{id?}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> deletarProduto(int? id)
         {
-            if (id == 0 || id < 0) return StatusCode(404, "Por favor insira um id valido");
-            if (id == null) return StatusCode(404, "Por favor insira um id");
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            if (id == 0 || id < 0)
+            {
+                _logger.logarAviso($"ID INVALIDO: [{id}]. Requirido por [{currentUser}]");
+                return StatusCode(404, "Por favor insira um id valido");
+            }
+            if (id == null)
+            {
+                _logger.logarAviso($"ID INVALIDO: [{id}]. Requirido por [{currentUser}]");
+                return StatusCode(404, "Por favor insira um id para atualizar");
+            }
             var result = await _repo.removerProduto(id);
-            return (result) ? StatusCode(200, "Produto deletado com sucesso!") : StatusCode(500, "Não foi possivel deletar o produto!");
+            if (result)
+            {
+                _logger.logarInfo($"Produto com ID [{id}] deletado com sucesso. Ação feita por [{currentUser}]");
+                return StatusCode(200, "Produto deletado com sucesso!");
+            }
+            _logger.logarFatal($"Não foi possivel deletar o produto com ID [{id}]. Ação feita por [{currentUser}]");
+            return StatusCode(500, "Não foi possivel deletar o produto!");
         }
     }
 

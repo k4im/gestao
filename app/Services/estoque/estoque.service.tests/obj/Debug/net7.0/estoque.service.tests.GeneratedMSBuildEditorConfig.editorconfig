@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = estoque.service.tests
-build_property.ProjectDir = /home/oem/gestao/app/Services/estoque/estoque.service.tests/
+build_property.ProjectDir = /home/oem/github/gestao/app/Services/estoque/estoque.service.tests/
