@@ -17,3 +17,8 @@ global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc;
 global using projeto.service.AsyncComm;
 global using AutoMapper;
+global using Serilog;
+global using Serilog.Sinks.Graylog;
+global using projeto.service.Logger;
+global using System.Security.Claims;
+

@@ -282,3 +282,9 @@
 /home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/obj/Debug/net7.0/projeto.service.tests.pdb
 /home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/obj/Debug/net7.0/projeto.service.tests.genruntimeconfig.cache
 /home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/obj/Debug/net7.0/ref/projeto.service.tests.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/bin/Debug/net7.0/Serilog.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/bin/Debug/net7.0/Serilog.AspNetCore.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/bin/Debug/net7.0/Serilog.Extensions.Hosting.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/bin/Debug/net7.0/Serilog.Extensions.Logging.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/bin/Debug/net7.0/Serilog.Sinks.Graylog.Core.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service.tests/bin/Debug/net7.0/Serilog.Sinks.Graylog.dll

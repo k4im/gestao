@@ -130,3 +130,9 @@
 /home/k4im/github/gestao/app/Services/projeto/projeto.service/obj/Debug/net7.0/projeto.service.pdb
 /home/k4im/github/gestao/app/Services/projeto/projeto.service/obj/Debug/net7.0/projeto.service.genruntimeconfig.cache
 /home/k4im/github/gestao/app/Services/projeto/projeto.service/obj/Debug/net7.0/ref/projeto.service.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service/bin/Debug/net7.0/Serilog.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service/bin/Debug/net7.0/Serilog.AspNetCore.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service/bin/Debug/net7.0/Serilog.Extensions.Hosting.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service/bin/Debug/net7.0/Serilog.Extensions.Logging.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service/bin/Debug/net7.0/Serilog.Sinks.Graylog.Core.dll
+/home/k4im/github/gestao/app/Services/projeto/projeto.service/bin/Debug/net7.0/Serilog.Sinks.Graylog.dll

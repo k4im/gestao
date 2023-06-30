@@ -42,6 +42,7 @@ builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 // builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Data"));
 builder.Services.AddScoped<IRepoProjetos, RepoProjetos>();
+builder.Services.AddScoped<GrayLogger>();
 builder.Services.AddScoped<IMessageBusService, MessageBusService>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 

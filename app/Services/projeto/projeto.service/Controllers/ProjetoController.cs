@@ -7,11 +7,13 @@ namespace projeto.service.Controllers
         readonly IRepoProjetos _repo;
         readonly IMessageBusService _msgBus;
         readonly IMapper _mapper;
-        public ProjetoController(IRepoProjetos repo, IMessageBusService msg, IMapper mapper)
+        readonly GrayLogger _logger;
+        public ProjetoController(IRepoProjetos repo, IMessageBusService msg, IMapper mapper, GrayLogger logger)
         {
             _repo = repo;
             _msgBus = msg;
             _mapper = mapper;
+            _logger = logger;
         }
 
         /// <summary>
@@ -35,8 +37,14 @@ namespace projeto.service.Controllers
         [Authorize(Roles ="ADMIN, ATENDENTE")]
         public async Task<IActionResult> GetById(int? id)
         {
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var item = await _repo.BuscarPorId(id);
-            if (item == null) return NotFound();
+            if (item == null) 
+            {
+                _logger.logarAviso($"Não foi possivel identificar o projeto pelo ID: [{id}]. Ação feita por: [{currentUser}]");
+                return NotFound();
+            }
+            _logger.logarInfo($"Retornado projeto com ID: [{id}]. Ação feita por [{currentUser}]");
             return Ok(item);
         }
 
@@ -67,19 +75,25 @@ namespace projeto.service.Controllers
         [Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> CreateProject(Projeto model)
         {
-
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            if(!ModelState.IsValid) 
+            {
+                _logger.logarAviso($"Tentativa de criar projeto invalido. Ação feita por [{currentUser}]");
+                return StatusCode(400, ModelState);
+            }
             if (ModelState.IsValid)
             {
                 await _repo.CriarProjeto(model);
+                _logger.logarInfo($"Adicionado projeto ao banco de dados com nome: [{model.Nome}]. Ação feita por: [{currentUser}]");
                 try
                 {
                     var projeto = _mapper.Map<Projeto, ProjetoDTO>(model);
                     _msgBus.publishNewProjeto(projeto);
-                    Console.WriteLine("--> Mensagem enviado para o bus");
+                    _logger.logarInfo($"Realizado envio de mensagem para o RabbitMQ. Ação feita por [{currentUser}]");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"--> Não foi possivel enviar a mensagem para o bus: {e.Message}");
+                    _logger.logarErro($"--> Não foi possivel enviar a mensagem para o RabbitMQ: {e.Message}. Ação feita por [{currentUser}]");
                 }
             }
             return StatusCode(201);
@@ -95,6 +109,7 @@ namespace projeto.service.Controllers
         [Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> UpdateProject(StatusProjeto model, int? id)
         {
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             if (!ModelState.IsValid) return BadRequest(ModelState);
             if (id == null) return NotFound();
             try
@@ -118,6 +133,7 @@ namespace projeto.service.Controllers
         [Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> DeleteProject(int? id)
         {
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             if (id == null) return NotFound();
             try
             {
