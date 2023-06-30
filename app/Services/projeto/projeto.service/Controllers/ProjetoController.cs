@@ -24,7 +24,14 @@ namespace projeto.service.Controllers
         [Authorize(Roles ="ADMIN, ATENDENTE")]
         public async Task<IActionResult> GetAllProjects(int pagina = 1, float resultadoPorPagina = 5)
         {
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var projetos = await _repo.BuscarProdutos(pagina, resultadoPorPagina);
+            if (projetos == null) 
+            {
+                _logger.logarAviso($"Não foi possivel identificar a lista de projetos. Ação feita por [{currentUser}]");
+                return StatusCode(404);
+            }
+            _logger.logarAviso($"Retornado lista de projetos. Ação feita por [{currentUser}]");
             return Ok(projetos);
         }
 
@@ -111,14 +118,20 @@ namespace projeto.service.Controllers
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            if (id == null) return NotFound();
+            if (id == null) 
+            {
+                _logger.logarAviso($"Não foi possivel atualizar o projeto com ID [{id}]. Ação feita por [{currentUser}]");
+                return NotFound();
+            }
             try
             {
                 await _repo.AtualizarStatus(model, id);
+                _logger.logarInfo($"Realizado atualização do projeto com ID [{id}]. Ação realizada por [{currentUser}]");
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.logarErro($"Não foi possivel realizar a operação de atualização do projeto com ID [{id}]. Ação feita por [{currentUser}]. [ERRO] {e.Message}");
                 return StatusCode(409, "Não foi possivel atualizar o item, o mesmo foi atualizado por outro usuario!");
             }
         }
@@ -134,14 +147,20 @@ namespace projeto.service.Controllers
         public async Task<IActionResult> DeleteProject(int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            if (id == null) return NotFound();
+            if (id == null) 
+            {
+                _logger.logarAviso($"Não foi possivel deletar o projeto com ID [{id}]. Ação feita por [{currentUser}]");
+                return NotFound();
+            }
             try
             {
                 await _repo.DeletarProjeto(id);
+                _logger.logarInfo($"Realizado remoção do projeto com ID [{id}]. Ação realizada por [{currentUser}]");
                 return StatusCode(204);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.logarErro($"Não foi possivel realizar a operação de remoção do projeto com ID [{id}]. Ação feita por [{currentUser}]. [ERRO] {e.Message}");
                 return StatusCode(409, "Não foi possivel deletar o item, o mesmo foi deletado por outro usuario!");
             }
         }
