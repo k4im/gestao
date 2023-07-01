@@ -21,7 +21,7 @@ namespace projeto.service.Controllers
         /// </summary>
         /// <response code="200">Retorna a lista com todos os projetos paginados</response>
         [HttpGet("projetos/{pagina?}/{resultadoPorPagina?}")]
-        [Authorize(Roles ="ADMIN, ATENDENTE")]
+        [Authorize(Roles ="ADMIN,ATENDENTE")]
         public async Task<IActionResult> GetAllProjects(int pagina = 1, float resultadoPorPagina = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -41,7 +41,7 @@ namespace projeto.service.Controllers
         /// <response code="200"> Retorna o projeto</response>
         /// <response code="404"> Não existe um projeto com este ID</response>
         [HttpGet("projeto/{id?}")]
-        [Authorize(Roles ="ADMIN, ATENDENTE")]
+        [Authorize(Roles ="ADMIN,ATENDENTE")]
         public async Task<IActionResult> GetById(int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -79,7 +79,7 @@ namespace projeto.service.Controllers
         /// </remarks>
         /// <response code="201"> Informa que tudo ocorreu como esperado</response>
         [HttpPost("Create")]
-        [Authorize(Roles ="ADMIN")]
+        [Authorize(Roles ="ADMIN,ATENDENTE")]
         public async Task<IActionResult> CreateProject(Projeto model)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
