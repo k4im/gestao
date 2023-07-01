@@ -49,6 +49,7 @@ namespace autenticacao.service.Controllers
         /// Exemplo:
         ///     
         ///     {
+        ///       "nome": "Jonas"            
         ///       "senha": "Sua Senha",
         ///       "papel": "ADMIN ou ATENDENTE"
         ///     }
