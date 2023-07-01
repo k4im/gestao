@@ -44,7 +44,7 @@ namespace autenticacao.service.jwtManager
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim("name", user.UserName),
+                new Claim(ClaimTypes.Name, user.UserName),
                 new Claim("email", user.Email),
                 new Claim("role", user.Role),
                 new Claim("key", _config["Jwt:Key"])

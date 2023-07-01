@@ -105,6 +105,7 @@ namespace autenticacao.service.Repository
             var chave = await _chaveManager.gerarChaveDeAcesso();
             var NovoUsuario = new AppUser
             {
+                Name = user.Nome,
                 UserName = chave,
                 Email = chave,
                 EmailConfirmed = true,

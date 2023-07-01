@@ -5,6 +5,7 @@ namespace autenticacao.service.Models
         public string Role { get; set; }
         public bool FlagDesativado { get; set; }
 
+        public string Name { get; set; }
         public void desativarUsuario()
         {
             this.FlagDesativado = true;
