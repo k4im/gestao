@@ -22,7 +22,7 @@ services:
           memory: 2048M  
   
 
-  # --------------------------
+   # --------------------------
   # Kong migrations
   # --------------------------  
   kong-migrations:
@@ -30,7 +30,7 @@ services:
     environment:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
-      - KONG_PG_PASSWORD=${KONG_PWD}
+      - KONG_PG_PASSWORD=kong
       - KONG_CASSANDRA_CONTACT_POINTS=kong-database
     command: kong migrations bootstrap
     restart: on-failure
@@ -50,8 +50,8 @@ services:
       - LC_ALL=en_US.UTF-8
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
-      - KONG_PG_USER=${KONG_USER}
-      - KONG_PG_PASSWORD=${KONG_PWD}
+      - KONG_PG_USER=kong
+      - KONG_PG_PASSWORD=kong
       - KONG_CASSANDRA_CONTACT_POINTS=kong-database
       - KONG_PROXY_ACCESS_LOG=/dev/stdout
       - KONG_ADMIN_ACCESS_LOG=/dev/stdout
@@ -75,7 +75,6 @@ services:
         limits:
           cpus: '.80'
           memory: 2048M  
-  
   # --------------------------
   # konga
   # --------------------------  
