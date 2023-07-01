@@ -16,14 +16,14 @@ namespace autenticacao.service.Models.ValueObjects
         string validarPrimeiroNome(string nome)
         {
             if (string.IsNullOrEmpty(nome)) throw new CampoVazio("O nome não pode estar vazio!");
-            if (!Regex.IsMatch(nome, @"^[a-zA-Z ]+$")) throw new CaracterInvalido("O nome não pode conter caracteres especiais");
+            if (!Regex.IsMatch(nome, @"^[a-zA-ZzáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$")) throw new CaracterInvalido("O nome não pode conter caracteres especiais");
             return nome;
         }
 
         string validarSobreNome(string sobreNome)
         {
             if (string.IsNullOrEmpty(sobreNome)) throw new CampoVazio("O sobrenome não pode estar vazio!");
-            if (!Regex.IsMatch(sobreNome, @"^[a-zA-Z ]+$")) throw new CaracterInvalido("O sobrenome não pode conter caracteres especiais");
+            if (!Regex.IsMatch(sobreNome, @"^[a-zA-ZzáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$")) throw new CaracterInvalido("O sobrenome não pode conter caracteres especiais");
             return sobreNome.Trim();
         }
     }

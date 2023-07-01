@@ -27,14 +27,14 @@ namespace autenticacao.service.Models.ValueObjects
         string VerificarCidade(string cidade)
         {
             if (string.IsNullOrEmpty(cidade)) throw new CampoVazio("A cidade não pode estar vazia!");
-            if (!Regex.IsMatch(cidade, @"^[a-zA-Z ]+$")) throw new CaracterInvalido("A cidade não pode conter caracteres especiais");
+            if (!Regex.IsMatch(cidade, @"^[a-zA-ZzáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$")) throw new CaracterInvalido("A cidade não pode conter caracteres especiais");
             return cidade;
         }
 
         string VerificarBairro(string bairro)
         {
             if (string.IsNullOrEmpty(bairro)) throw new CampoVazio("O bairro não pode estar vazio!");
-            if (!Regex.IsMatch(bairro, @"^[a-zA-Z ]+$")) throw new CaracterInvalido("O bairro não pode conter caracteres especiais");
+            if (!Regex.IsMatch(bairro, @"^[a-zA-ZzáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$")) throw new CaracterInvalido("O bairro não pode conter caracteres especiais");
             return bairro;
         }
         string VerificarCep(string cep)
