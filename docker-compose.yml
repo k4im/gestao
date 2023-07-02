@@ -8,9 +8,9 @@ services:
     image: postgres:9.6
     container_name: kong-database
     environment:
-      - POSTGRES_USER=${KONG_USER}
+      - POSTGRES_USER=kong
       - POSTGRES_DB=kong
-      - POSTGRES_PASSWORD=${KONG_PWD}
+      - POSTGRES_PASSWORD=kong
     volumes:
       - "db-data-kong-postgres:/var/lib/postgresql/data"
     networks:
@@ -22,7 +22,7 @@ services:
           memory: 2048M  
   
 
-   # --------------------------
+  # --------------------------
   # Kong migrations
   # --------------------------  
   kong-migrations:
@@ -75,6 +75,7 @@ services:
         limits:
           cpus: '.80'
           memory: 2048M  
+  
   # --------------------------
   # konga
   # --------------------------  
@@ -94,7 +95,7 @@ services:
         limits:
           cpus: ".65"
           memory: 512M        
-       
+
   # --------------------------
   # Serviço de estoque
   # --------------------------  
