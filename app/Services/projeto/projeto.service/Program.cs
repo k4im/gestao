@@ -71,6 +71,7 @@ builder.Services.AddAuthentication(
 });
 #endregion
 builder.Services.AddCors();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -80,6 +81,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseCors(c =>
 {
     c.AllowAnyOrigin();
@@ -91,4 +93,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/health");
 app.Run();
