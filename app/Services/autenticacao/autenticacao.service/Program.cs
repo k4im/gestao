@@ -98,7 +98,7 @@ builder.Services.AddAuthentication(
 builder.Services.AddAuthorization();
 #endregion
 builder.Services.AddCors();
-
+builder.Services.AddHealthChecks();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -118,5 +118,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/health");
 
 app.Run();
