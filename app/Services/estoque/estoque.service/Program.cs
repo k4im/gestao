@@ -69,6 +69,7 @@ builder.Services.AddAuthentication(
 });
 #endregion
 builder.Services.AddCors();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -89,5 +90,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/health");
 
 app.Run();
