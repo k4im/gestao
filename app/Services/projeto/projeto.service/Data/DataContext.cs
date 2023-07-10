@@ -28,5 +28,6 @@ namespace projeto.service.Data
         }
 
         public DbSet<Projeto> Projetos { get; set; }
+        public DbSet<ProdutosDisponiveis> ProdutosEmEstoque { get; set; }
     }
 }

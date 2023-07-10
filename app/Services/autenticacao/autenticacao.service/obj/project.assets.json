@@ -3349,19 +3349,19 @@
     ]
   },
   "packageFolders": {
-    "/home/k4im/.nuget/packages/": {}
+    "/home/oem/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/k4im/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
+      "projectUniqueName": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
       "projectName": "autenticacao.service",
-      "projectPath": "/home/k4im/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
-      "packagesPath": "/home/k4im/.nuget/packages/",
-      "outputPath": "/home/k4im/github/gestao/app/Services/autenticacao/autenticacao.service/obj/",
+      "projectPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/autenticacao.service.csproj",
+      "packagesPath": "/home/oem/.nuget/packages/",
+      "outputPath": "/home/oem/github/gestao/app/Services/autenticacao/autenticacao.service/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/k4im/.nuget/NuGet/NuGet.Config"
+        "/home/oem/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -3483,12 +3483,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.7, 7.0.7]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -3497,7 +3491,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.108/RuntimeIdentifierGraph.json"
       }
     }
   }
