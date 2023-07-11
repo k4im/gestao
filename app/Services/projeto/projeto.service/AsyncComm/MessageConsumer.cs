@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using RabbitMQ.Client.Events;
 
 namespace projeto.service.AsyncComm
@@ -11,11 +7,12 @@ namespace projeto.service.AsyncComm
         private readonly IConfiguration _config;
         private readonly IConnection _connection;
         private readonly IModel _channel;
+        private readonly IRepoProdutosDisponiveis _repo;
 
-
-        public MessageConsumer(IConfiguration config)
+        public MessageConsumer(IConfiguration config, IRepoProdutosDisponiveis repo)
         {
             _config = config;
+            _repo = repo;
             var factory = new ConnectionFactory()
             {
                 HostName = _config["RabbitMQ"],
@@ -72,22 +69,19 @@ namespace projeto.service.AsyncComm
             }
         }
 
-        public List<ProdutosDisponiveis> consumeMessage()
+        public void verificarFila()
         {
-            var listaDeProdutos = consumirProdutosDisponiveis(_channel);
-            return listaDeProdutos;
+            if (_channel.MessageCount("produtos.disponiveis") != 0) consumirProdutosDisponiveis(_channel);
+            if (_channel.MessageCount("produtos.disponiveis.deletados") != 0) consumirProdutosDeletados(_channel);
         }
 
-        private List<ProdutosDisponiveis> consumirProdutosDisponiveis(IModel channel)
+        private void consumirProdutosDisponiveis(IModel channel)
         {
-            // Cria uma lista de produtos que foram enviados para a queue
-            var listaDeProdutos = new List<ProdutosDisponiveis>();
-            if (channel.MessageCount("produtos.disponiveis") == 0) return listaDeProdutos;
             // Definindo um consumidor
             var consumer = new EventingBasicConsumer(channel);
 
             // seta o EventSlim
-            var msgsRecievedGate = new ManualResetEventSlim(false);
+            // var msgsRecievedGate = new ManualResetEventSlim(false);
 
             // Definindo o que o consumidor recebe
             consumer.Received += (model, ea) =>
@@ -101,14 +95,13 @@ namespace projeto.service.AsyncComm
                     var message = Encoding.UTF8.GetString(body);
                     var projeto = JsonConvert.DeserializeObject<ProdutosDisponiveis>(message);
 
-                    // Repassa o valor da mensagem para a var
-                    for (int i = 0; i <= channel.MessageCount("projetos"); i++)
+                    // Estará realizando a operação de adicição dos projetos no banco de dados
+                    for (int i = 0; i <= channel.MessageCount("produtos.disponiveis"); i++)
                     {
-                        listaDeProdutos.Add(projeto);
-
+                        _repo.adicionarProdutos(projeto);
                     }
                     // seta o valor no EventSlim
-                    msgsRecievedGate.Set();
+                    // msgsRecievedGate.Set();
                     Console.WriteLine("--> Messagem tratada");
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 
@@ -131,11 +124,61 @@ namespace projeto.service.AsyncComm
              consumer: consumer);
 
             // Espera pelo valor setado
-            msgsRecievedGate.Wait();
+            // msgsRecievedGate.Wait();
             // retorna o valor tratado
-            Dispose();
-            return listaDeProdutos;
+            // return listaDeProdutos;
 
+
+        }
+        private void consumirProdutosDeletados(IModel channel)
+        {
+            // Definindo um consumidor
+            var consumer = new EventingBasicConsumer(channel);
+
+            // seta o EventSlim
+            // var msgsRecievedGate = new ManualResetEventSlim(false);
+
+            // Definindo o que o consumidor recebe
+            consumer.Received += (model, ea) =>
+            {
+                try
+                {
+                    // transformando o body em um array
+                    byte[] body = ea.Body.ToArray();
+
+                    // transformando o body em string
+                    var message = Encoding.UTF8.GetString(body);
+                    var produto = JsonConvert.DeserializeObject<ProdutosDisponiveis>(message);
+
+                    // Estará realizando a operação de adicição dos projetos no banco de dados
+                    for (int i = 0; i <= channel.MessageCount("produtos.disponiveis"); i++)
+                    {
+                        _repo.removerProdutos(produto.Id);
+                    }
+                    // seta o valor no EventSlim
+                    // msgsRecievedGate.Set();
+                    Console.WriteLine("--> Messagem tratada");
+                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+
+                }
+                catch (Exception e)
+                {
+                    channel.BasicNack(ea.DeliveryTag,
+                    multiple: false,
+                    requeue: true);
+                    Console.WriteLine(e);
+                }
+
+
+
+
+            };
+            // Consome o evento
+            channel.BasicConsume(queue: "produtos.disponiveis.deletados",
+                         autoAck: false,
+             consumer: consumer);
+
+            Dispose();
 
         }
 

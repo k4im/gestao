@@ -1,3 +1,5 @@
+using estoque.service.AssynComm;
+
 var builder = WebApplication.CreateBuilder(args);
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 // Add services to the container.
@@ -42,11 +44,12 @@ builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 // builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Data"));
 builder.Services.AddScoped<IRepoEstoque, RepoEstoque>();
+builder.Services.AddScoped<IMessagePublisher, MessagePublisher>();
 builder.Services.AddScoped<GrayLogger>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 #region  configurando jwt
-builder.Services.AddAuthentication(    
+builder.Services.AddAuthentication(
     opt =>
     {
         opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -320,3 +320,5 @@
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.pdb
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.genruntimeconfig.cache
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/ref/estoque.service.dll
+/home/oem/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Newtonsoft.Json.dll
+/home/oem/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/RabbitMQ.Client.dll

@@ -1,3 +1,5 @@
+using projeto.service.Worker;
+
 var builder = WebApplication.CreateBuilder(args);
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 // Add services to the container.
@@ -42,9 +44,12 @@ builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 // builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Data"));
 builder.Services.AddScoped<IRepoProjetos, RepoProjetos>();
-builder.Services.AddScoped<GrayLogger>();
+builder.Services.AddScoped<IRepoProdutosDisponiveis, RepoProdutosDisponiveis>();
+builder.Services.AddSingleton<GrayLogger>();
 builder.Services.AddScoped<IMessageBusService, MessageBusService>();
+builder.Services.AddScoped<IMessageConsumer, MessageConsumer>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddHostedService<RabbitConsumer>();
 
 #region  configurando jwt
 builder.Services.AddAuthentication(

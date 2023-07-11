@@ -1,4 +1,7 @@
 
+using AutoMapper;
+using estoque.service.AssynComm;
+
 namespace estoque.service.Controllers
 {
     [ApiController]
@@ -7,10 +10,15 @@ namespace estoque.service.Controllers
     {
         readonly IRepoEstoque _repo;
         readonly GrayLogger _logger;
-        public ProdutosController(IRepoEstoque repo, GrayLogger logger)
+        readonly IMessagePublisher _publisher;
+        readonly IMapper _mapper;
+
+        public ProdutosController(IRepoEstoque repo, GrayLogger logger, IMessagePublisher publisher, IMapper mapper)
         {
             _repo = repo;
             _logger = logger;
+            _publisher = publisher;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -19,7 +27,7 @@ namespace estoque.service.Controllers
         /// <response code="200">Retorna a lista com os dados necessários</response>
         /// <response code="404">Informa que não foi possivel localizar a lista de produtos</response>
         [HttpGet("{pagina?}/{resultado?}")]
-        [Authorize(Roles="ADMIN,ATENDENTE")]
+        [Authorize(Roles = "ADMIN,ATENDENTE")]
         public async Task<IActionResult> buscarProdutos(int pagina = 1, int resultado = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -40,7 +48,7 @@ namespace estoque.service.Controllers
         /// <response code="404">Informa que não foi possivel estar encontrando o produto.</response>
         /// <response code="400">Retorna BadRequest e informa que é necessário ter um id para pequisa</response>
         [HttpGet("{id}")]
-        [Authorize(Roles="ADMIN,ATENDENTE")]
+        [Authorize(Roles = "ADMIN,ATENDENTE")]
         public async Task<IActionResult> buscarProdutoId(int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -77,7 +85,7 @@ namespace estoque.service.Controllers
         /// <response code="400">BadRequest, informa o campo que está errado no modelo</response>
         /// <response code="500">Informa que algo deu errado do lado do servidor</response>
         [HttpPost("novo_produto")]
-        [Authorize(Roles = "ADMIN")]
+        //[Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> adicionarProduto(Produto model)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -86,9 +94,11 @@ namespace estoque.service.Controllers
                 _logger.logarErro($"Modelo invalido ao tentar adicionar um produto. Ação feita por [{currentUser}]");
             }
             var result = await _repo.adicionarProduto(model);
+            // var mapper = _mapper.Map<Produto, ProdutoDisponivel>(model);
+            _publisher.publicarProduto(new ProdutoDisponivel { Id = 0, Nome = model.Nome, Quantidade = model.Quantidade });
             if (result)
             {
-                _logger.logarInfo($"Adicionado produto com nome [{model.Nome}]. Ação realizada por [{currentUser}]");
+                // _logger.logarInfo($"Adicionado produto com nome [{model.Nome}]. Ação realizada por [{currentUser}]");
                 return StatusCode(201, "Produto adicionado com sucesso");
             }
             _logger.logarFatal($"Erro interno ao tentar adicionar produto. Ação feita por [{currentUser}]");
