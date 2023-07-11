@@ -18,15 +18,23 @@ namespace projeto.service.Worker
         public Task StartAsync(CancellationToken cancellationToken)
         {
             Console.WriteLine("Escutando fila em background...");
-            _timer = new Timer(consumirMensagens, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
+            _timer = new Timer(consumirMensagens, null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
             return Task.CompletedTask;
         }
         public void consumirMensagens(object state)
         {
-            using (IServiceScope scope = _provider.CreateScope())
+            try
             {
-                IMessageConsumer messager = scope.ServiceProvider.GetService<IMessageConsumer>();
-                messager.verificarFila();
+                using (IServiceScope scope = _provider.CreateScope())
+                {
+                    IMessageConsumer messager = scope.ServiceProvider.GetService<IMessageConsumer>();
+                    messager.verificarFila();
+                }
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Não foi possivel se conecetar ao RabbitMQ no Worker");
             }
 
         }

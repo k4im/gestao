@@ -2,16 +2,9 @@ namespace projeto.service.Models
 {
     public class ProdutosDisponiveis
     {
-        public ProdutosDisponiveis(int id, string nome, int quantidade)
-        {
-            Id = id;
-            Nome = nome;
-            Quantidade = quantidade;
-        }
 
-        [Key]
-        public int Id { get; }
-        public string Nome { get; }
-        public int Quantidade { get; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public int Quantidade { get; set; }
     }
 }

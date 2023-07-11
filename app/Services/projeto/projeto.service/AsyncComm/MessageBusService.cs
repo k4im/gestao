@@ -28,20 +28,20 @@ namespace projeto.service.AsyncComm
                 _channel = _connection.CreateModel();
 
                 // Definindo a fila no RabbitMQ
-                _channel.QueueDeclare(queue: "projetos", durable: true,
+                _channel.QueueDeclare(queue: "atualizar.estoque", durable: true,
                     exclusive: false,
                     autoDelete: false);
 
                 // Definindo o Exchange no RabbitMQ
-                _channel.ExchangeDeclare(exchange: "projeto-trigger",
-                type: ExchangeType.Fanout,
+                _channel.ExchangeDeclare(exchange: "projeto.adicionado/api.projetos",
+                type: ExchangeType.Topic,
                 durable: true,
                 autoDelete: false);
 
                 // Linkando a fila ao exchange
-                _channel.QueueBind(queue: "projetos",
-                    exchange: "projeto-trigger",
-                    routingKey: "");
+                _channel.QueueBind(queue: "atualizar.estoque",
+                    exchange: "projeto.adicionado/api.projetos",
+                    routingKey: "projeto.atualizar.estoque");
 
 
                 _connection.ConnectionShutdown += RabbitMQFailed;
@@ -57,16 +57,16 @@ namespace projeto.service.AsyncComm
         // Metodo de publicação de um novo projeto contendo todos os dados do projeto
         public void publishNewProjeto(ProjetoDTO evento)
         {
+            // Realizando apontamento para outra variavel e
+            // convertendo o objeto em JSON
             var projeto = evento;
             var message = JsonConvert.SerializeObject(projeto);
             if (_connection.IsOpen)
             {
-                Console.WriteLine("--> RabbitMQ Connection Open, enviando mensagem...");
+                Console.WriteLine("--> Enviando mensagem para o RabbitMQ...");
                 SendMessage(message);
 
             }
-
-            Console.WriteLine("--> RabbitMQ Connection Closed...");
         }
 
         // Metodo privado de envio da mensagem
@@ -84,22 +84,7 @@ namespace projeto.service.AsyncComm
                 routingKey: "",
                 basicProperties: props,
                 body: body);
-            Console.WriteLine("--> Mensagem enviado");
-
         }
-
-        // Metodo para fechar a conexão com o broker 
-        private void Dispose()
-        {
-            Console.WriteLine("Message Bus disposed");
-
-            // Verifica se a conexão está aberta e fecha
-            if (_channel.IsOpen)
-            {
-                _channel.Dispose();
-            }
-        }
-
         // "Logger" caso de algum erro 
         public void RabbitMQFailed(object sender, ShutdownEventArgs e)
         {

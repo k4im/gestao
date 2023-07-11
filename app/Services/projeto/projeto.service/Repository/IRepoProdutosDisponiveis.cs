@@ -2,7 +2,7 @@ namespace projeto.service.Repository
 {
     public interface IRepoProdutosDisponiveis
     {
-        Task<ProdutosDisponiveis> buscarTodosProdutos();
+        Task<List<ProdutosDisponiveis>> buscarTodosProdutos();
 
         Task<bool> removerProdutos(int id);
         Task<bool> adicionarProdutos(ProdutosDisponiveis model);
