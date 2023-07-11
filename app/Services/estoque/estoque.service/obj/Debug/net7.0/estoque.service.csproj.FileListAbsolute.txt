@@ -234,6 +234,8 @@
 /home/oem/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.pdb
 /home/oem/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.genruntimeconfig.cache
 /home/oem/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/ref/estoque.service.dll
+/home/oem/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Newtonsoft.Json.dll
+/home/oem/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/RabbitMQ.Client.dll
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/appsettings.Development.json
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/appsettings.json
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/estoque.service
@@ -269,7 +271,9 @@
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Moq.dll
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Moq.EntityFrameworkCore.dll
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/MySqlConnector.dll
+/home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Newtonsoft.Json.dll
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Pomelo.EntityFrameworkCore.MySql.dll
+/home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/RabbitMQ.Client.dll
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Scrutor.dll
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Serilog.dll
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Serilog.AspNetCore.dll
@@ -320,5 +324,3 @@
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.pdb
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/estoque.service.genruntimeconfig.cache
 /home/k4im/github/gestao/app/Services/estoque/estoque.service/obj/Debug/net7.0/ref/estoque.service.dll
-/home/oem/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/Newtonsoft.Json.dll
-/home/oem/github/gestao/app/Services/estoque/estoque.service/bin/Debug/net7.0/RabbitMQ.Client.dll

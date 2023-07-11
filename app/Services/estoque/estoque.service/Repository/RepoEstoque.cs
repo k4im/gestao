@@ -2,11 +2,18 @@ namespace estoque.service.Repository
 {
     public class RepoEstoque : IRepoEstoque
     {
-        DataContext _db;
+        readonly DataContext _db;
+        readonly IMessagePublisher _publisher;
+        delegate void produtoEventHandler(Produto model);
+        event produtoEventHandler aoCriarProduto;
+        event produtoEventHandler aoDeletarProduto;
+        event produtoEventHandler aoAtualizarProduto;
 
-        public RepoEstoque(DataContext db)
+        public RepoEstoque(DataContext db, IMessagePublisher publisher)
         {
             _db = db;
+            _publisher = publisher;
+            aoCriarProduto += _publisher.publicarProduto;
         }
 
         public async Task<bool> adicionarProduto(Produto model)
@@ -15,6 +22,7 @@ namespace estoque.service.Repository
             {
                 _db.Produtos.Add(model);
                 await _db.SaveChangesAsync();
+                aoCriarProduto.Invoke(model);
                 return true;
             }
             catch (DbUpdateConcurrencyException)

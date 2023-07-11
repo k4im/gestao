@@ -42,7 +42,6 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 #endregion
 // builder.Services.AddDbContext<DataContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("docker"), serverVersion));
-builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Data"));
 builder.Services.AddScoped<IRepoProjetos, RepoProjetos>();
 builder.Services.AddScoped<IRepoProdutosDisponiveis, RepoProdutosDisponiveis>();
 builder.Services.AddSingleton<GrayLogger>();

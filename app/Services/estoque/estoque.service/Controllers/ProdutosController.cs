@@ -10,15 +10,11 @@ namespace estoque.service.Controllers
     {
         readonly IRepoEstoque _repo;
         readonly GrayLogger _logger;
-        readonly IMessagePublisher _publisher;
-        readonly IMapper _mapper;
 
-        public ProdutosController(IRepoEstoque repo, GrayLogger logger, IMessagePublisher publisher, IMapper mapper)
+        public ProdutosController(IRepoEstoque repo, GrayLogger logger)
         {
             _repo = repo;
             _logger = logger;
-            _publisher = publisher;
-            _mapper = mapper;
         }
 
         /// <summary>
@@ -94,8 +90,6 @@ namespace estoque.service.Controllers
                 _logger.logarErro($"Modelo invalido ao tentar adicionar um produto. Ação feita por [{currentUser}]");
             }
             var result = await _repo.adicionarProduto(model);
-            // var mapper = _mapper.Map<Produto, ProdutoDisponivel>(model);
-            _publisher.publicarProduto(new ProdutoDisponivel { Id = 0, Nome = model.Nome, Quantidade = model.Quantidade });
             if (result)
             {
                 // _logger.logarInfo($"Adicionado produto com nome [{model.Nome}]. Ação realizada por [{currentUser}]");

@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using AutoMapper;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 
@@ -12,8 +10,8 @@ namespace estoque.service.AssynComm
         private readonly IConfiguration _config;
         private IConnection _connection;
         private IModel _channel;
-
-        public MessagePublisher(IConfiguration config)
+        IMapper _mapper;
+        public MessagePublisher(IConfiguration config, IMapper mapper)
         {
             _config = config;
 
@@ -59,17 +57,18 @@ namespace estoque.service.AssynComm
             {
                 Console.WriteLine($"--> Não foi possivel se conectar com o Message Bus: {e.Message}");
             }
+            _mapper = mapper;
         }
 
         // Metodo de publicação de um novo projeto contendo todos os dados do projeto
-        public void publicarProduto(ProdutoDisponivel produto)
+        public void publicarProduto(Produto produto)
         {
-            var produtoModel = produto;
+            var produtoModel = _mapper.Map<Produto, ProdutoDisponivel>(produto);
             var message = JsonConvert.SerializeObject(produtoModel);
             if (_connection.IsOpen)
             {
                 Console.WriteLine("--> RabbitMQ Connection Open, enviando mensagem...");
-                SendMessage(message);
+                enviarProdutoAdicionado(message);
 
             }
 
@@ -77,7 +76,7 @@ namespace estoque.service.AssynComm
         }
 
         // Metodo privado de envio da mensagem
-        private void SendMessage(string evento)
+        private void enviarProdutoAdicionado(string evento)
         {
             // transformando o json em array de bytes
             var body = Encoding.UTF8.GetBytes(evento);

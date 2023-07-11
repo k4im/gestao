@@ -18,6 +18,10 @@ namespace projeto.service.Repository
                 Console.WriteLine("Não foi possivel realizar a operação, a mesma já foi realizado por um outro usuario!");
                 return false;
             }
+            catch (ArgumentException)
+            {
+                return true;
+            }
             catch (Exception e)
             {
                 Console.WriteLine($"Não foi possivel realizar a operação: {e.Message}");

@@ -7,7 +7,7 @@ namespace estoque.service.AssynComm
 {
     public interface IMessagePublisher
     {
-        void publicarProduto(ProdutoDisponivel produto);
+        void publicarProduto(Produto produto);
     }
 
 }

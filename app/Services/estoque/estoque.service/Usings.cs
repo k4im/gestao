@@ -15,3 +15,4 @@ global using Serilog.Sinks.Graylog;
 global using estoque.service.Logger;
 global using System.Security.Claims;
 global using Microsoft.AspNetCore.Authorization;
+global using estoque.service.AssynComm;

@@ -2,21 +2,19 @@ namespace projeto.service.Repository
 {
     public class RepoProjetos : IRepoProjetos
     {
-        readonly DataContext _db;
-
-        public RepoProjetos(DataContext db)
-        {
-            _db = db;
-        }
 
         public async Task<bool> AtualizarStatus(StatusProjeto model, int? id)
         {
             try
             {
-                var projeto = await _db.Projetos.FirstOrDefaultAsync(x => x.Id == id);
-                projeto.AtualizarStatus(model);
-                await _db.SaveChangesAsync();
-                return true;
+                using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+                {
+                    var projeto = await db.Projetos.FirstOrDefaultAsync(x => x.Id == id);
+                    projeto.AtualizarStatus(model);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -32,27 +30,38 @@ namespace projeto.service.Repository
 
         public async Task<Projeto> BuscarPorId(int? id)
         {
-            var item = await _db.Projetos.FirstOrDefaultAsync(x => x.Id == id);
-            return item;
+            using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+            {
+                var item = await db.Projetos.FirstOrDefaultAsync(x => x.Id == id);
+                return item;
+            }
+
         }
 
         public async Task<Response<Projeto>> BuscarProdutos(int pagina, float resultadoPorPagina)
         {
-            var ResultadoPorPagina = resultadoPorPagina;
-            var projetos = await _db.Projetos.ToListAsync();
-            var TotalDePaginas = Math.Ceiling(projetos.Count() / ResultadoPorPagina);
-            var projetosPaginados = projetos.Skip((pagina - 1) * (int)ResultadoPorPagina).Take((int)ResultadoPorPagina).ToList();
+            using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+            {
+                var ResultadoPorPagina = resultadoPorPagina;
+                var projetos = await db.Projetos.ToListAsync();
+                var TotalDePaginas = Math.Ceiling(projetos.Count() / ResultadoPorPagina);
+                var projetosPaginados = projetos.Skip((pagina - 1) * (int)ResultadoPorPagina).Take((int)ResultadoPorPagina).ToList();
 
-            return new Response<Projeto>(projetosPaginados, pagina, (int)TotalDePaginas);
+                return new Response<Projeto>(projetosPaginados, pagina, (int)TotalDePaginas);
+            }
         }
 
         public async Task<bool> CriarProjeto(Projeto model)
         {
             try
             {
-                _db.Projetos.Add(model);
-                await _db.SaveChangesAsync();
-                return true;
+                using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+                {
+                    db.Projetos.Add(model);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -70,10 +79,14 @@ namespace projeto.service.Repository
         {
             try
             {
-                var item = await BuscarPorId(id);
-                _db.Projetos.Remove(item);
-                await _db.SaveChangesAsync();
-                return true;
+                using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+                {
+                    var item = await BuscarPorId(id);
+                    db.Projetos.Remove(item);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -106,9 +106,11 @@ namespace projeto.service.AsyncComm
                     {
                         await _repo.adicionarProdutos(projeto);
                     }
+
                     // seta o valor no EventSlim
                     // msgsRecievedGate.Set();
                     Console.WriteLine("--> Consumido mensagem vindo da fila [produtos.disponiveis]");
+                    Console.WriteLine(message);
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 
                 }
