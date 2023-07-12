@@ -44,7 +44,7 @@ namespace estoque.service.Controllers
         /// <response code="404">Informa que não foi possivel estar encontrando o produto.</response>
         /// <response code="400">Retorna BadRequest e informa que é necessário ter um id para pequisa</response>
         [HttpGet("{id}")]
-        [Authorize(Roles = "ADMIN,ATENDENTE")]
+        // [Authorize(Roles = "ADMIN,ATENDENTE")]
         public async Task<IActionResult> buscarProdutoId(int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -116,7 +116,7 @@ namespace estoque.service.Controllers
         /// <response code="400">BadRequest, informa o campo que está errado no modelo</response>
         /// <response code="500">Informa que algo deu errado do lado do servidor</response>
         [HttpPut("produto_atualizar/{id?}")]
-        [Authorize(Roles = "ADMIN")]
+        // [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> atualizarProduto(int? id, Produto model)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);

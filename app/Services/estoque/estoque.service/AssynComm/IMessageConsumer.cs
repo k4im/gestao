@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace estoque.service.AssynComm
 {
-    public interface IMessagePublisher
+    public interface IMessageConsumer
     {
-        void publicarProduto(Produto produto);
-        void atualizarProduto(Produto produto);
+        void verificarFila();
     }
-
 }

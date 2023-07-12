@@ -37,6 +37,16 @@ namespace estoque.service.AssynComm
                     exclusive: false,
                     autoDelete: false);
 
+                // Definindo a fila no RabbitMQ
+                _channel.QueueDeclare(queue: "produtos.disponiveis.atualizados", durable: true,
+                    exclusive: false,
+                    autoDelete: false);
+
+                // Definindo a fila no RabbitMQ
+                _channel.QueueDeclare(queue: "produtos.disponiveis.deletados", durable: true,
+                    exclusive: false,
+                    autoDelete: false);
+
                 // Definindo o Exchange no RabbitMQ
                 _channel.ExchangeDeclare(exchange: "produtos/api.estoque",
                 type: ExchangeType.Topic,
@@ -47,6 +57,16 @@ namespace estoque.service.AssynComm
                 _channel.QueueBind(queue: "produtos.disponiveis",
                     exchange: "produtos/api.estoque",
                     routingKey: "produtos.disponiveis.produto.adicionado");
+
+                // Linkando a fila ao exchange
+                _channel.QueueBind(queue: "produtos.disponiveis.atualizados",
+                    exchange: "produtos/api.estoque",
+                    routingKey: "produtos.disponiveis.produto.atualizado");
+
+                // Linkando a fila ao exchange
+                _channel.QueueBind(queue: "produtos.disponiveis.deletados",
+                    exchange: "produtos/api.estoque",
+                    routingKey: "produtos.disponiveis.produto.deletado");
 
 
                 _connection.ConnectionShutdown += RabbitMQFailed;
@@ -71,8 +91,6 @@ namespace estoque.service.AssynComm
                 enviarProdutoAdicionado(message);
 
             }
-
-            Console.WriteLine("--> RabbitMQ Connection Closed...");
         }
 
         // Metodo privado de envio da mensagem
@@ -88,6 +106,25 @@ namespace estoque.service.AssynComm
             // Realizando o envio para o exchange 
             _channel.BasicPublish(exchange: "produtos/api.estoque",
                 routingKey: "produtos.disponiveis.produto.adicionado",
+                basicProperties: props,
+                body: body);
+            Console.WriteLine("--> Mensagem enviado");
+
+        }
+
+        // Metodo estará enviando apenas as mensagens que foram atualizadas
+        private void enviarProdutoAtualizado(string evento)
+        {
+            // transformando o json em array de bytes
+            var body = Encoding.UTF8.GetBytes(evento);
+
+            // Persistindo a mensagem no broker
+            var props = _channel.CreateBasicProperties();
+            props.Persistent = true;
+
+            // Realizando o envio para o exchange 
+            _channel.BasicPublish(exchange: "produtos/api.estoque",
+                routingKey: "produtos.disponiveis.produto.atualizado",
                 basicProperties: props,
                 body: body);
             Console.WriteLine("--> Mensagem enviado");
@@ -110,6 +147,19 @@ namespace estoque.service.AssynComm
         public void RabbitMQFailed(object sender, ShutdownEventArgs e)
         {
             Console.WriteLine("--> RabbitMQ foi derrubado");
+        }
+
+        public void atualizarProduto(Produto produto)
+        {
+            var produtoModel = _mapper.Map<Produto, ProdutoDisponivel>(produto);
+            produtoModel.Id = 1;
+            var message = JsonConvert.SerializeObject(produtoModel);
+            if (_connection.IsOpen)
+            {
+                Console.WriteLine("--> RabbitMQ Connection Open, enviando mensagem...");
+                enviarProdutoAtualizado(message);
+
+            }
         }
     }
 

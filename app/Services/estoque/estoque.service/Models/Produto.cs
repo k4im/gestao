@@ -41,5 +41,12 @@ namespace estoque.service.Models
             if (!Regex.IsMatch(nome, @"^[a-zA-Z ]+$")) throw new CaracterInvalido("O nome não pode conter caracteres especiais");
             return nome;
         }
+
+        public void atualizarProduto(Produto model)
+        {
+            this.Nome = model.Nome;
+            this.Valor = model.Valor;
+            this.Quantidade = model.Quantidade;
+        }
     }
 }

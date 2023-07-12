@@ -1,15 +1,17 @@
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace projeto.service.AsyncComm
+namespace estoque.service.AssynComm
 {
     public class MessageConsumer : IMessageConsumer
     {
         private readonly IConfiguration _config;
         private readonly IConnection _connection;
         private readonly IModel _channel;
-        private readonly IRepoProdutosDisponiveis _repo;
+        private readonly IRepoEstoque _repo;
 
-        public MessageConsumer(IConfiguration config, IRepoProdutosDisponiveis repo)
+        public MessageConsumer(IConfiguration config, IRepoEstoque repo)
         {
             _config = config;
             _repo = repo;
@@ -26,20 +28,7 @@ namespace projeto.service.AsyncComm
                 _channel = _connection.CreateModel();
 
                 // Declarando a fila para eventos que foram adicionados
-                _channel.QueueDeclare(queue: "produtos.disponiveis",
-                    durable: true,
-                    exclusive: false,
-                    autoDelete: false);
-
-
-                // Declarando a fila para eventos que foram deletados
-                _channel.QueueDeclare(queue: "produtos.disponiveis.deletados",
-                    durable: true,
-                    exclusive: false,
-                    autoDelete: false);
-
-                // Declarando a fila para eventos que foram atualizados
-                _channel.QueueDeclare(queue: "produtos.disponiveis.atualizados",
+                _channel.QueueDeclare(queue: "projeto.adicionado",
                     durable: true,
                     exclusive: false,
                     autoDelete: false);
@@ -47,21 +36,10 @@ namespace projeto.service.AsyncComm
                 // Definindo o balanceamento da fila para uma mensagem por vez.
                 _channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
 
-                // Linkando a fila de eventos adicionados ao exchange 
-                _channel.QueueBind(queue: "produtos.disponiveis",
+                // Linkando a fila de eventos atualizados ao exchange
+                _channel.QueueBind(queue: "projeto.adicionado",
                     exchange: "produtos/api.estoque",
-                    routingKey: "produtos.disponiveis.produto.adicionado");
-
-                // Linkando a fila de eventos deletados ao exchange 
-                _channel.QueueBind(queue: "produtos.disponiveis.deletados",
-                    exchange: "produtos/api.estoque",
-                    routingKey: "produtos.disponiveis.produto.deletado");
-
-                // Linkando a fila de eventos atualizados ao exchange 
-                _channel.QueueBind(queue: "produtos.disponiveis.atualizados",
-                    exchange: "produtos/api.estoque",
-                    routingKey: "produtos.disponiveis.produto.atualizado");
-
+                    routingKey: "novo.projeto.adicionado");
 
 
                 _connection.ConnectionShutdown += RabbitMQFailed;
@@ -76,9 +54,8 @@ namespace projeto.service.AsyncComm
 
         public void verificarFila()
         {
-
-            if (_channel.MessageCount("produtos.disponiveis") != 0) consumirProdutosDisponiveis(_channel);
-            if (_channel.MessageCount("produtos.disponiveis.atualizados") != 0) consumirProdutosAtualizados(_channel);
+            if (_channel.MessageCount("projeto.adicionado") != 0) consumirProdutosAtualizados(_channel);
+            if (_channel.MessageCount("produtos.disponiveis.deletados") != 0) consumirProdutosDeletados(_channel);
         }
 
         private void consumirProdutosDisponiveis(IModel channel)
@@ -99,17 +76,17 @@ namespace projeto.service.AsyncComm
 
                     // transformando o body em string
                     var message = Encoding.UTF8.GetString(body);
-                    var projeto = JsonConvert.DeserializeObject<ProdutosDisponiveis>(message);
+                    var projeto = JsonConvert.DeserializeObject<Produto>(message);
 
                     // Estará realizando a operação de adicição dos projetos no banco de dados
-                    for (int i = 0; i <= channel.MessageCount("produtos.disponiveis"); i++)
+                    for (int i = 0; i <= channel.MessageCount("projeto.adicionado"); i++)
                     {
-                        await _repo.adicionarProdutos(projeto);
+                        await _repo.adicionarProduto(projeto);
                     }
 
                     // seta o valor no EventSlim
                     // msgsRecievedGate.Set();
-                    Console.WriteLine("--> Consumido mensagem vindo da fila [produtos.disponiveis]");
+                    Console.WriteLine("--> Consumido mensagem vindo da fila [projeto.adicionado]");
                     Console.WriteLine(message);
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 
@@ -127,7 +104,7 @@ namespace projeto.service.AsyncComm
 
             };
             // Consome o evento
-            channel.BasicConsume(queue: "produtos.disponiveis",
+            channel.BasicConsume(queue: "projeto.adicionado",
                          autoAck: false,
              consumer: consumer);
         }
@@ -149,16 +126,16 @@ namespace projeto.service.AsyncComm
 
                     // transformando o body em string
                     var message = Encoding.UTF8.GetString(body);
-                    var produto = JsonConvert.DeserializeObject<ProdutosDisponiveis>(message);
+                    var produto = JsonConvert.DeserializeObject<Produto>(message);
 
                     // Estará realizando a operação de adicição dos projetos no banco de dados
-                    for (int i = 0; i <= channel.MessageCount("produtos.disponiveis.deletados"); i++)
+                    for (int i = 0; i <= channel.MessageCount("projeto.adicionado"); i++)
                     {
-                        _repo.removerProdutos(produto.Id);
+                        _repo.removerProduto(produto.Id);
                     }
                     // seta o valor no EventSlim
                     // msgsRecievedGate.Set();
-                    Console.WriteLine("--> Consumido mensagem vindo da fila [produtos.disponiveis.deletados]");
+                    Console.WriteLine("--> Consumido mensagem vindo da fila [projeto.adicionado]");
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 
                 }
@@ -175,7 +152,7 @@ namespace projeto.service.AsyncComm
 
             };
             // Consome o evento
-            channel.BasicConsume(queue: "produtos.disponiveis.deletados",
+            channel.BasicConsume(queue: "projeto.adicionado",
                          autoAck: false,
              consumer: consumer);
         }
@@ -189,7 +166,7 @@ namespace projeto.service.AsyncComm
             // var msgsRecievedGate = new ManualResetEventSlim(false);
 
             // Definindo o que o consumidor recebe
-            consumer.Received += async (model, ea) =>
+            consumer.Received += (model, ea) =>
             {
                 try
                 {
@@ -198,17 +175,16 @@ namespace projeto.service.AsyncComm
 
                     // transformando o body em string
                     var message = Encoding.UTF8.GetString(body);
-                    var produto = JsonConvert.DeserializeObject<ProdutosDisponiveis>(message);
+                    var produto = JsonConvert.DeserializeObject<Produto>(message);
 
                     // Estará realizando a operação de adicição dos projetos no banco de dados
-                    for (int i = 0; i <= channel.MessageCount("produtos.disponiveis.atualizados"); i++)
+                    for (int i = 0; i <= channel.MessageCount("projeto.adicionado"); i++)
                     {
-                        await _repo.atualizarProdutos(produto.Id, produto);
+                        _repo.atualizarProduto(produto.Id, produto);
                     }
                     // seta o valor no EventSlim
                     // msgsRecievedGate.Set();
-                    Console.WriteLine("--> Consumido mensagem vindo da fila [produtos.disponiveis.atualizados]");
-                    Console.WriteLine(message);
+                    Console.WriteLine("--> Consumido mensagem vindo da fila [projeto.adicionado]");
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 
                 }
@@ -225,7 +201,7 @@ namespace projeto.service.AsyncComm
 
             };
             // Consome o evento
-            channel.BasicConsume(queue: "produtos.disponiveis.atualizados",
+            channel.BasicConsume(queue: "projeto.adicionado",
                          autoAck: false,
              consumer: consumer);
         }
@@ -236,5 +212,4 @@ namespace projeto.service.AsyncComm
         }
 
     }
-
 }

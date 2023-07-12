@@ -1,3 +1,4 @@
+
 namespace estoque.service.tests
 {
     public class RepoEstoqueTeste
@@ -8,9 +9,9 @@ namespace estoque.service.tests
         public async Task deve_retornar_produto()
         {
             // Arrange 
-            var context = new DataContext(_contextOpt.Options);
+            var context = new Mock<IMessagePublisher>();
             var novoProduto = new Produto("Produto", 55.5, 4);
-            var _repo = new RepoEstoque(context);
+            var _repo = new RepoEstoque(context.Object);
             var resultAdd = await _repo.adicionarProduto(novoProduto);
 
             //Act
@@ -24,9 +25,9 @@ namespace estoque.service.tests
         public async Task ao_adicionar_produto_deve_retornar_true()
         {
             //Arrange
-            var context = new DataContext(_contextOpt.Options);
+            var context = new Mock<IMessagePublisher>();
             var novoProduto = new Produto("produto", 55.5, 4);
-            var _repo = new RepoEstoque(context);
+            var _repo = new RepoEstoque(context.Object);
             var expect = true;
 
             //Act
@@ -40,9 +41,9 @@ namespace estoque.service.tests
         public async Task ao_deletar_produto_deve_retornar_true()
         {
             //Arrange
-            var context = new DataContext(_contextOpt.Options);
+            var context = new Mock<IMessagePublisher>();
             var model = new Produto("nome", 55.5, 5);
-            var _repo = new RepoEstoque(context);
+            var _repo = new RepoEstoque(context.Object);
             await _repo.adicionarProduto(model);
             var expect = true;
 
@@ -58,10 +59,10 @@ namespace estoque.service.tests
         public async Task ao_realizar_update_deve_retornar_true()
         {
             //Arrange
-            var context = new DataContext(_contextOpt.Options);
+            var context = new Mock<IMessagePublisher>();
             var model = new Produto("nome", 55.5, 5);
             var modelUpdt = new Produto("nOOme", 55.5, 5);
-            var _repo = new RepoEstoque(context);
+            var _repo = new RepoEstoque(context.Object);
             await _repo.adicionarProduto(model);
             var expect = true;
 

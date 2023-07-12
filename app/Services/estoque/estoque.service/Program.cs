@@ -1,4 +1,5 @@
 using estoque.service.AssynComm;
+using estoque.service.Worker;
 
 var builder = WebApplication.CreateBuilder(args);
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
@@ -47,6 +48,8 @@ builder.Services.AddScoped<IRepoEstoque, RepoEstoque>();
 builder.Services.AddScoped<IMessagePublisher, MessagePublisher>();
 builder.Services.AddScoped<GrayLogger>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddHostedService<RabbitMQBackground>();
+builder.Services.AddScoped<IMessageConsumer, MessageConsumer>();
 
 #region  configurando jwt
 builder.Services.AddAuthentication(

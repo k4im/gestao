@@ -5,3 +5,5 @@ global using estoque.service.Repository;
 global using estoque.service.tests.Helpers;
 global using Microsoft.EntityFrameworkCore;
 global using FluentAssertions;
+global using estoque.service.AssynComm;
+global using Moq;

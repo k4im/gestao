@@ -21,12 +21,12 @@ namespace projeto.service.Controllers
         /// </summary>
         /// <response code="200">Retorna a lista com todos os projetos paginados</response>
         [HttpGet("projetos/{pagina?}/{resultadoPorPagina?}")]
-        [Authorize(Roles ="ADMIN,ATENDENTE")]
+        [Authorize(Roles = "ADMIN,ATENDENTE")]
         public async Task<IActionResult> GetAllProjects(int pagina = 1, float resultadoPorPagina = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var projetos = await _repo.BuscarProdutos(pagina, resultadoPorPagina);
-            if (projetos == null) 
+            if (projetos == null)
             {
                 _logger.logarAviso($"Não foi possivel identificar a lista de projetos. Ação feita por [{currentUser}]");
                 return StatusCode(404);
@@ -41,12 +41,12 @@ namespace projeto.service.Controllers
         /// <response code="200"> Retorna o projeto</response>
         /// <response code="404"> Não existe um projeto com este ID</response>
         [HttpGet("projeto/{id?}")]
-        [Authorize(Roles ="ADMIN,ATENDENTE")]
+        [Authorize(Roles = "ADMIN,ATENDENTE")]
         public async Task<IActionResult> GetById(int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var item = await _repo.BuscarPorId(id);
-            if (item == null) 
+            if (item == null)
             {
                 _logger.logarAviso($"Não foi possivel identificar o projeto pelo ID: [{id}]. Ação feita por: [{currentUser}]");
                 return NotFound();
@@ -79,11 +79,11 @@ namespace projeto.service.Controllers
         /// </remarks>
         /// <response code="201"> Informa que tudo ocorreu como esperado</response>
         [HttpPost("Create")]
-        [Authorize(Roles ="ADMIN,ATENDENTE")]
+        [Authorize(Roles = "ADMIN,ATENDENTE")]
         public async Task<IActionResult> CreateProject(Projeto model)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            if(!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 _logger.logarAviso($"Tentativa de criar projeto invalido. Ação feita por [{currentUser}]");
                 return StatusCode(400, ModelState);
@@ -95,7 +95,7 @@ namespace projeto.service.Controllers
                 try
                 {
                     var projeto = _mapper.Map<Projeto, ProjetoDTO>(model);
-                    _msgBus.publishNewProjeto(projeto);
+                    _msgBus.enviarProjeto(projeto);
                     _logger.logarInfo($"Realizado envio de mensagem para o RabbitMQ. Ação feita por [{currentUser}]");
                 }
                 catch (Exception e)
@@ -113,12 +113,12 @@ namespace projeto.service.Controllers
         /// <response code="409"> Informa que houve um erro de conflito</response>
         /// <response code="404"> Informa que não foi possivel encontrar um produto com este ID</response>
         [HttpPut("update/{id}")]
-        [Authorize(Roles ="ADMIN")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> UpdateProject(StatusProjeto model, int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            if (id == null) 
+            if (id == null)
             {
                 _logger.logarAviso($"Não foi possivel atualizar o projeto com ID [{id}]. Ação feita por [{currentUser}]");
                 return NotFound();
@@ -143,11 +143,11 @@ namespace projeto.service.Controllers
         /// <response code="409"> Informa que houve um erro de conflito</response>
         /// <response code="404"> Informa que não foi possivel encontrar um produto com este ID</response>
         [HttpDelete("delete/{id}")]
-        [Authorize(Roles ="ADMIN")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> DeleteProject(int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            if (id == null) 
+            if (id == null)
             {
                 _logger.logarAviso($"Não foi possivel deletar o projeto com ID [{id}]. Ação feita por [{currentUser}]");
                 return NotFound();

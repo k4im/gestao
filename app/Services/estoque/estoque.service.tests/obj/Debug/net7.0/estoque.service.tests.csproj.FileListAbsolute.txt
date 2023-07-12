@@ -630,3 +630,4 @@
 /home/k4im/github/gestao/app/Services/estoque/estoque.service.tests/obj/Debug/net7.0/estoque.service.tests.pdb
 /home/k4im/github/gestao/app/Services/estoque/estoque.service.tests/obj/Debug/net7.0/estoque.service.tests.genruntimeconfig.cache
 /home/k4im/github/gestao/app/Services/estoque/estoque.service.tests/obj/Debug/net7.0/ref/estoque.service.tests.dll
+/home/k4im/github/gestao/app/Services/estoque/estoque.service.tests/bin/Debug/net7.0/RabbitMQ.Client.dll

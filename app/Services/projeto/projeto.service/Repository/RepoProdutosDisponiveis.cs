@@ -36,7 +36,8 @@ namespace projeto.service.Repository
                 using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
                 {
                     var produto = await db.ProdutosEmEstoque.FirstOrDefaultAsync(x => x.Id == id);
-                    produto = model;
+                    produto.Nome = model.Nome;
+                    produto.Quantidade = model.Quantidade;
                     await db.SaveChangesAsync();
                     return true;
                 };

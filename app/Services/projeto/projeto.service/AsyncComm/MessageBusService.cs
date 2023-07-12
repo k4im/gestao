@@ -55,7 +55,7 @@ namespace projeto.service.AsyncComm
         }
 
         // Metodo de publicação de um novo projeto contendo todos os dados do projeto
-        public void publishNewProjeto(ProjetoDTO evento)
+        public void enviarProjeto(ProjetoDTO evento)
         {
             // Realizando apontamento para outra variavel e
             // convertendo o objeto em JSON

@@ -2,37 +2,47 @@ namespace estoque.service.Repository
 {
     public class RepoEstoque : IRepoEstoque
     {
-        readonly DataContext _db;
         readonly IMessagePublisher _publisher;
         delegate void produtoEventHandler(Produto model);
         event produtoEventHandler aoCriarProduto;
         event produtoEventHandler aoDeletarProduto;
         event produtoEventHandler aoAtualizarProduto;
 
-        public RepoEstoque(DataContext db, IMessagePublisher publisher)
+        public RepoEstoque(IMessagePublisher publisher)
         {
-            _db = db;
             _publisher = publisher;
             aoCriarProduto += _publisher.publicarProduto;
+            aoAtualizarProduto += _publisher.atualizarProduto;
         }
 
         public async Task<bool> adicionarProduto(Produto model)
         {
             try
             {
-                _db.Produtos.Add(model);
-                await _db.SaveChangesAsync();
-                aoCriarProduto.Invoke(model);
-                return true;
+                using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+                {
+                    db.Produtos.Add(model);
+                    await db.SaveChangesAsync();
+                    aoCriarProduto.Invoke(model);
+                    return true;
+                }
+
             }
             catch (DbUpdateConcurrencyException)
             {
                 Console.WriteLine("Não foi possivel realizar a operação, a mesma já foi realizada por outro usuario!");
                 return false;
             }
+            catch (ArgumentException e)
+            {
+                // Caso o software tente adicionar um item mais de uma vez 
+                // problema identificado com o IHostServiced rodando em background
+                Console.WriteLine($"Debug: {e.Message}");
+                return true;
+            }
             catch (Exception e)
             {
-                Console.WriteLine($"Não foi possivel realizar a operação: {e.Message}");
+                Console.WriteLine($"Não foi possivel realizar a operação no repo: {e.Message}");
                 return false;
             }
         }
@@ -41,10 +51,14 @@ namespace estoque.service.Repository
         {
             try
             {
-                var produto = await buscarProdutoId(id);
-                produto = model;
-                await _db.SaveChangesAsync();
-                return true;
+                using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+                {
+                    var produto = await db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
+                    produto.atualizarProduto(model);
+                    await db.SaveChangesAsync();
+                    aoAtualizarProduto(model);
+                    return true;
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -53,7 +67,7 @@ namespace estoque.service.Repository
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Não foi possivel realizar a operação: {e.Message}");
+                Console.WriteLine($"Não foi possivel realizar a operação no repo: {e.Message}");
                 return false;
             }
         }
@@ -62,9 +76,13 @@ namespace estoque.service.Repository
         {
             try
             {
-                var produto = await _db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
-                if (produto == null) return null;
-                return produto;
+                using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+                {
+                    var produto = await db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
+                    if (produto == null) return null;
+                    return produto;
+                }
+
             }
             catch (Exception)
             {
@@ -74,23 +92,31 @@ namespace estoque.service.Repository
 
         public async Task<Response<Produto>> buscarProdutos(int pagina, float resultado)
         {
-            var resultadoPaginas = resultado;
-            var pessoas = await _db.Produtos.ToListAsync();
-            var totalDePaginas = Math.Ceiling(pessoas.Count() / resultadoPaginas);
-            var produtosPaginados = pessoas.Skip((pagina - 1) * (int)resultadoPaginas).Take((int)resultadoPaginas).ToList();
-            var paginasTotal = (int)totalDePaginas;
-            return new Response<Produto>(produtosPaginados, pagina, paginasTotal);
+            using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+            {
+                var resultadoPaginas = resultado;
+                var pessoas = await db.Produtos.ToListAsync();
+                var totalDePaginas = Math.Ceiling(pessoas.Count() / resultadoPaginas);
+                var produtosPaginados = pessoas.Skip((pagina - 1) * (int)resultadoPaginas).Take((int)resultadoPaginas).ToList();
+                var paginasTotal = (int)totalDePaginas;
+                return new Response<Produto>(produtosPaginados, pagina, paginasTotal);
+            }
+
         }
 
         public async Task<bool> removerProduto(int? id)
         {
             try
             {
-                var produto = await _db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
-                if (produto == null) return false;
-                _db.Remove(produto);
-                await _db.SaveChangesAsync();
-                return true;
+                using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+                {
+                    var produto = await db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
+                    if (produto == null) return false;
+                    db.Remove(produto);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -99,7 +125,7 @@ namespace estoque.service.Repository
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Não foi possivel realizar a operação: {e.Message}");
+                Console.WriteLine($"Não foi possivel realizar a operação no repo: {e.Message}");
                 return false;
             }
         }

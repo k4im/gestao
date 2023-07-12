@@ -12,9 +12,9 @@ namespace projeto.service.Controllers
         }
 
         [HttpGet("produtos_em_estoque")]
-        public IActionResult mostrarProdutos()
+        public async Task<ActionResult<List<ProdutosDisponiveis>>> mostrarProdutos()
         {
-            var produtos = _repo.buscarTodosProdutos();
+            var produtos = await _repo.buscarTodosProdutos();
             return Ok(produtos);
         }
     }
