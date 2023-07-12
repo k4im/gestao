@@ -55,7 +55,7 @@ namespace estoque.service.AssynComm
         public void verificarFila()
         {
             if (_channel.MessageCount("projeto.adicionado") != 0) consumirProdutosAtualizados(_channel);
-            if (_channel.MessageCount("produtos.disponiveis.deletados") != 0) consumirProdutosDeletados(_channel);
+            // if (_channel.MessageCount("produtos.disponiveis.deletados") != 0) consumirProdutosDeletados(_channel);
         }
 
         private void consumirProdutosDisponiveis(IModel channel)
