@@ -56,7 +56,7 @@ namespace estoque.service.Repository
                     var produto = await db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
                     produto.atualizarProduto(model);
                     await db.SaveChangesAsync();
-                    aoAtualizarProduto(model);
+                    aoAtualizarProduto(produto);
                     return true;
                 }
             }
