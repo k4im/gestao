@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace estoque.service.Worker
 {
-    public class RabbitMQBackground : IHostedService
+    public class RabbitMQBackground : BackgroundService
     {
         IServiceProvider _provider;
         Timer _timer;
@@ -14,12 +14,6 @@ namespace estoque.service.Worker
             _provider = provider;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            Console.WriteLine("Escutando fila..");
-            _timer = new Timer(escutarFila, null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
-            return Task.CompletedTask;
-        }
 
         public void escutarFila(object state)
         {
@@ -36,9 +30,11 @@ namespace estoque.service.Worker
                 }
             }
         }
-        public Task StopAsync(CancellationToken cancellationToken)
+
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            Console.WriteLine("Parando de escutar fila...");
+            Console.WriteLine("Escutando fila...");
+            _timer = new Timer(escutarFila, null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
             return Task.CompletedTask;
         }
     }
