@@ -129,5 +129,28 @@ namespace estoque.service.Repository
                 return false;
             }
         }
+
+        public async Task atualizarEstoque(ProjetoDTO model)
+        {
+            try
+            {
+                using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+                {
+                    var produto = await db.Produtos.FirstOrDefaultAsync(x => x.Id == model.ProdutoUtilizado);
+                    if (produto == null) Console.WriteLine("Produto nulo");
+                    produto.diminuirQuantidade(model.QuantidadeUtilizada);
+                    await db.SaveChangesAsync();
+                }
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                Console.WriteLine("Não é possivel realizar esta operação, a mesma já foi realizada");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Não foi possivel realizar a operação no repo: {e.Message}");
+            }
+        }
     }
 }

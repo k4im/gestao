@@ -23,7 +23,7 @@ namespace estoque.service.Controllers
         /// <response code="200">Retorna a lista com os dados necessários</response>
         /// <response code="404">Informa que não foi possivel localizar a lista de produtos</response>
         [HttpGet("{pagina?}/{resultado?}")]
-        [Authorize(Roles = "ADMIN,ATENDENTE")]
+        // [Authorize(Roles = "ADMIN,ATENDENTE")]
         public async Task<IActionResult> buscarProdutos(int pagina = 1, int resultado = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);

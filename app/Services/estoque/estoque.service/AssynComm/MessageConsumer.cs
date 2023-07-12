@@ -28,7 +28,7 @@ namespace estoque.service.AssynComm
                 _channel = _connection.CreateModel();
 
                 // Declarando a fila para eventos que foram adicionados
-                _channel.QueueDeclare(queue: "projeto.adicionado",
+                _channel.QueueDeclare(queue: "atualizar.estoque",
                     durable: true,
                     exclusive: false,
                     autoDelete: false);
@@ -38,8 +38,8 @@ namespace estoque.service.AssynComm
 
                 // Linkando a fila de eventos atualizados ao exchange
                 _channel.QueueBind(queue: "projeto.adicionado",
-                    exchange: "produtos/api.estoque",
-                    routingKey: "novo.projeto.adicionado");
+                    exchange: "projeto.adicionado/api.projetos",
+                    routingKey: "projeto.atualizar.estoque");
 
 
                 _connection.ConnectionShutdown += RabbitMQFailed;
@@ -54,7 +54,7 @@ namespace estoque.service.AssynComm
 
         public void verificarFila()
         {
-            if (_channel.MessageCount("projeto.adicionado") != 0) consumirProdutosAtualizados(_channel);
+            if (_channel.MessageCount("atualizar.estoque") != 0) consumirProdutosDisponiveis(_channel);
             // if (_channel.MessageCount("produtos.disponiveis.deletados") != 0) consumirProdutosDeletados(_channel);
         }
 
@@ -76,12 +76,12 @@ namespace estoque.service.AssynComm
 
                     // transformando o body em string
                     var message = Encoding.UTF8.GetString(body);
-                    var projeto = JsonConvert.DeserializeObject<Produto>(message);
+                    var projeto = JsonConvert.DeserializeObject<ProjetoDTO>(message);
 
                     // Estará realizando a operação de adicição dos projetos no banco de dados
                     for (int i = 0; i <= channel.MessageCount("projeto.adicionado"); i++)
                     {
-                        await _repo.adicionarProduto(projeto);
+                        await _repo.atualizarEstoque(projeto);
                     }
 
                     // seta o valor no EventSlim
@@ -104,107 +104,11 @@ namespace estoque.service.AssynComm
 
             };
             // Consome o evento
-            channel.BasicConsume(queue: "projeto.adicionado",
-                         autoAck: false,
-             consumer: consumer);
-        }
-        private void consumirProdutosDeletados(IModel channel)
-        {
-            // Definindo um consumidor
-            var consumer = new EventingBasicConsumer(channel);
-
-            // seta o EventSlim
-            // var msgsRecievedGate = new ManualResetEventSlim(false);
-
-            // Definindo o que o consumidor recebe
-            consumer.Received += (model, ea) =>
-            {
-                try
-                {
-                    // transformando o body em um array
-                    byte[] body = ea.Body.ToArray();
-
-                    // transformando o body em string
-                    var message = Encoding.UTF8.GetString(body);
-                    var produto = JsonConvert.DeserializeObject<Produto>(message);
-
-                    // Estará realizando a operação de adicição dos projetos no banco de dados
-                    for (int i = 0; i <= channel.MessageCount("projeto.adicionado"); i++)
-                    {
-                        _repo.removerProduto(produto.Id);
-                    }
-                    // seta o valor no EventSlim
-                    // msgsRecievedGate.Set();
-                    Console.WriteLine("--> Consumido mensagem vindo da fila [projeto.adicionado]");
-                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-
-                }
-                catch (Exception e)
-                {
-                    channel.BasicNack(ea.DeliveryTag,
-                    multiple: false,
-                    requeue: true);
-                    Console.WriteLine(e);
-                }
-
-
-
-
-            };
-            // Consome o evento
-            channel.BasicConsume(queue: "projeto.adicionado",
+            channel.BasicConsume(queue: "atualizar.estoque",
                          autoAck: false,
              consumer: consumer);
         }
 
-        private void consumirProdutosAtualizados(IModel channel)
-        {
-            // Definindo um consumidor
-            var consumer = new EventingBasicConsumer(channel);
-
-            // seta o EventSlim
-            // var msgsRecievedGate = new ManualResetEventSlim(false);
-
-            // Definindo o que o consumidor recebe
-            consumer.Received += (model, ea) =>
-            {
-                try
-                {
-                    // transformando o body em um array
-                    byte[] body = ea.Body.ToArray();
-
-                    // transformando o body em string
-                    var message = Encoding.UTF8.GetString(body);
-                    var produto = JsonConvert.DeserializeObject<Produto>(message);
-
-                    // Estará realizando a operação de adicição dos projetos no banco de dados
-                    for (int i = 0; i <= channel.MessageCount("projeto.adicionado"); i++)
-                    {
-                        _repo.atualizarProduto(produto.Id, produto);
-                    }
-                    // seta o valor no EventSlim
-                    // msgsRecievedGate.Set();
-                    Console.WriteLine("--> Consumido mensagem vindo da fila [projeto.adicionado]");
-                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-
-                }
-                catch (Exception e)
-                {
-                    channel.BasicNack(ea.DeliveryTag,
-                    multiple: false,
-                    requeue: true);
-                    Console.WriteLine(e);
-                }
-
-
-
-
-            };
-            // Consome o evento
-            channel.BasicConsume(queue: "projeto.adicionado",
-                         autoAck: false,
-             consumer: consumer);
-        }
 
         private void RabbitMQFailed(object sender, ShutdownEventArgs e)
         {

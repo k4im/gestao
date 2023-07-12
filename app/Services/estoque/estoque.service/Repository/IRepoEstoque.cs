@@ -10,5 +10,6 @@ namespace estoque.service.Repository
         Task<bool> removerProduto(int? id);
 
         Task<bool> atualizarProduto(int? id, Produto model);
+        Task atualizarEstoque(ProjetoDTO model);
     }
 }
