@@ -32,9 +32,9 @@ namespace projeto.service.Worker
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("Não foi possivel se conecetar ao RabbitMQ no Worker");
+                Console.WriteLine($"Não foi possivel se conecetar ao RabbitMQ no Worker: {e.Message}");
             }
 
         }

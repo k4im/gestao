@@ -18,13 +18,6 @@ namespace projeto.service.Data
                 .Property(status => status.Status)
                 .HasColumnName("Status");
             });
-
-            modelBuilder.Entity<Projeto>(builder =>
-            {
-                builder.OwnsOne<ChapaUtilizada>(projeto => projeto.Chapa)
-                .Property(chapa => chapa.Chapa)
-                .HasColumnName("ChapaUtilizada");
-            });
         }
 
         public DbSet<Projeto> Projetos { get; set; }

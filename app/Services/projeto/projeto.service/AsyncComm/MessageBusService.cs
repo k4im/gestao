@@ -5,8 +5,8 @@ namespace projeto.service.AsyncComm
         private readonly IConfiguration _config;
         private IConnection _connection;
         private IModel _channel;
-
-        public MessageBusService(IConfiguration config)
+        IMapper _mapper;
+        public MessageBusService(IConfiguration config, IMapper mapper)
         {
             _config = config;
 
@@ -52,25 +52,26 @@ namespace projeto.service.AsyncComm
             {
                 Console.WriteLine($"--> Não foi possivel se conectar com o Message Bus: {e.Message}");
             }
+            _mapper = mapper;
         }
 
         // Metodo de publicação de um novo projeto contendo todos os dados do projeto
-        public void enviarProjeto(ProjetoDTO evento)
+        public void enviarProjeto(Projeto evento)
         {
             // Realizando apontamento para outra variavel e
             // convertendo o objeto em JSON
-            var projeto = evento;
-            var message = JsonConvert.SerializeObject(projeto);
+            var projetoModel = _mapper.Map<Projeto, ProjetoDTO>(evento);
+            var message = JsonConvert.SerializeObject(projetoModel);
             if (_connection.IsOpen)
             {
                 Console.WriteLine("--> Enviando mensagem para o RabbitMQ...");
-                SendMessage(message);
+                enviar(message);
 
             }
         }
 
         // Metodo privado de envio da mensagem
-        private void SendMessage(string evento)
+        private void enviar(string evento)
         {
             // transformando o json em array de bytes
             var body = Encoding.UTF8.GetBytes(evento);
@@ -80,8 +81,8 @@ namespace projeto.service.AsyncComm
             props.Persistent = true;
 
             // Realizando o envio para o exchange 
-            _channel.BasicPublish(exchange: "projeto-trigger",
-                routingKey: "",
+            _channel.BasicPublish(exchange: "projeto.adicionado/api.projetos",
+                routingKey: "projeto.atualizar.estoque",
                 basicProperties: props,
                 body: body);
         }

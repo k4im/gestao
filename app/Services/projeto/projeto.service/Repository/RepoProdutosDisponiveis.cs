@@ -87,5 +87,15 @@ namespace projeto.service.Repository
                 return false;
             }
         }
+
+        public static async Task atualizarTabelaProdutosDisponiveis(Projeto model)
+        {
+            using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
+            {
+                var produto = await db.ProdutosEmEstoque.FirstOrDefaultAsync(x => x.Id == model.ProdutoUtilizado);
+                produto.Quantidade -= model.QuantidadeUtilizado;
+                await db.SaveChangesAsync();
+            }
+        }
     }
 }

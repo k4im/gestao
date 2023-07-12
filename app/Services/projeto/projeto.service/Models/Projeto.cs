@@ -4,16 +4,17 @@ namespace projeto.service.Models
     {
         protected Projeto()
         { }
-        public Projeto(string nome, StatusProjeto status, DateTime dataInicio, DateTime dataEntrega, ChapaUtilizada chapa, string descricao, int quantidadeDeChapa, double valor)
+
+        public Projeto(string nome, StatusProjeto status, DateTime dataInicio, DateTime dataEntrega, int produtoUtilizado, int quantidadeUtilizado, string descricao, double valor)
         {
             Nome = verificarNome(nome);
             Status = status;
             DataInicio = dataInicio;
             DataEntrega = dataEntrega;
-            Chapa = chapa;
-            Descricao = verificarDescricao(descricao);
-            QuantidadeDeChapa = verificarQuantidade(quantidadeDeChapa);
-            Valor = verificarValor(valor);
+            ProdutoUtilizado = produtoUtilizado;
+            QuantidadeUtilizado = verificarQuantidade(quantidadeUtilizado);
+            Descricao = descricao;
+            Valor = valor;
         }
 
         [Key]
@@ -37,13 +38,13 @@ namespace projeto.service.Models
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [DataType("NVARCHAR(150)")]
-        public ChapaUtilizada Chapa { get; private set; }
+        public int ProdutoUtilizado { get; private set; }
+        [Required(ErrorMessage = "Campo obrigatório")]
+        public int QuantidadeUtilizado { get; private set; }
 
         [DataType("NVARCHAR(150)")]
         public string Descricao { get; private set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
-        public int QuantidadeDeChapa { get; private set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         public double Valor { get; private set; }
