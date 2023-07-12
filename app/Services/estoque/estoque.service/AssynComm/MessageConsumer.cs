@@ -37,7 +37,7 @@ namespace estoque.service.AssynComm
                 _channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
 
                 // Linkando a fila de eventos atualizados ao exchange
-                _channel.QueueBind(queue: "projeto.adicionado",
+                _channel.QueueBind(queue: "atualizar.estoque",
                     exchange: "projeto.adicionado/api.projetos",
                     routingKey: "projeto.atualizar.estoque");
 
@@ -79,7 +79,7 @@ namespace estoque.service.AssynComm
                     var projeto = JsonConvert.DeserializeObject<ProjetoDTO>(message);
 
                     // Estará realizando a operação de adicição dos projetos no banco de dados
-                    for (int i = 0; i <= channel.MessageCount("projeto.adicionado"); i++)
+                    for (int i = 0; i <= channel.MessageCount("atualizar.estoque"); i++)
                     {
                         await _repo.atualizarEstoque(projeto);
                     }
