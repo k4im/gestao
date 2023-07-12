@@ -2,10 +2,12 @@ namespace projeto.service.Repository
 {
     public class RepoProjetos : IRepoProjetos
     {
+        //Delegates e Eventos a serem disparados
         public delegate void aoCriarProjetoEventHandler(Projeto model);
         public delegate void aoRealizarOperacaoEventHandler(string message);
         public event aoRealizarOperacaoEventHandler aoRealizarOperacao;
         public event aoCriarProjetoEventHandler aocriarProjeto;
+
         IMessageBusService _messageBroker;
 
         public RepoProjetos(IMessageBusService messageBroker)
@@ -69,10 +71,10 @@ namespace projeto.service.Repository
             {
                 using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
                 {
-                    // if (await verificarProdutoValido(model))
-                    // {
-                    //     throw new Exception($"Enterrompido criação do projeto pois produto com [id] - [{model.ProdutoUtilizado}] não existe!");
-                    // }
+                    if (await db.ProdutosEmEstoque.FirstOrDefaultAsync(x => x.Id == model.ProdutoUtilizado) == null)
+                    {
+                        throw new Exception($"Enterrompido criação do projeto pois produto com [id] - [{model.ProdutoUtilizado}] não existe!");
+                    }
                     db.Projetos.Add(model);
                     await db.SaveChangesAsync();
                     aocriarProjeto(model);
@@ -114,16 +116,6 @@ namespace projeto.service.Repository
             {
                 Console.Write($"Não foi possivel realizar a operação: {e.Message}");
                 return false;
-            }
-        }
-
-        async Task<bool> verificarProdutoValido(Projeto model)
-        {
-            using (var db = new DataContext(new DbContextOptionsBuilder().UseInMemoryDatabase("Data").Options))
-            {
-                var produtoUtilizado = await db.ProdutosEmEstoque.FirstOrDefaultAsync(x => x.Id == model.ProdutoUtilizado);
-                if (produtoUtilizado == null) return false;
-                return true;
             }
         }
 
