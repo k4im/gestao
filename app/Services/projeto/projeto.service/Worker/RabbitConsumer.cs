@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace projeto.service.Worker
 {
-    public class RabbitConsumer : IHostedService
+    public class RabbitConsumer : BackgroundService
     {
-        Timer _timer;
         IServiceProvider _provider;
 
         public RabbitConsumer(IServiceProvider provider)
@@ -15,33 +9,25 @@ namespace projeto.service.Worker
             _provider = provider;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            Console.WriteLine("Escutando fila em background...");
-            _timer = new Timer(consumirMensagens, null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
-            return Task.CompletedTask;
-        }
-        public void consumirMensagens(object state)
-        {
-            try
+            while (!stoppingToken.IsCancellationRequested)
             {
-                using (IServiceScope scope = _provider.CreateScope())
+                try
                 {
-                    IMessageConsumer messager = scope.ServiceProvider.GetService<IMessageConsumer>();
-                    messager.verificarFila();
+                    using (IServiceScope scope = _provider.CreateScope())
+                    {
+                        IMessageConsumer messager = scope.ServiceProvider.GetService<IMessageConsumer>();
+                        messager.verificarFila();
+                    }
+
                 }
-
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Não foi possivel se conecetar ao RabbitMQ no Worker: {e.Message}");
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Não foi possivel se conecetar ao RabbitMQ no Worker: {e.Message}");
-            }
-
-        }
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            Console.WriteLine("Parando processo em background");
-            return Task.CompletedTask;
+            await Task.Delay(8000, stoppingToken);
         }
     }
 }

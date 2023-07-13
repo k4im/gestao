@@ -8,7 +8,6 @@ namespace estoque.service.Worker
     public class RabbitMQBackground : BackgroundService
     {
         IServiceProvider _provider;
-        Timer _timer;
         public RabbitMQBackground(IServiceProvider provider)
         {
             _provider = provider;

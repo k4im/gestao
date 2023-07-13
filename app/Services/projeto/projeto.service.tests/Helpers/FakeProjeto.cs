@@ -8,12 +8,10 @@ namespace projeto.service.tests.Helpers
         public static Projeto factoryProjeto()
         {
             var status = factoryProjetoStatus();
-            var chapa = factoryChapaUtilizada();
-            return new Projeto("Projeto FAKE", status, DateTime.UtcNow, DateTime.UtcNow.AddHours(1), chapa, "asdasd", 5, 155.5);
+            return new Projeto("Projeto FAKE", status, DateTime.UtcNow, DateTime.UtcNow.AddHours(1), 1, 5, "asd", 155.5);
         }
 
         static StatusProjeto factoryProjetoStatus() => new StatusProjeto("Rodando");
 
-        static ChapaUtilizada factoryChapaUtilizada() => new ChapaUtilizada("Chapa branca");
     }
 }
