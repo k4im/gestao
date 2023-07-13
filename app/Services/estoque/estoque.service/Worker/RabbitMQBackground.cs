@@ -15,27 +15,26 @@ namespace estoque.service.Worker
         }
 
 
-        public void escutarFila(object state)
-        {
-            using (var scope = _provider.CreateScope())
-            {
-                try
-                {
-                    IMessageConsumer consumer = scope.ServiceProvider.GetService<IMessageConsumer>();
-                    consumer.verificarFila();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Não foi possivel conectar ao BUS: {e.Message}");
-                }
-            }
-        }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             Console.WriteLine("Escutando fila...");
-            _timer = new Timer(escutarFila, null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
-            return Task.CompletedTask;
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                using (var scope = _provider.CreateScope())
+                {
+                    try
+                    {
+                        IMessageConsumer consumer = scope.ServiceProvider.GetService<IMessageConsumer>();
+                        consumer.verificarFila();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"Não foi possivel conectar ao BUS: {e.Message}");
+                    }
+                }
+                await Task.Delay(8000, stoppingToken);
+            }
         }
     }
 }

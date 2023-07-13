@@ -138,7 +138,7 @@ namespace estoque.service.Repository
                 {
                     var produto = await db.Produtos.FirstOrDefaultAsync(x => x.Id == model.ProdutoUtilizado);
                     if (produto == null) Console.WriteLine("Produto nulo");
-                    produto.diminuirQuantidade(model.QuantidadeUtilizada);
+                    produto.diminuirQuantidade(model.QuantidadeUtilizado);
                     await db.SaveChangesAsync();
                 }
 
