@@ -13,21 +13,20 @@ namespace projeto.service.Worker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                try
+                using (var scope = _provider.CreateScope())
                 {
-                    using (IServiceScope scope = _provider.CreateScope())
+                    try
                     {
-                        IMessageConsumer messager = scope.ServiceProvider.GetService<IMessageConsumer>();
-                        messager.verificarFila();
+                        IMessageConsumer consumer = scope.ServiceProvider.GetService<IMessageConsumer>();
+                        consumer.verificarFila();
                     }
-
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"Não foi possivel conectar ao BUS: {e.Message}");
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Não foi possivel se conecetar ao RabbitMQ no Worker: {e.Message}");
-                }
+                await Task.Delay(8000, stoppingToken);
             }
-            await Task.Delay(8000, stoppingToken);
         }
     }
 }
