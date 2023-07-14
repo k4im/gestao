@@ -155,7 +155,7 @@ namespace estoque.service.Controllers
         /// <response code="200">Informa que o produto foi deletado com sucesso</response>
         /// <response code="500">Informa que não foi possivel realizar a operação, erro do lado do servidor</response>
         [HttpDelete("produto_delete/{id?}")]
-        [Authorize(Roles = "ADMIN")]
+        // [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> deletarProduto(int? id)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);

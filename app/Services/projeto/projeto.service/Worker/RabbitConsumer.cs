@@ -11,6 +11,7 @@ namespace projeto.service.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            Console.WriteLine("Escutando filas...");
             while (!stoppingToken.IsCancellationRequested)
             {
                 using (var scope = _provider.CreateScope())

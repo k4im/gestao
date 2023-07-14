@@ -131,6 +131,24 @@ namespace estoque.service.AssynComm
 
         }
 
+        // Metodo estará enviando apenas as mensagens que foram atualizadas
+        private void enviarProdutoDeletado(string evento)
+        {
+            // transformando o json em array de bytes
+            var body = Encoding.UTF8.GetBytes(evento);
+
+            // Persistindo a mensagem no broker
+            var props = _channel.CreateBasicProperties();
+            props.Persistent = true;
+
+            // Realizando o envio para o exchange 
+            _channel.BasicPublish(exchange: "produtos/api.estoque",
+                routingKey: "produtos.disponiveis.produto.deletado",
+                basicProperties: props,
+                body: body);
+            Console.WriteLine("--> Mensagem enviado");
+
+        }
         // Metodo para fechar a conexão com o broker 
         private void Dispose()
         {
@@ -152,12 +170,23 @@ namespace estoque.service.AssynComm
         public void atualizarProduto(Produto produto)
         {
             var produtoModel = _mapper.Map<Produto, ProdutoDisponivel>(produto);
-            produtoModel.Id = 1;
             var message = JsonConvert.SerializeObject(produtoModel);
             if (_connection.IsOpen)
             {
                 Console.WriteLine("--> RabbitMQ Connection Open, enviando mensagem...");
                 enviarProdutoAtualizado(message);
+
+            }
+        }
+
+        public void deletarProduto(Produto produto)
+        {
+            var produtoModel = _mapper.Map<Produto, ProdutoDisponivel>(produto);
+            var message = JsonConvert.SerializeObject(produtoModel);
+            if (_connection.IsOpen)
+            {
+                Console.WriteLine("--> RabbitMQ Connection Open, enviando mensagem...");
+                enviarProdutoDeletado(message);
 
             }
         }

@@ -9,6 +9,7 @@ namespace estoque.service.AssynComm
     {
         void publicarProduto(Produto produto);
         void atualizarProduto(Produto produto);
+        void deletarProduto(Produto produto);
     }
 
 }

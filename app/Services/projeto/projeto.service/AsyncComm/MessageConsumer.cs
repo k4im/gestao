@@ -65,8 +65,6 @@ namespace projeto.service.AsyncComm
 
 
                 _connection.ConnectionShutdown += RabbitMQFailed;
-
-                Console.WriteLine("--> Conectado ao Message Bus");
             }
             catch (Exception e)
             {
@@ -79,15 +77,13 @@ namespace projeto.service.AsyncComm
 
             if (_channel.MessageCount("produtos.disponiveis") != 0) consumirProdutosDisponiveis(_channel);
             if (_channel.MessageCount("produtos.disponiveis.atualizados") != 0) consumirProdutosAtualizados(_channel);
+            if (_channel.MessageCount("produtos.disponiveis.deletados") != 0) consumirProdutosDeletados(_channel);
         }
 
         private void consumirProdutosDisponiveis(IModel channel)
         {
             // Definindo um consumidor
             var consumer = new EventingBasicConsumer(channel);
-
-            // seta o EventSlim
-            // var msgsRecievedGate = new ManualResetEventSlim(false);
 
             // Definindo o que o consumidor recebe
             consumer.Received += async (model, ea) =>
@@ -136,9 +132,6 @@ namespace projeto.service.AsyncComm
             // Definindo um consumidor
             var consumer = new EventingBasicConsumer(channel);
 
-            // seta o EventSlim
-            // var msgsRecievedGate = new ManualResetEventSlim(false);
-
             // Definindo o que o consumidor recebe
             consumer.Received += (model, ea) =>
             {
@@ -159,6 +152,7 @@ namespace projeto.service.AsyncComm
                     // seta o valor no EventSlim
                     // msgsRecievedGate.Set();
                     Console.WriteLine("--> Consumido mensagem vindo da fila [produtos.disponiveis.deletados]");
+                    Console.WriteLine(message);
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 
                 }
@@ -184,9 +178,6 @@ namespace projeto.service.AsyncComm
         {
             // Definindo um consumidor
             var consumer = new EventingBasicConsumer(channel);
-
-            // seta o EventSlim
-            // var msgsRecievedGate = new ManualResetEventSlim(false);
 
             // Definindo o que o consumidor recebe
             consumer.Received += async (model, ea) =>

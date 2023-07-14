@@ -43,8 +43,6 @@ namespace estoque.service.AssynComm
 
 
                 _connection.ConnectionShutdown += RabbitMQFailed;
-
-                Console.WriteLine("--> Conectado ao Message Bus");
             }
             catch (Exception e)
             {
@@ -62,9 +60,6 @@ namespace estoque.service.AssynComm
         {
             // Definindo um consumidor
             var consumer = new EventingBasicConsumer(channel);
-
-            // seta o EventSlim
-            // var msgsRecievedGate = new ManualResetEventSlim(false);
 
             // Definindo o que o consumidor recebe
             consumer.Received += async (model, ea) =>
@@ -86,8 +81,7 @@ namespace estoque.service.AssynComm
 
                     // seta o valor no EventSlim
                     // msgsRecievedGate.Set();
-                    Console.WriteLine("--> Consumido mensagem vindo da fila [projeto.adicionado]");
-                    Console.WriteLine(message);
+                    Console.WriteLine("--> Dado consumido da fila[projeto.adicionado]");
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 
                 }
@@ -96,7 +90,7 @@ namespace estoque.service.AssynComm
                     channel.BasicNack(ea.DeliveryTag,
                     multiple: false,
                     requeue: true);
-                    Console.WriteLine(e);
+                    Console.WriteLine($"Erro ao consumir mensagem: {e.Message}");
                 }
 
 

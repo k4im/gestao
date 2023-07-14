@@ -13,6 +13,7 @@ namespace estoque.service.Repository
             _publisher = publisher;
             aoCriarProduto += _publisher.publicarProduto;
             aoAtualizarProduto += _publisher.atualizarProduto;
+            aoDeletarProduto += _publisher.deletarProduto;
         }
 
         public async Task<bool> adicionarProduto(Produto model)
@@ -56,7 +57,7 @@ namespace estoque.service.Repository
                     var produto = await db.Produtos.FirstOrDefaultAsync(x => x.Id == id);
                     produto.atualizarProduto(model);
                     await db.SaveChangesAsync();
-                    aoAtualizarProduto(produto);
+                    aoAtualizarProduto.Invoke(produto);
                     return true;
                 }
             }
@@ -114,6 +115,7 @@ namespace estoque.service.Repository
                     if (produto == null) return false;
                     db.Remove(produto);
                     await db.SaveChangesAsync();
+                    aoDeletarProduto.Invoke(produto);
                     return true;
                 }
 
