@@ -21,4 +21,3 @@ global using Serilog;
 global using Serilog.Sinks.Graylog;
 global using projeto.service.Logger;
 global using System.Security.Claims;
-

@@ -28,7 +28,7 @@ namespace projeto.service.AsyncComm
 
                 // Criando o modelo da conexão
                 _channel = _connection.CreateModel();
-
+                criarFilas(_channel);
                 _connection.ConnectionShutdown += RabbitMQFailed;
 
                 Console.WriteLine("--> Conectado ao Message Bus");
