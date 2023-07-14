@@ -1,6 +1,8 @@
+using projeto.service.AsyncComm.Extensions;
+
 namespace projeto.service.AsyncComm
 {
-    public class MessageBusService : IMessageBusService
+    public class MessageBusService : MessagePublisherExtension, IMessageBusService
     {
         private readonly IConfiguration _config;
         private IConnection _connection;
@@ -27,23 +29,6 @@ namespace projeto.service.AsyncComm
                 // Criando o modelo da conexão
                 _channel = _connection.CreateModel();
 
-                // Definindo a fila no RabbitMQ
-                _channel.QueueDeclare(queue: "atualizar.estoque", durable: true,
-                    exclusive: false,
-                    autoDelete: false);
-
-                // Definindo o Exchange no RabbitMQ
-                _channel.ExchangeDeclare(exchange: "projeto.adicionado/api.projetos",
-                type: ExchangeType.Topic,
-                durable: true,
-                autoDelete: false);
-
-                // Linkando a fila ao exchange
-                _channel.QueueBind(queue: "atualizar.estoque",
-                    exchange: "projeto.adicionado/api.projetos",
-                    routingKey: "projeto.atualizar.estoque");
-
-
                 _connection.ConnectionShutdown += RabbitMQFailed;
 
                 Console.WriteLine("--> Conectado ao Message Bus");
@@ -57,39 +42,35 @@ namespace projeto.service.AsyncComm
 
         // Metodo de publicação de um novo projeto contendo todos os dados do projeto
         public void enviarProjeto(Projeto evento)
+            => enviar(serializarObjeto(evento), routingKey);
+
+        // Metodo privado de envio da mensagem
+        void enviar(string evento, string routingKey)
         {
-            // Realizando apontamento para outra variavel e
-            // convertendo o objeto em JSON
-            var projetoModel = _mapper.Map<Projeto, ProjetoDTO>(evento);
-            var message = JsonConvert.SerializeObject(projetoModel);
-            if (_connection.IsOpen)
+            if (_channel.IsOpen)
             {
-                Console.WriteLine("--> Enviando mensagem para o RabbitMQ...");
-                enviar(message);
+                // transformando o json em array de bytes
+                var body = Encoding.UTF8.GetBytes(evento);
+
+                // Persistindo a mensagem no broker
+                var props = _channel.CreateBasicProperties();
+                props.Persistent = true;
+
+                // Realizando o envio para o exchange 
+                _channel.BasicPublish(exchange: exchange,
+                    routingKey: routingKey,
+                    basicProperties: props,
+                    body: body);
 
             }
         }
-
-        // Metodo privado de envio da mensagem
-        private void enviar(string evento)
+        string serializarObjeto(Projeto evento)
         {
-            // transformando o json em array de bytes
-            var body = Encoding.UTF8.GetBytes(evento);
-
-            // Persistindo a mensagem no broker
-            var props = _channel.CreateBasicProperties();
-            props.Persistent = true;
-
-            // Realizando o envio para o exchange 
-            _channel.BasicPublish(exchange: "projeto.adicionado/api.projetos",
-                routingKey: "projeto.atualizar.estoque",
-                basicProperties: props,
-                body: body);
+            var projetoModel = _mapper.Map<Projeto, ProjetoDTO>(evento);
+            return JsonConvert.SerializeObject(projetoModel);
         }
         // "Logger" caso de algum erro 
-        public void RabbitMQFailed(object sender, ShutdownEventArgs e)
-        {
-            Console.WriteLine("--> RabbitMQ foi derrubado");
-        }
+        void RabbitMQFailed(object sender, ShutdownEventArgs e)
+            => Console.WriteLine("--> RabbitMQ foi derrubado");
     }
 }
