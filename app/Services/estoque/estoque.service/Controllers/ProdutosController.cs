@@ -27,6 +27,10 @@ namespace estoque.service.Controllers
         public async Task<IActionResult> buscarProdutos(int pagina = 1, int resultado = 5)
         {
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+
+            // Recupera ID de correlacao
+            // var teste = HttpContext.Request.Headers["X-Correlation-ID"].ToString();
+            // Console.WriteLine($"TESTADA: [{teste}]");
             var produtos = await _repo.buscarProdutos(pagina, resultado);
             if (produtos == null)
             {
