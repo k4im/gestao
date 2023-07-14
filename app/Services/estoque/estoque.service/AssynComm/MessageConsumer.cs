@@ -1,10 +1,6 @@
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-
 namespace estoque.service.AssynComm
 {
-    public class MessageConsumer : IMessageConsumer
+    public class MessageConsumer : MessageConsumerExtension, IMessageConsumer
     {
         private readonly IConfiguration _config;
         private readonly IConnection _connection;
@@ -26,22 +22,7 @@ namespace estoque.service.AssynComm
             {
                 _connection = factory.CreateConnection();
                 _channel = _connection.CreateModel();
-
-                // Declarando a fila para eventos que foram adicionados
-                _channel.QueueDeclare(queue: "atualizar.estoque",
-                    durable: true,
-                    exclusive: false,
-                    autoDelete: false);
-
-                // Definindo o balanceamento da fila para uma mensagem por vez.
-                _channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
-
-                // Linkando a fila de eventos atualizados ao exchange
-                _channel.QueueBind(queue: "atualizar.estoque",
-                    exchange: "projeto.adicionado/api.projetos",
-                    routingKey: "projeto.atualizar.estoque");
-
-
+                criarFilas(_channel);
                 _connection.ConnectionShutdown += RabbitMQFailed;
             }
             catch (Exception e)
@@ -51,63 +32,59 @@ namespace estoque.service.AssynComm
         }
 
         public void verificarFila()
-        {
-            if (_channel.MessageCount("atualizar.estoque") != 0) consumirProdutosDisponiveis(_channel);
-            // if (_channel.MessageCount("produtos.disponiveis.deletados") != 0) consumirProdutosDeletados(_channel);
-        }
+            => consumirProdutosDisponiveis(_channel);
 
-        private void consumirProdutosDisponiveis(IModel channel)
+        void consumirProdutosDisponiveis(IModel channel)
         {
-            // Definindo um consumidor
-            var consumer = new EventingBasicConsumer(channel);
-
-            // Definindo o que o consumidor recebe
-            consumer.Received += async (model, ea) =>
+            if (_channel.MessageCount("atualizar.estoque") != 0)
             {
-                try
+                // Definindo um consumidor
+                var consumer = new EventingBasicConsumer(channel);
+
+                // Definindo o que o consumidor recebe
+                consumer.Received += async (model, ea) =>
                 {
-                    // transformando o body em um array
-                    byte[] body = ea.Body.ToArray();
-
-                    // transformando o body em string
-                    var message = Encoding.UTF8.GetString(body);
-                    var projeto = JsonConvert.DeserializeObject<ProjetoDTO>(message);
-
-                    // Estará realizando a operação de adicição dos projetos no banco de dados
-                    for (int i = 0; i <= channel.MessageCount("atualizar.estoque"); i++)
+                    try
                     {
-                        await _repo.atualizarEstoque(projeto);
+                        // transformando o body em um array
+                        byte[] body = ea.Body.ToArray();
+
+                        // transformando o body em string
+                        var message = Encoding.UTF8.GetString(body);
+                        var projeto = JsonConvert.DeserializeObject<ProjetoDTO>(message);
+
+                        // Estará realizando a operação de adicição dos projetos no banco de dados
+                        for (int i = 0; i <= channel.MessageCount("atualizar.estoque"); i++)
+                        {
+                            await _repo.atualizarEstoque(projeto);
+                        }
+
+                        // seta o valor no EventSlim
+                        // msgsRecievedGate.Set();
+                        Console.WriteLine("--> Dado consumido da fila[projeto.adicionado]");
+                        Console.WriteLine(message);
+                        channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+
+                    }
+                    catch (Exception e)
+                    {
+                        channel.BasicNack(ea.DeliveryTag,
+                        multiple: false,
+                        requeue: true);
+                        Console.WriteLine($"Erro ao consumir mensagem: {e.Message}");
                     }
 
-                    // seta o valor no EventSlim
-                    // msgsRecievedGate.Set();
-                    Console.WriteLine("--> Dado consumido da fila[projeto.adicionado]");
-                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                };
+                // Consome o evento
+                channel.BasicConsume(queue: "atualizar.estoque",
+                             autoAck: false,
+                 consumer: consumer);
+            }
 
-                }
-                catch (Exception e)
-                {
-                    channel.BasicNack(ea.DeliveryTag,
-                    multiple: false,
-                    requeue: true);
-                    Console.WriteLine($"Erro ao consumir mensagem: {e.Message}");
-                }
-
-
-
-
-            };
-            // Consome o evento
-            channel.BasicConsume(queue: "atualizar.estoque",
-                         autoAck: false,
-             consumer: consumer);
         }
 
-
-        private void RabbitMQFailed(object sender, ShutdownEventArgs e)
-        {
-            Console.WriteLine($"--> Não foi possivel se conectar ao Message Bus: {e}");
-        }
+        void RabbitMQFailed(object sender, ShutdownEventArgs e)
+          => Console.WriteLine($"--> Não foi possivel se conectar ao Message Bus: {e}");
 
     }
 }

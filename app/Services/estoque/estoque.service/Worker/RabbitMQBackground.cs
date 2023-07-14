@@ -13,8 +13,6 @@ namespace estoque.service.Worker
             _provider = provider;
         }
 
-
-
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             Console.WriteLine("Escutando fila...");

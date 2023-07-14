@@ -16,3 +16,8 @@ global using estoque.service.Logger;
 global using System.Security.Claims;
 global using Microsoft.AspNetCore.Authorization;
 global using estoque.service.AssynComm;
+global using estoque.service.AssynComm.Extensions;
+global using Newtonsoft.Json;
+global using RabbitMQ.Client;
+global using RabbitMQ.Client.Events;
+global using AutoMapper;
