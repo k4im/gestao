@@ -1,4 +1,5 @@
 ## Icarus
+## As api's pertencentes a este projeto foram separadas em repositorios separados devido a utilização do github-actions
 Cada serviço estará sendo adicionado a um container docker, assim como o gateway, e sistema de autenticação.
 
 Cada serviço se torna idependente desta forma, sendo assim cada um deles terá seu proprio banco de dados, assim como suas proprias regras de negocios, fazendo com que apenas o serviço seja responsavel por leitura ou escrita na base de dado referente a ele, desta maneira será possivel estar utilizando tecnologias diversas para compor o sistema, não se limitando apenas um tipo de banco de dado ou linguagem.
