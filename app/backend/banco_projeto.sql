@@ -8,21 +8,21 @@ START TRANSACTION;
 
 CREATE TABLE `ProdutosEmEstoque` (
     `Id` INTEGER NOT NULL,
-    `Nome` TEXT NULL,
+    `Nome` NVARCHAR(150o) NULL,
     `Quantidade` INTEGER NOT NULL,
     CONSTRAINT `PK_ProdutosEmEstoque` PRIMARY KEY (`Id`)
 );
 
 CREATE TABLE `Projetos` (
     `Id` INTEGER NOT NULL,
-    `Nome` TEXT NOT NULL,
-    `Status` TEXT NOT NULL,
-    `DataInicio` TEXT NOT NULL,
-    `DataEntrega` TEXT NOT NULL,
+    `Nome` NVARCHAR(80) NOT NULL,
+    `Status` NVARCHAR(10) NOT NULL,
+    `DataInicio` DATETIME NOT NULL,
+    `DataEntrega` DATETIME NOT NULL,
     `ProdutoUtilizadoId` INTEGER NOT NULL,
     `QuantidadeUtilizado` INTEGER NOT NULL,
-    `Descricao` TEXT NULL,
-    `Valor` REAL NOT NULL,
+    `Descricao` NVARCHAR(250) NULL,
+    `Valor` FLOAT NOT NULL,
     `RowVersion` BLOB NULL,
     CONSTRAINT `PK_Projetos` PRIMARY KEY (`Id`),
     CONSTRAINT `FK_Projetos_ProdutosEmEstoque_ProdutoUtilizadoId` FOREIGN KEY (`ProdutoUtilizadoId`) REFERENCES `ProdutosEmEstoque` (`Id`)

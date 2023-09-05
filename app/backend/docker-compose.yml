@@ -12,7 +12,7 @@ services:
     networks:
       - icarus-network
     volumes:
-      - ./banco_projeto.sql:/docker-entryoerpoint-initdb.d/1.sql
+      - icarus-db:/var/lib/mysql
 
   gateway:
     image: k4im/gateway:${version}
