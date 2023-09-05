@@ -35,7 +35,7 @@ services:
     container_name: container_estoque
     restart: on-failure
     environment:
-      - DB_CONNECTION=${connectionString}
+      - DB_CONNECTION=${connection_string_estoque}
       - RABBIT_MQ_USER=${rabbit_user}
       - RABBIT_MQ_PWD=${rabbit_pwd}
     networks:
@@ -55,7 +55,7 @@ services:
     container_name: container_projetos
     restart: on-failure
     environment:
-      - DB_CONNECTION=${connectionString}
+      - DB_CONNECTION=${connection_string_projetos}
       - RABBIT_MQ_USER=${rabbit_user}
       - RABBIT_MQ_PWD=${rabbit_pwd}
     networks:
@@ -75,7 +75,7 @@ services:
     container_name: container_auth
     restart: on-failure
     environment:
-      - DB_CONNECTION=${connectionString}
+      - DB_CONNECTION=${connection_string_auth}
       - RABBIT_MQ_USER=${rabbit_user}
       - RABBIT_MQ_PWD=${rabbit_pwd}
     networks:
