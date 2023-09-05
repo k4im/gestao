@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 
 services:
   # --------------------------
@@ -6,10 +6,11 @@ services:
   # --------------------------  
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: container-broker
+    container_name: container_broker
+    restart: on-failure
     environment:
-    - RABBITMQ_DEFAULT_USER=admin
-    - RABBITMQ_DEFAULT_PASS=admin
+    - RABBITMQ_DEFAULT_USER=${rabbit_user}
+    - RABBITMQ_DEFAULT_PASS=${rabbit_pwd}
     hostname: broker
     ports:
         - 5672:5672
@@ -17,15 +18,15 @@ services:
     volumes:
       - db-broker:/var/lib/rabbitmq
     networks:
-      - kong-net
+      - rabbitMQ-network
     deploy:
       resources:
         limits:
           memory: 256M
 
-  # --------------------------
+# --------------------------
 volumes:
   db-broker:
 networks:
-    kong-net:
+    rabbitMQ-network:
         external: true

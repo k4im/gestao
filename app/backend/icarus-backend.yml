@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  icarus-db:
+    image: mysql
+    container_name: container_db
+    restart: on-failure
+    environment:
+      - MYSQL_USER=${user_mysql}
+      - MYSQL_PASSWORD=${pwd_mysql}
+      - MYSQL_ROOT_PASSWORD=${pwd_mysql}
+    networks:
+      - icarus-network
+    volumes:
+      - icarus-db:/var/lib/mysql
+
+  gateway:
+    image: k4im/gateway:${version}
+    container_name: container_gateway
+    restart: on-failure
+    ports:
+      - 5258:5258
+    networks:
+      - icarus-network  
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 512M
+        reservations:
+          memory: 512M
+  
+  estoque:
+    image: k4im/estoque:${version}
+    container_name: container_estoque
+    restart: on-failure
+    networks:
+      - icarus-network
+      - rabbitMQ-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+            
+  projetos: 
+    image: k4im/projetos:${version}
+    container_name: container_projetos
+    restart: on-failure
+    networks:
+      - icarus-network
+      - rabbitMQ-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+      
+  autenticacao:
+    image: k4im/autenticacao:${version}
+    container_name: container_auth
+    restart: on-failure
+    networks:
+      - icarus-network
+      - rabbitMQ-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+      
+
+# Volume utilizados para banco de dados mysql
+volumes:
+  icarus-db:  
+
+# Network que serão utilizadas
+# Será utilizado a network para o backend 
+# e uma network external sendo para comunicação do rabbitMQ
+networks:
+  rabbitMQ-network:
+    external: true
+  icarus-network: 

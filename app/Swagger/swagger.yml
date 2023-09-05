@@ -5,11 +5,11 @@ services:
   # --------------------------  
   swagger-ui:
     image: swaggerapi/swagger-ui
-    container_name: "container-swagger"
+    container_name: "container_swagger"
     ports:
       - "8085:8080"
     environment:
-      URL: https://k4im.github.io/json/api.json
+      URL: ${url_swagger}
     deploy:
       resources:
         limits:

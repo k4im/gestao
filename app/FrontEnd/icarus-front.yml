@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  front-angular:
+    image: k4im/front:${version}
+    restart: on-failure
+    networks:
+      - icarus-network
+    volumes:
+      - icarus-db:/var/lib/mysql
+
+networks:
+  icarus-network:
