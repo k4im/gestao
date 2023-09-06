@@ -1,4 +1,7 @@
-﻿CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+﻿CREATE DATABASE IC_Projetos;
+USE IC_Projetos;
+
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
     `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
     `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
     CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
@@ -8,7 +11,7 @@ START TRANSACTION;
 
 CREATE TABLE `ProdutosEmEstoque` (
     `Id` INTEGER NOT NULL,
-    `Nome` NVARCHAR(150o) NULL,
+    `Nome` NVARCHAR(150) NULL,
     `Quantidade` INTEGER NOT NULL,
     CONSTRAINT `PK_ProdutosEmEstoque` PRIMARY KEY (`Id`)
 );

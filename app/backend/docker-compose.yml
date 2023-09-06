@@ -9,6 +9,8 @@ services:
       - MYSQL_USER=${user_mysql}
       - MYSQL_PASSWORD=${pwd_mysql}
       - MYSQL_ROOT_PASSWORD=${pwd_mysql}
+    ports:
+      - 3306:3306
     networks:
       - icarus-network
     volumes:
@@ -32,7 +34,7 @@ services:
   
   estoque:
     image: k4im/estoque:${version}
-    container_name: container_estoque
+    container_name: container_estoque  
     restart: on-failure
     environment:
       - DB_CONNECTION=${connection_string_estoque}
@@ -41,6 +43,8 @@ services:
     networks:
       - icarus-network
       - rabbitMQ-network
+    depends_on:
+      - icarus-db
     deploy:
       resources:
         limits:
@@ -61,6 +65,8 @@ services:
     networks:
       - icarus-network
       - rabbitMQ-network
+    depends_on:
+      - icarus-db
     deploy:
       resources:
         limits:
@@ -81,6 +87,8 @@ services:
     networks:
       - icarus-network
       - rabbitMQ-network
+    depends_on:
+      - icarus-db
     deploy:
       resources:
         limits:
