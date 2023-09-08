@@ -19,7 +19,7 @@ services:
       resources:
         limits:
           cpus: '0.75'
-          memory: 1G
+          memory: 512M
         reservations:
           memory: 512M
 
@@ -61,7 +61,7 @@ services:
           memory: 512M
 
   projetos:
-    image: k4im/projetos:${version}
+    image: k4im/projeto:${version}
     container_name: container_projetos
     restart: on-failure
     environment:
