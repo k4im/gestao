@@ -24,6 +24,27 @@ services:
         reservations:
           memory: 512M
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: container_broker
+    restart: on-failure
+    environment:
+    - RABBITMQ_DEFAULT_USER=${rabbit_user}
+    - RABBITMQ_DEFAULT_PASS=${rabbit_pwd}
+    hostname: broker
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+      - db-broker:/var/lib/rabbitmq
+    networks:
+      - rabbitMQ-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+
   gateway:
     image: k4im/gateway:${version}
     container_name: container_gateway
@@ -53,6 +74,7 @@ services:
       - rabbitMQ-network
     depends_on:
       - icarus-db
+      - rabbitmq
     deploy:
       resources:
         limits:
@@ -74,6 +96,7 @@ services:
       - rabbitMQ-network
     depends_on:
       - icarus-db
+      - rabbitmq
     deploy:
       resources:
         limits:
@@ -92,7 +115,6 @@ services:
       - RABBIT_MQ_PWD=${rabbit_pwd}
     networks:
       - icarus-network
-      - rabbitMQ-network
     depends_on:
       - icarus-db
     deploy:
@@ -102,26 +124,6 @@ services:
           memory: 2G
         reservations:
           memory: 512M
-
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: container_broker
-    restart: on-failure
-    environment:
-    - RABBITMQ_DEFAULT_USER=${rabbit_user}
-    - RABBITMQ_DEFAULT_PASS=${rabbit_pwd}
-    hostname: broker
-    ports:
-        - 5672:5672
-        - 15672:15672
-    volumes:
-      - db-broker:/var/lib/rabbitmq
-    networks:
-      - rabbitMQ-network
-    deploy:
-      resources:
-        limits:
-          memory: 256M
 
 # --------------------------
 # Volume utilizados para banco de dados mysql
@@ -134,5 +136,4 @@ volumes:
 # e uma network external sendo para comunicação do rabbitMQ
 networks:
   rabbitMQ-network:
-    external: true
   icarus-network:
