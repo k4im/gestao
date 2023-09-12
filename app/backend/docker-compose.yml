@@ -127,6 +127,7 @@ services:
 # Volume utilizados para banco de dados mysql
 volumes:
   icarus-db:
+  db-broker:
 
 # Network que serão utilizadas
 # Será utilizado a network para o backend 
