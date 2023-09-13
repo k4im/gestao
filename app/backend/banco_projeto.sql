@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
 START TRANSACTION;
 
 CREATE TABLE `ProdutosEmEstoque` (
-    `Id` INTEGER NOT NULL,
+    `Id` INTEGER NOT NULL AUTO_INCREMENT,
     `Nome` NVARCHAR(150) NULL,
     `Quantidade` INTEGER NOT NULL,
     CONSTRAINT `PK_ProdutosEmEstoque` PRIMARY KEY (`Id`)
