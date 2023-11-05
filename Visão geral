@@ -1,9 +1,24 @@
-<mxfile host="app.diagrams.net" modified="2023-11-05T17:02:05.480Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0" version="22.0.8" etag="Bc-FNRfNXcqGUtHYa8Zw" type="github">
+<mxfile host="app.diagrams.net" modified="2023-11-05T17:03:08.632Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0" etag="0NVmvRMpGoKZhE79MtPT" version="22.0.8" type="github">
   <diagram name="Página-1" id="IMzrSiv5_c-c2k2mWIro">
-    <mxGraphModel>
+    <mxGraphModel dx="1114" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="y0e9qNs_a7xZ3pIUpA1I-6" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="600" y="310" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="y0e9qNs_a7xZ3pIUpA1I-4" value="" style="group" vertex="1" connectable="0" parent="y0e9qNs_a7xZ3pIUpA1I-6">
+          <mxGeometry width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="y0e9qNs_a7xZ3pIUpA1I-2" value="" style="swimlane;startSize=0;dashed=1;" vertex="1" parent="y0e9qNs_a7xZ3pIUpA1I-4">
+          <mxGeometry y="30" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="y0e9qNs_a7xZ3pIUpA1I-3" value="Docker" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="y0e9qNs_a7xZ3pIUpA1I-4">
+          <mxGeometry x="50" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="y0e9qNs_a7xZ3pIUpA1I-5" value="Angular" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="y0e9qNs_a7xZ3pIUpA1I-6">
+          <mxGeometry x="20" y="65" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
