@@ -6,8 +6,8 @@ Cada serviço se torna idependente desta forma, sendo assim cada um deles terá 
 
 Também será mais facil estar escalando o sistema conforme a necessidade, utilizando replicas de cada serviço. 
 Toda a comunicação entre os serviços estará acontecendo de forma assincrona, para isto será utilizado um broker de mensageria(Service Bus), neste caso foi optado o **RabbiMQ**, o serviço remetente de dados estará criando uma exchange e uma fila para aquele tipo de mensagem, após determinada ação no serviço rementente será disparado uma mensagem para o broker, o serviço destinatário estará assinando a fila e à escutando, cada mensagem nova chegada na fila, o serviço destinatário estará realizando uma lógica de consumo e tratativa.
+![Visão geral drawio(1)](https://github.com/k4im/gestao/assets/108486349/6310b41c-0e9a-4d4b-9c8c-c7932c073094)
 
-![Visão geral drawio](https://github.com/k4im/gestao/assets/108486349/69773d64-e767-4ca7-bca6-2403089e20e2)
 
 ## Comunicação entre os serviços
 A comunicação no sistema funciona de forma assincrona, como citado acima. 
