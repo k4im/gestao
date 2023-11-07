@@ -107,7 +107,7 @@ services:
 
   worker-projeto:
     image: k4im/worker-projeto:${version}
-    container_name: container_projetos
+    container_name: worker-projetos
     restart: on-failure
     environment:
       - DB_CONNECTION=${connection_string_projetos}
