@@ -105,6 +105,28 @@ services:
         reservations:
           memory: 512M
 
+  worker-projeto:
+    image: k4im/worker-projeto:${version}
+    container_name: container_projetos
+    restart: on-failure
+    environment:
+      - DB_CONNECTION=${connection_string_projetos}
+      - RABBIT_MQ_USER=${rabbit_user}
+      - RABBIT_MQ_PWD=${rabbit_pwd}
+    networks:
+      - icarus-network
+      - rabbitMQ-network
+    depends_on:
+      - icarus-db
+      - rabbitmq
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 1G
+        reservations:
+          memory: 512M
+  
   autenticacao:
     image: k4im/autenticacao:${version}
     container_name: container_auth
