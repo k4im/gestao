@@ -7,8 +7,5 @@ services:
     restart: on-failure
     networks:
       - icarus-network
-    volumes:
-      - icarus-db:/var/lib/mysql
-
 networks:
   icarus-network:
